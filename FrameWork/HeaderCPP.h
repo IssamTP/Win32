@@ -4,6 +4,7 @@
 	// Intestazioni STL
 	#include <cmath>
 	#include <string>
+	#include <type_traits>
 	#include <typeinfo>
 	// Intestazioni di Windows.
 	#include <tchar.h>

@@ -1,19 +1,8 @@
 #pragma once
 #ifndef _WINDOW_H_
 	#define _WINDOW_H_
-	#include "HeaderCPP.h"
-	#include "WinExports.h"
 namespace FW
 {
-	/// <summary>
-	/// Enumera i vari stili di finestra disponibili
-	/// </summary>
-	enum class ClassStyles
-	{
-		CSHRedraw = CS_HREDRAW,
-		CSVRedraw = CS_VREDRAW,
-	};
-
 	class Cursor;
 	class Icon;
 	/// <summary>

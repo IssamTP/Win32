@@ -33,3 +33,5 @@
 /.vs/Win32/v17/ipch/AutoPCH
 /.vs/Win32/v17
 /FrameWork.7z
+/FrameWork/x64/Debug/FrameWork.tlog
+/FrameWork/x64/Debug

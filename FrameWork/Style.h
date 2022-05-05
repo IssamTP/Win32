@@ -1,62 +1,48 @@
 #pragma once
+#ifndef _STYLE_CLASS_H_
+#define _STYLE_CLASS_H_
+#include <type_traits>
+#include <Windows.h>
 
-template <typename S>
-class Style
+namespace FW
 {
-public:
-    template <typename... S>
-    static UINT Combine(S &&... values)
+    /// <summary>
+    /// Stili della classe di finestre.
+    /// </summary>
+    enum class ClassStyles
     {
+        CSHRedraw = CS_HREDRAW,
+        CSVRedraw = CS_VREDRAW,
+    };
 
-    }
-};
+    template<class Head, class... Tail>
+    using are_same = std::conjunction<std::is_same<Head, Tail>...>;
 
-#pragma once
-#include <iostream>
-#include <string>
-
-class Logger {
-private:
-    enum class Severity { INFO, WARN, ERROR };
-
-    static void print_colored(const char* log, Severity severity) {
-        const char* color_code = nullptr;
-
-        switch (severity) {
-        case Severity::INFO:
-            color_code = BLUE.c_str();
-            break;
-        case Severity::WARN:
-            color_code = YELLOW.c_str();
-            break;
-        case Severity::ERROR:
-            color_code = RED.c_str();
-            break;
+    /// <summary>
+    /// Classe che incapsula un qualsiasi stile definito con gli enum.
+    /// Usare la funzione combine per ottenere il valore dello stile richiesto.
+    /// </summary>
+    /// <typeparam name="S">Uno degli enum definiti qui sopra.</typeparam>
+    class StylesOperation
+    {
+    public:
+        /// <summary>
+        /// Combina gli enum in maniera C++.
+        /// </summary>
+        /// <typeparam name="Head">Primo stile.</typeparam>
+        /// <typeparam name="...Tail">Ultimo stile.</typeparam>
+        /// <typeparam name="">Controllo compile-time di uguaglianza di tutti i parametri.</typeparam>
+        /// <param name="head">Primo parametro.</param>
+        /// <param name="...tail">Ultimo parametro.</param>
+        /// <returns>La combinazione dei valori passati.</returns>
+        template<class Head, class... Tail, class = std::enable_if_t<are_same<Head, Tail...>::value, void>>
+        static UINT Combine(Head head, Tail... tail)
+        {
+            UINT combina = static_cast<UINT>(head);
+            combina |= static_cast<UINT>((std::forward(tail)...));
+            return combina;
         }
+    };
+}
 
-        std::cout << "\033" << color_code << log << "\033[0m -- ";
-    }
-
-    template <class Args> static void print_args(Args args) {
-        std::cout << args << " ";
-    }
-
-public:
-    template <class... Args> static void info(Args &&...args) {
-        print_colored("[INFO] ", Severity::INFO);
-        int dummy[] = { 0, ((void)print_args(std::forward<Args>(args)), 0)... };
-        std::cout << std::endl;
-    }
-
-    template <class... Args> static void warn(Args &&...args) {
-        print_colored("[WARN] ", Severity::WARN);
-        int dummy[] = { 0, ((void)print_args(std::forward<Args>(args)), 0)... };
-        std::cout << std::endl;
-    }
-
-    template <class... Args> static void error(Args &&...args) {
-        print_colored("[ERROR]", Severity::ERROR);
-        int dummy[] = { 0, ((void)print_args(std::forward<Args>(args)), 0)... };
-        std::cout << std::endl;
-    }
-};
+#endif

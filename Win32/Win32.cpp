@@ -1,3 +1,4 @@
+#include <headers/FrameWork.h>
 #include "AG_Framework.h"
 #include "Win32.h"
 
@@ -13,6 +14,7 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -64,8 +66,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     WNDCLASSEXW wcex;
 
     wcex.cbSize = sizeof(WNDCLASSEX);
-
-    wcex.style          = CS_HREDRAW | CS_VREDRAW;
+    wcex.style = FW::StylesOperation::Combine(FW::ClassStyles::CSHRedraw, FW::ClassStyles::CSVRedraw, FW::ClassStyles::CSVRedraw, FW::ClassStyles::CSVRedraw, FW::ClassStyles::CSVRedraw);
     wcex.lpfnWndProc    = WndProc;
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;

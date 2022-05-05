@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "Style.h"
 #include "Icon.h"
 #include "Cursor.h"
 #include "Window.h"

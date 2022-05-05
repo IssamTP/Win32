@@ -74,13 +74,7 @@
     <ClCompile Include="Icon.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
-    <ClCompile Include="Size.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
     <ClCompile Include="Cursor.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
-    <ClCompile Include="Style.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

@@ -8,6 +8,8 @@
 	#include "String.h"
 	#include "SystemMessageBox.h"
 	#ifndef _SOLO_STABILI_
+		#include "Size.h"
+		#include "Style.h"
 		#include "Cursor.h"
 		#include "Icon.h"
 		#include "Window.h"

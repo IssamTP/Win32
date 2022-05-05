@@ -1,0 +1,14 @@
+﻿  Win32.cpp
+E:\Sviluppo\Win32\FrameWork\x64\Debug\FrameWork-msvc14-std20\headers\String.h(16,16): warning C4251: 'FW::String::Contenuto': class 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'FW::String'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4928): message : vedere la dichiarazione di 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>'
+E:\Sviluppo\Win32\FrameWork\x64\Debug\FrameWork-msvc14-std20\headers\Style.h(46,28): error C2440: 'reinterpret_cast': impossibile convertire da '_Ty' a 'UINT'
+          with
+          [
+              _Ty=std::any
+          ]
+E:\Sviluppo\Win32\FrameWork\x64\Debug\FrameWork-msvc14-std20\headers\Style.h(46,28): message : La conversione richiede un costruttore o un operatore di conversione definito dall'utente, che non può essere utilizzato da const_cast o reinterpret_cast
+E:\Sviluppo\Win32\Win32\Win32.cpp(69): message : vedere il riferimento all'istanza 'UINT FW::StylesOperation::Combine<FW::ClassStyles,FW::ClassStyles,FW::ClassStyles,FW::ClassStyles,FW::ClassStyles,void>(Head,FW::ClassStyles,FW::ClassStyles,FW::ClassStyles,FW::ClassStyles)' della funzione modello di cui è in corso la compilazione
+          with
+          [
+              Head=FW::ClassStyles
+          ]
