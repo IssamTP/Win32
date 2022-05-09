@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "Style.h"
 #include "Icon.h"
 #include "Cursor.h"
+#include "StylesOperations.h"
 #include "Window.h"
 
 namespace FW
@@ -19,7 +19,7 @@ namespace FW
 		: Window()
 	{
 		NomeClasse = String(nomeClasse);
-		ClasseWindows.style = static_cast<UINT>(ClassStyles::CSHRedraw) | static_cast<UINT>(ClassStyles::CSVRedraw);
+		ClasseWindows.style = StylesOperations::Combine(ClassStyles::CSHRedraw, ClassStyles::CSVRedraw, WindowStyles::WSVisible);
 		ClasseWindows.hInstance = istanza;
 		ClasseWindows.lpfnWndProc = &ProceduraStandard;
 		ClasseWindows.lpszClassName = NomeClasse;
