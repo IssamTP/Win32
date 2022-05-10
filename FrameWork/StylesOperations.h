@@ -1,13 +1,12 @@
 #pragma once
 #ifndef _STYLE_CLASS_H_
-#define _STYLE_CLASS_H_
-#include <type_traits>
-#include <Windows.h>
+    #define _STYLE_CLASS_H_
+    #include "HeaderCPP.h"
 
 namespace FW
 {
     /// <summary>
-    /// Stili della classe di finestre.
+    /// Incapsulamento ad enum degli stili di classe di Windows.
     /// </summary>
     enum class ClassStyles : UINT
     {
@@ -15,36 +14,34 @@ namespace FW
         CSVRedraw = CS_VREDRAW,
     };
 
+    /// <summary>
+    /// Incapsulamento ad enum degli stili di finestra.
+    /// </summary>
     enum class WindowStyles : UINT
     {
         WSVisible = WS_VISIBLE,
     };
 
     /// <summary>
-    /// Classe che incapsula un qualsiasi stile definito con gli enum.
-    /// Usare la funzione combine per ottenere il valore dello stile richiesto.
+    /// Classe delle operazioni sugli stili.
     /// </summary>
-    /// <typeparam name="S">Uno degli enum definiti qui sopra.</typeparam>
     class StylesOperations
     {
     public:
-        template <class T>
-        static UINT TemplateToWin32Cast(T style)
-        {
-            return static_cast<UINT>(style);
-        }
-
+        /// <summary>
+        /// Questa operazione combina un qualsiasi numero di stili di tipo diverso in un'unica maschera.
+        /// </summary>
+        /// <typeparam name="...T">Tipo qualsiasi di stile come enum class.</typeparam>
+        /// <param name="...styles">Un numero arbitrario di stili da combinare in un'unica maschera.</param>
+        /// <returns>Una maschera di tipo UINT da fornire alle API di Windows.</returns>
         template <class... T>
         static UINT Combine(T... styles)
         {
-            UINT combinazione = 0u;/*([](auto& stile)
+            UINT combinazione = 0u;
+            ([&](auto stile)
             {
-                return static_cast<UINT>(stile);
-            }(styles), ...);*/
-            for (const auto p : { styles... })
-            {
-                combinazione |= static_cast<UINT>(p);
-            }
+                combinazione |= static_cast<UINT>(stile);
+            }(styles), ...);
             return combinazione;
         }
     };
