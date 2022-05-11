@@ -7,9 +7,9 @@
 	#include "WinExports.h"
 	#include "String.h"
 	#include "SystemMessageBox.h"
+	#include "Size.h"
+	#include "Point.h"
 	#ifndef _SOLO_STABILI_
-		#include "Size.h"
-		#include "Style.h"
 		#include "Cursor.h"
 		#include "Icon.h"
 		#include "Window.h"

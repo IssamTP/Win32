@@ -15,10 +15,19 @@ namespace FW
     };
 
     /// <summary>
+    /// Tag di riferimento.
+    /// </summary>
+    enum class CreateWindowOptions
+    {
+        CWUseDefault = CW_USEDEFAULT,
+    };
+
+    /// <summary>
     /// Incapsulamento ad enum degli stili di finestra.
     /// </summary>
     enum class WindowStyles : UINT
     {
+        WSOverlappedWindow = WS_OVERLAPPED,
         WSVisible = WS_VISIBLE,
     };
 

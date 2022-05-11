@@ -1,4 +1,6 @@
 #include "pch.h"
+#include "Size.h"
+#include "Point.h"
 #include "Icon.h"
 #include "Cursor.h"
 #include "StylesOperations.h"
@@ -9,8 +11,11 @@ namespace FW
 #pragma region Costruttori
 	Window::Window()
 	{
-		memset(&ClasseWindows, 0, sizeof(WNDCLASS));
+		memset(&ClasseWindows, 0, sizeof(WNDCLASSEX));
+		ClasseWindows.cbSize = sizeof(WNDCLASSEX);
 		CursoreFinestra = nullptr;
+		IdUnicoClasse = 0;
+		StileFinestra = StileFinestraEsteso = 0ul;
 		IconaFinestra = nullptr;
 		HandleFinestra = nullptr;
 	}
@@ -24,9 +29,26 @@ namespace FW
 		ClasseWindows.lpfnWndProc = &ProceduraStandard;
 		ClasseWindows.lpszClassName = NomeClasse;
 		ClasseWindows.hIcon = Icon::GetDefaultIcon();
+		ClasseWindows.hIconSm = Icon::GetDefaultIcon();
 		ClasseWindows.hCursor = Cursor::GetDefaultCursor();
 		ClasseWindows.lpszMenuName = nullptr;
 		HandleFinestra = nullptr;
+	}
+#pragma endregion
+
+#pragma region Interfaccia
+	void Window::RegisterClassAndCreateWindow()
+	{
+		CreateWindowEx(StileFinestraEsteso, NomeClasse, NomeFinestra, StileFinestra, StylesOperations::Combine(CW_USEDEFAULT))
+	}
+
+	void Window::RegisterWindowClass()
+	{
+		IdUnicoClasse = RegisterClassEx(&ClasseWindows);
+		if (IdUnicoClasse == 0)
+		{
+			throw std::exception();
+		}
 	}
 #pragma endregion
 
