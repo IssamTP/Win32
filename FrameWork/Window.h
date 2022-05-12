@@ -7,6 +7,7 @@
 	#include "Icon.h"
 	#include "Size.h"
 	#include "StylesOperations.h"
+	#include "DeviceContext.h"
 	#include "WinExports.h"
 	#include "WinUndefinitions.h"
 namespace FW
@@ -20,6 +21,7 @@ namespace FW
 	/// </summary>
 	class _FRAMEWORK_CLASS_EXPORT_ Window
 	{
+#pragma region Membri
 	protected:
 		/// <summary>
 		/// Identificatore unico della classe. Vale solo se != 0.
@@ -29,6 +31,10 @@ namespace FW
 		/// Cursore della finestra.
 		/// </summary>
 		Cursor CursoreFinestra;
+		/// <summary>
+		/// Oggetto per disegnare nella finestra.
+		/// </summary>
+		DeviceContext ContestoDisegno;
 		/// <summary>
 		/// Icona della finestra.
 		/// </summary>
@@ -71,12 +77,21 @@ namespace FW
 		/// Classe di registrazione della finestra..
 		/// </summary>
 		WNDCLASSEX ClasseWindows;
+#pragma endregion
+#pragma region Costruttori
+	private:
+		/// <summary>
+		/// Costruttore predefinito. Inizializza a zero WNDCLASS.
+		/// </summary>
+		Window();
 	public:
 		/// <summary>
 		/// Costruttore con l'istanza dell'applicazione.
 		/// </summary>
 		/// <param name="istanza">Istanza dell'applicazione.</param>
 		Window(HINSTANCE istanza, String nomeClasse);
+#pragma endregion
+	public:
 		/// <summary>
 		/// Registra la classe, se non lo è già, e crea la finestra con posizione e dimensioni predefinite senza finestra proprietaria.
 		/// </summary>
@@ -85,6 +100,11 @@ namespace FW
 		/// Registra la classe finestra associata.
 		/// </summary>
 		void RegisterClass();
+		/// <summary>
+		/// Imposta il titolo della finestra.
+		/// </summary>
+		/// <param name="nomeFinestra">Nuovo titolo della finestra.</param>
+		void SetTitle(String nomeFinestra);
 		/// <summary>
 		/// Mostra la finestra con la modalità specificata.
 		/// </summary>
@@ -95,12 +115,12 @@ namespace FW
 		/// </summary>
 		/// <returns>HWND istanza finestra.</returns>
 		HWND GetWindowHandle() const;
-	private:
-		/// <summary>
-		/// Costruttore predefinito. Inizializza a zero WNDCLASS.
-		/// </summary>
-		Window();
 	protected:
+		/// <summary>
+		/// Funzione di disegno di base.
+		/// Ogni finestra che erediterà da quella principale deve chiamare questa funzione.
+		/// </summary>
+		virtual void OnPaint();
 		/// <summary>
 		/// Implementazione della procedura della finestra: si può cambiare, se lo si desidera...
 		/// </summary>
@@ -108,7 +128,7 @@ namespace FW
 		/// <param name="parametro1"></param>
 		/// <param name="parametro2"></param>
 		/// <returns></returns>
-		INT_PTR ProceduraFinestra(UINT messaggio, WPARAM parametro1, LPARAM parametro2);
+		virtual INT_PTR ProceduraFinestra(UINT messaggio, WPARAM parametro1, LPARAM parametro2);
 	private:
 		/// <summary>
 		/// Procedura della finestra per la classe corrente.

@@ -43,8 +43,17 @@ namespace FW
     /// </summary>
     enum class WindowStyles : UINT
     {
-        WSOverlappedWindow = WS_OVERLAPPED,
+        WSOverlappedWindow = WS_OVERLAPPEDWINDOW,
         WSVisible = WS_VISIBLE,
+    };
+
+    /// <summary>
+    /// Codifica dei codici di errore di alcune funzioni Windows.
+    /// </summary>
+    enum class ErrNoCodes : int
+    {
+        EInval = EINVAL,
+        ERange = ERANGE,
     };
 
     /// <summary>

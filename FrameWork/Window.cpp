@@ -27,6 +27,7 @@ namespace FW
 		ClasseWindows.hIconSm = Icon::GetDefaultIcon();
 		ClasseWindows.hCursor = Cursor::GetDefaultCursor();
 		ClasseWindows.lpszMenuName = nullptr;
+		StileFinestra = StylesOperations::Combine(WindowStyles::WSOverlappedWindow);
 		HandleFinestra = nullptr;
 	}
 #pragma endregion
@@ -37,7 +38,7 @@ namespace FW
 		RegisterClass();
 		int usaPredefinito = static_cast<int>(StylesOperations::Combine(CreateWindowOptions::CWUseDefault));
 		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-createwindowexw
-		HandleFinestra = CreateWindowEx(StileFinestraEsteso, NomeClasse, NomeFinestra, StileFinestra, usaPredefinito, usaPredefinito, usaPredefinito, usaPredefinito, nullptr, nullptr, ClasseWindows.hInstance, nullptr);
+		HandleFinestra = CreateWindowEx(StileFinestraEsteso, NomeClasse, NomeFinestra, StileFinestra, usaPredefinito, usaPredefinito, usaPredefinito, usaPredefinito, nullptr, nullptr, ClasseWindows.hInstance, this);
 		if (HandleFinestra != nullptr)
 		{
 			ShowWindow(ShowWindowsCommands::SWShow);
@@ -59,6 +60,11 @@ namespace FW
 		}
 	}
 
+	void Window::SetTitle(String nomeFinestra)
+	{
+		NomeFinestra = nomeFinestra;
+	}
+
 	void Window::ShowWindow(ShowWindowsCommands command)
 	{
 		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-showwindow
@@ -72,6 +78,21 @@ namespace FW
 #pragma endregion
 
 #pragma region Messaggi
+	void Window::OnPaint()
+	{
+		PAINTSTRUCT paintStruct;
+		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-beginpaint
+		HDC controllo = BeginPaint(HandleFinestra, &paintStruct);
+		if (controllo == paintStruct.hdc)
+		{
+			ContestoDisegno = paintStruct;
+		}
+		else
+		{
+			throw std::exception();
+		}
+	}
+
 	INT_PTR Window::ProceduraFinestra(UINT messaggio, WPARAM wParam, LPARAM lParam)
 	{
 		INT_PTR messaggioGestito = FALSE;
@@ -107,7 +128,9 @@ namespace FW
 			// OnNotify(reinterpret_cast<LPNMHDR>(lParam));
 			break;
 		case WM_PAINT:
-			// OnPaint();
+			OnPaint();
+			// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-endpaint
+			EndPaint(HandleFinestra, ContestoDisegno);
 			break;
 		case WM_SIZE:
 			// OnSize(LOWORD(lParam), HIWORD(lParam));
@@ -119,7 +142,6 @@ namespace FW
 		}
 		return messaggioGestito;
 	}
-
 #pragma endregion
 
 #pragma region Statiche

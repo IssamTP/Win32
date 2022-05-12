@@ -57,6 +57,9 @@
     <ClInclude Include="WinUndefinitions.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="DeviceContext.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -81,6 +84,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Cursor.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceContext.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

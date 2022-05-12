@@ -36,10 +36,19 @@ namespace FW
 		}
 	}
 
+	void ApplicazioneWindows::InizializzaApplicazione(Window* window)
+	{
+		if (FinestraApplicazione != nullptr)
+		{
+			delete FinestraApplicazione;
+		}
+		FinestraApplicazione = window;
+	}
 
-	void ApplicazioneWindows::InizializzaApplicazione(HINSTANCE istance, String nomeClasseFinestra)
+	void ApplicazioneWindows::InizializzaApplicazione(HINSTANCE istance, String nomeClasseFinestra, String nomeFinestra)
 	{
 		FinestraApplicazione = new Window(istance, nomeClasseFinestra);
+		FinestraApplicazione->SetTitle(nomeFinestra);
 	}
 #pragma endregion
 }
