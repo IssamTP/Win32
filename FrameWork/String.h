@@ -1,12 +1,14 @@
 #pragma once
 #ifndef _STRING_H_
 	#define _STRING_H_
+	#include "HeaderCPP.h"
 namespace FW
 {
+	_FRAMEWORK_TEMPLATE_EXPORT_ template class std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t>>;
 	/// <summary>
 	/// Fornisce un accesso pratico alla versione corretta agli oggetti stl relativi alle stringhe.
 	/// </summary>
-	class CLASS_EXPORT String
+	class _FRAMEWORK_CLASS_EXPORT_ String
 	{
 	protected:
 #ifdef _UNICODE

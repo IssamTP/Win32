@@ -115,12 +115,14 @@ copy $(ProjectDir)*.h $(OutDir)headers
     <ClInclude Include="HeaderCPP.h" />
     <ClInclude Include="Icon.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="String.h" />
-    <ClInclude Include="Style.h" />
+    <ClInclude Include="StylesOperations.h" />
     <ClInclude Include="SystemMessageBox.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WinExports.h" />
+    <ClInclude Include="WinUndefinitions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApplicazioneWindows.cpp" />

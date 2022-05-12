@@ -1,38 +1,37 @@
 #pragma once
 #ifndef _SIZE_CLASS_H_
 	#define _SIZE_CLASS_H_
-
+	#include "HeaderCPP.h"
 namespace FW
 {
 	/// <summary>
 	/// Classe di incapsulamento della struttura SIZE.
 	/// </summary>
 	template <typename T>
-	class Size
+	class Size2D
 	{
 	protected:
-		SIZE WinSize;
-		T Height;
-		T Width;
+		T Altezza;
+		T Larghezza;
 	public:
 #pragma region Costruttori
 		/// <summary>
 		/// Costruttore predefinito, le dimensioni sono 0.
 		/// </summary>
-		Size()
+		Size2D()
 		{
-			Height = 0;
-			Width = 0;
+			Larghezza = 0;
+			Altezza = 0;
 		}
 		/// <summary>
 		/// Imposta le dimensioni in fase di costruzione.
 		/// </summary>
 		/// <param name="width">Larghezza.</param>
 		/// <param name="height">Altezza.</param>
-		Size(T width, T height)
+		Size2D(T width, T height)
 		{
-			Width = width;
-			Height = height;
+			Larghezza = width;
+			Altezza = height;
 		}
 #pragma endregion
 	public:
@@ -45,28 +44,46 @@ namespace FW
 			SIZE converted = { 0 };
 			if (typeid(T) == typeid(float) || typeid(T) == typeid(double) || typeid(T) == typeid(long double))
 			{
-				converted.cx = std::lround(Width);
-				converted.cy = std::lround(Height);
+				converted.cx = std::lround(Larghezza);
+				converted.cy = std::lround(Altezza);
 			}
 			else if (typeid(T) == typeid(int) || typeid(T) == typeid(long) || typeid(T) == typeid(short) ||
 				typeid(T) == typeid(unsigned int) || typeid(T) == typeid(unsigned long) || typeid(T) == typeid(unsigned short) ||
 				typeid(T) == typeid(long long) || typeid(T) == typeid(unsigned long long))
 			{
-				converted.cx = static_cast<LONG>(Width);
-				converted.cy = static_cast<LONG>(Height);
+				converted.cx = static_cast<LONG>(Larghezza);
+				converted.cy = static_cast<LONG>(Altezza);
 			}
 			return converted;
 		}
 #pragma endregion
 	public:
+#pragma region Interfaccia
 		/// <summary>
 		/// Calcola l'aspect ratio.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>AspectRatio della dimensione.</returns>
 		T AspectRatio() const
 		{
-			return Width / Height;
+			return Larghezza / Altezza;
 		}
+		/// <summary>
+		/// Larghezza.
+		/// </summary>
+		/// <returns>Larghezza.</returns>
+		T Width() const
+		{
+			return Larghezza;
+		}
+		/// <summary>
+		/// Altezza.
+		/// </summary>
+		/// <returns>Altezza.</returns>
+		T Height() const
+		{
+			return Altezza;
+		}
+#pragma endregion
 	};
 }
 #endif

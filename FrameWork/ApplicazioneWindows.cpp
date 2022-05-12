@@ -1,7 +1,4 @@
 #include "pch.h"
-#ifdef _SOLO_STABILI_
-#include "Window.h"
-#endif
 #include "ApplicazioneWindows.h"
 
 namespace FW
@@ -13,35 +10,36 @@ namespace FW
 		IstanzaApplicazione = nullptr;
 		FinestraApplicazione = nullptr;
 	}
+
+	ApplicazioneWindows::~ApplicazioneWindows()
+	{
+		if (FinestraApplicazione != nullptr)
+		{
+			delete FinestraApplicazione;
+		}
+	}
 #pragma endregion
 
 #pragma region Virtuali
-	/// <summary>
-	/// Inizializza l'applicazione.
-	/// </summary>
-	void ApplicazioneWindows::InizializzaApplicazione()
+	void ApplicazioneWindows::AvviaApplicazione()
 	{
-
-	}
-#pragma endregion
-
-#pragma region Get/Set
-	/// <summary>
-	/// Imposta il valore dell'istanza di applicazione.
-	/// </summary>
-	/// <param name="istanzaApplicazione">Id dell'applicazione. Lo fornisce _tWinMain.</param>
-	void ApplicazioneWindows::SetIstanzaApplicazione(HINSTANCE istanzaApplicazione)
-	{
-		IstanzaApplicazione = istanzaApplicazione;
+		if (FinestraApplicazione != nullptr)
+		{
+			FinestraApplicazione->RegisterClassAndCreateWindow();
+			HWND handle = FinestraApplicazione->GetWindowHandle();
+			MSG message;
+			while (GetMessage(&message, handle, 0, 0))
+			{
+				TranslateMessage(&message);
+				DispatchMessage(&message);
+			}
+		}
 	}
 
-	/// <summary>
-	/// Ottiene l'istanza dell'applicazione.
-	/// </summary>
-	/// <returns>L'ID dell'applicazione.</returns>
-	HINSTANCE ApplicazioneWindows::GetIstanzaApplicazione() const
+
+	void ApplicazioneWindows::InizializzaApplicazione(HINSTANCE istance, String nomeClasseFinestra)
 	{
-		return IstanzaApplicazione;
+		FinestraApplicazione = new Window(istance, nomeClasseFinestra);
 	}
 #pragma endregion
 }

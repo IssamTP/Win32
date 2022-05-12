@@ -48,7 +48,13 @@
     <ClInclude Include="Cursor.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="Style.h">
+    <ClInclude Include="StylesOperations.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="WinUndefinitions.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>

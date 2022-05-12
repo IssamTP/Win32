@@ -2,16 +2,23 @@
 #ifndef _WINDOW_H_
 	#define _WINDOW_H_
 	#include "HeaderCPP.h"
+	#include "Point.h"
+	#include "Cursor.h"
+	#include "Icon.h"
+	#include "Size.h"
+	#include "StylesOperations.h"
 	#include "WinExports.h"
+	#include "WinUndefinitions.h"
 namespace FW
 {
-	class Cursor;
-	class Icon;
+	_FRAMEWORK_TEMPLATE_EXPORT_ template class Point2D<LONG>;
+	_FRAMEWORK_TEMPLATE_EXPORT_ template class Size2D<LONG>;
+
 	/// <summary>
 	/// Finestra di base.
 	/// Incapsula le funzionalità di base della finestra C.
 	/// </summary>
-	class CLASS_EXPORT Window
+	class _FRAMEWORK_CLASS_EXPORT_ Window
 	{
 	protected:
 		/// <summary>
@@ -21,11 +28,11 @@ namespace FW
 		/// <summary>
 		/// Cursore della finestra.
 		/// </summary>
-		Cursor* CursoreFinestra;
+		Cursor CursoreFinestra;
 		/// <summary>
 		/// Icona della finestra.
 		/// </summary>
-		Icon* IconaFinestra;
+		Icon IconaFinestra;
 		/// <summary>
 		/// "Puntatore" alla finestra di Windows.
 		/// </summary>
@@ -37,7 +44,11 @@ namespace FW
 		/// <summary>
 		/// Dimensioni in pixel della finestra sullo schermo.
 		/// </summary>
-		Size<LONG> Dimensione;
+		Size2D<LONG> Dimensione;
+		/// <summary>
+		/// Specifica come mostrare la finestra al comando Show.
+		/// </summary>
+		ShowWindowsCommands ModalitaVisualizzazione;
 		/// <summary>
 		/// Nome della classe di finestre.
 		/// </summary>
@@ -67,13 +78,23 @@ namespace FW
 		/// <param name="istanza">Istanza dell'applicazione.</param>
 		Window(HINSTANCE istanza, String nomeClasse);
 		/// <summary>
-		/// Registra la classe, se non lo è già, e crea la finestra.
+		/// Registra la classe, se non lo è già, e crea la finestra con posizione e dimensioni predefinite senza finestra proprietaria.
 		/// </summary>
 		void RegisterClassAndCreateWindow();
 		/// <summary>
 		/// Registra la classe finestra associata.
 		/// </summary>
-		void RegisterWindowClass();
+		void RegisterClass();
+		/// <summary>
+		/// Mostra la finestra con la modalità specificata.
+		/// </summary>
+		/// <param name="command">Specifica come mostrare la finestra.</param>
+		void ShowWindow(ShowWindowsCommands command);
+		/// <summary>
+		/// Ottiene l'handle dell'istanza della finestra.
+		/// </summary>
+		/// <returns>HWND istanza finestra.</returns>
+		HWND GetWindowHandle() const;
 	private:
 		/// <summary>
 		/// Costruttore predefinito. Inizializza a zero WNDCLASS.

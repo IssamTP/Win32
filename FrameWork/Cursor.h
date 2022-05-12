@@ -1,13 +1,14 @@
 #pragma once
 #ifndef _CURSOR_CLASS_H_
 	#define _CURSOR_CLASS_H_
-
+	#include "HeaderCPP.h"
+	#include "WinExports.h"
 namespace FW
 {
 	/// <summary>
 	/// Oggetto che modella il cursorse del mouse.
 	/// </summary>
-	class CLASS_EXPORT Cursor
+	class _FRAMEWORK_CLASS_EXPORT_ Cursor
 	{
 	protected:
 		/// <summary>

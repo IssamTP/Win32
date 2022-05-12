@@ -7,19 +7,18 @@ namespace FW
 	/// <summary>
 	/// Classe per la gestione delle icone.
 	/// </summary>
-	class CLASS_EXPORT Icon
+	class _FRAMEWORK_CLASS_EXPORT_ Icon
 	{
 	protected:
 		/// <summary>
 		/// Puntatore Win32 della risorsa.
 		/// </summary>
 		HICON HandleIcona;
-	private:
+	public:
 		/// <summary>
 		/// Costruttore predefinito.
 		/// </summary>
 		Icon();
-	public:
 		/// <summary>
 		/// Costruttore per handle della risorsa.
 		/// </summary>

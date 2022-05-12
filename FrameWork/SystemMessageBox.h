@@ -68,7 +68,7 @@ namespace FW
     /// Classe che permette di utilizzare la chiamata MessageBox delle API di Windows in un ambiente ad oggetti.
     /// L'intestazione inoltre racchiude delle enum class che raccolgono tutte (salvo mancanze) le define associate sparse nei vari .h di Windows.
     /// </summary>
-    class CLASS_EXPORT SystemMessageBox
+    class _FRAMEWORK_CLASS_EXPORT_ SystemMessageBox
     {
     public:
         /// <summary>

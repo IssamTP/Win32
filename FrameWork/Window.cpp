@@ -1,9 +1,4 @@
 #include "pch.h"
-#include "Size.h"
-#include "Point.h"
-#include "Icon.h"
-#include "Cursor.h"
-#include "StylesOperations.h"
 #include "Window.h"
 
 namespace FW
@@ -24,7 +19,7 @@ namespace FW
 		: Window()
 	{
 		NomeClasse = String(nomeClasse);
-		ClasseWindows.style = StylesOperations::Combine(ClassStyles::CSHRedraw, ClassStyles::CSVRedraw, WindowStyles::WSVisible);
+		ClasseWindows.style = StylesOperations::Combine(ClassStyles::CSHRedraw, ClassStyles::CSVRedraw);
 		ClasseWindows.hInstance = istanza;
 		ClasseWindows.lpfnWndProc = &ProceduraStandard;
 		ClasseWindows.lpszClassName = NomeClasse;
@@ -39,16 +34,40 @@ namespace FW
 #pragma region Interfaccia
 	void Window::RegisterClassAndCreateWindow()
 	{
-		CreateWindowEx(StileFinestraEsteso, NomeClasse, NomeFinestra, StileFinestra, StylesOperations::Combine(CW_USEDEFAULT))
+		RegisterClass();
+		int usaPredefinito = static_cast<int>(StylesOperations::Combine(CreateWindowOptions::CWUseDefault));
+		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-createwindowexw
+		HandleFinestra = CreateWindowEx(StileFinestraEsteso, NomeClasse, NomeFinestra, StileFinestra, usaPredefinito, usaPredefinito, usaPredefinito, usaPredefinito, nullptr, nullptr, ClasseWindows.hInstance, nullptr);
+		if (HandleFinestra != nullptr)
+		{
+			ShowWindow(ShowWindowsCommands::SWShow);
+			UpdateWindow(HandleFinestra);
+		}
+		else
+		{
+			throw std::exception();
+		}
 	}
 
-	void Window::RegisterWindowClass()
+	void Window::RegisterClass()
 	{
+		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-registerclassexw
 		IdUnicoClasse = RegisterClassEx(&ClasseWindows);
 		if (IdUnicoClasse == 0)
 		{
 			throw std::exception();
 		}
+	}
+
+	void Window::ShowWindow(ShowWindowsCommands command)
+	{
+		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-showwindow
+		BOOL statoPrecedente = ::ShowWindow(HandleFinestra, static_cast<int>(command));
+	}
+
+	HWND Window::GetWindowHandle() const
+	{
+		return HandleFinestra;
 	}
 #pragma endregion
 

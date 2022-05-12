@@ -22,6 +22,22 @@ namespace FW
         CWUseDefault = CW_USEDEFAULT,
     };
 
+    enum class ShowWindowsCommands : int
+    {
+        SWHide = SW_HIDE,
+        SWShowNormal = SW_NORMAL,
+        SWShowMinimized = SW_SHOWMINIMIZED,
+        SWShowMaximized = SW_SHOWMAXIMIZED,
+        SWShowNoActivate = SW_SHOWNOACTIVATE,
+        SWShow = SW_SHOW,
+        SWMinimize = SW_MINIMIZE,
+        SWShowMinNoActive = SW_SHOWMINNOACTIVE,
+        SWShowNA = SW_SHOWNA,
+        SWRestore = SW_RESTORE,
+        SWDefault = SW_SHOWDEFAULT,
+        SWForceMinimize = SW_FORCEMINIMIZE,
+    };
+
     /// <summary>
     /// Incapsulamento ad enum degli stili di finestra.
     /// </summary>
