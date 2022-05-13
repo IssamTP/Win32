@@ -24,10 +24,23 @@ namespace FW
 		Size2D<T> Dimensione;
 #pragma region Costruttori
 	public:
+		/// <summary>
+		/// Costruttore predefinito.
+		/// </summary>
+		Rectangle()
+		{
+		}
+		/// <summary>
+		/// Costruttore via singoli parametri.
+		/// </summary>
+		/// <param name="x">Punto a sinistra.</param>
+		/// <param name="y">Punto in alto</param>
+		/// <param name="larghezza">Larghezza del rettangolo.</param>
+		/// <param name="altezza">Altezza del rettangolo.</param>
 		Rectangle(T x, T y, T larghezza, T altezza)
 		{
-			Origine = Point2D(x, y);
-			Dimensione = Size2D(larghezza, altezza);
+			Origine = Point2D<T>(x, y);
+			Dimensione = Size2D<T>(larghezza, altezza);
 			Alias = *this;
 		}
 		/// <summary>

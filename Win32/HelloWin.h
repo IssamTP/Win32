@@ -12,10 +12,8 @@ protected:
     virtual void OnPaint()
     {
         FW::Window::OnPaint();
-        RECT rettangolo;
-        GetClientRect(HandleFinestra, &rettangolo);
         UINT stileTesto = FW::StylesOperations::Combine(FW::DrawTextStyles::DTSingleLine, FW::DrawTextStyles::DTCenter, FW::DrawTextStyles::DTVCener);
-        ContestoDisegno.DrawText(TEXT("Hello, Windows 10!"), FW::Rectangle<LONG>(rettangolo), stileTesto);
+        ContestoDisegno.DrawText(TEXT("Hello, Windows 10!"), GetClientRect(), stileTesto);
     }
 };
 

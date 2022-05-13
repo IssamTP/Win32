@@ -60,6 +60,22 @@ namespace FW
 	public:
 #pragma region Interfaccia
 		/// <summary>
+		/// Imposta la altezza.
+		/// </summary>
+		/// <param name="height">Altezza della finestra.</param>
+		void SetHeight(T height)
+		{
+			Altezza = height;
+		}
+		/// <summary>
+		/// Imposta la larghezza.
+		/// </summary>
+		/// <param name="width">Larghezza della finestra.</param>
+		void SetWidth(T width)
+		{
+			Larghezza = width;
+		}
+		/// <summary>
 		/// Calcola l'aspect ratio.
 		/// </summary>
 		/// <returns>AspectRatio della dimensione.</returns>

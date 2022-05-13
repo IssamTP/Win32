@@ -75,6 +75,17 @@ namespace FW
 	{
 		return HandleFinestra;
 	}
+
+	Rectangle<LONG> Window::GetClientRect()
+	{
+		if (HandleFinestra != nullptr)
+		{
+			RECT rettangolo{ 0 };
+			::GetClientRect(HandleFinestra, &rettangolo);
+			RettangoloClient = Rectangle<LONG>(rettangolo);
+		}
+		return RettangoloClient;
+	}
 #pragma endregion
 
 #pragma region Messaggi

@@ -6,6 +6,7 @@
 	#include "Cursor.h"
 	#include "Icon.h"
 	#include "Size.h"
+	#include "Rectangle.h"
 	#include "StylesOperations.h"
 	#include "DeviceContext.h"
 	#include "WinExports.h"
@@ -14,6 +15,7 @@ namespace FW
 {
 	_FRAMEWORK_TEMPLATE_EXPORT_ template class Point2D<LONG>;
 	_FRAMEWORK_TEMPLATE_EXPORT_ template class Size2D<LONG>;
+	_FRAMEWORK_TEMPLATE_EXPORT_ template class Rectangle<LONG>;
 
 	/// <summary>
 	/// Finestra di base.
@@ -47,6 +49,10 @@ namespace FW
 		/// Coordinata di posizione della finestra sullo schermo.
 		/// </summary>
 		Point2D<LONG> Posizione;
+		/// <summary>
+		/// Dimensioni dell'area client.
+		/// </summary>
+		Rectangle<LONG> RettangoloClient;
 		/// <summary>
 		/// Dimensioni in pixel della finestra sullo schermo.
 		/// </summary>
@@ -115,6 +121,11 @@ namespace FW
 		/// </summary>
 		/// <returns>HWND istanza finestra.</returns>
 		HWND GetWindowHandle() const;
+		/// <summary>
+		/// Ottiene le dimensioni del rettangolo Client.
+		/// </summary>
+		/// <returns>Un oggetto Rectangle<LONG></returns>
+		Rectangle<LONG> GetClientRect();
 	protected:
 		/// <summary>
 		/// Funzione di disegno di base.
