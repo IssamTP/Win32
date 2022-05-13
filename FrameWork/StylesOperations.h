@@ -22,6 +22,37 @@ namespace FW
         CWUseDefault = CW_USEDEFAULT,
     };
 
+    /// <summary>
+    /// Codifica i vari stili per scrittura del testo.
+    /// </summary>
+    enum class DrawTextStyles : UINT
+    {
+        DTBottom = DT_BOTTOM,
+        DTCalcRect = DT_CALCRECT,
+        DTCenter = DT_CENTER,
+        DTEditControl = DT_EDITCONTROL,
+        DTEndEllipsis = DT_END_ELLIPSIS,
+        DTExpandTabs = DT_EXPANDTABS,
+        DTExternalLeading = DT_EXTERNALLEADING,
+        DTHidePrefix = DT_HIDEPREFIX,
+        DTInternal = DT_INTERNAL,
+        DTLeft = DT_LEFT,
+        DTModifyString = DT_MODIFYSTRING,
+        DTNoClip = DT_NOCLIP,
+        DTNoFullWidthCharBreak = DT_NOFULLWIDTHCHARBREAK,
+        DTNoPrefix = DT_NOPREFIX,
+        DTPathEllipsis = DT_PATH_ELLIPSIS,
+        DTPrefixOnly = DT_PREFIXONLY,
+        DTRight = DT_RIGHT,
+        DTRTLReading = DT_RTLREADING,
+        DTSingleLine = DT_SINGLELINE,
+        DTTabStop = DT_TABSTOP,
+        DTTop = DT_TOP,
+        DTVCener = DT_VCENTER,
+        DTWordBreak = DT_WORDBREAK,
+        DTWordEllipsis = DT_WORD_ELLIPSIS,
+    };
+
     enum class ShowWindowsCommands : int
     {
         SWHide = SW_HIDE,

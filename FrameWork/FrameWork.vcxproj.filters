@@ -60,6 +60,9 @@
     <ClInclude Include="DeviceContext.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">

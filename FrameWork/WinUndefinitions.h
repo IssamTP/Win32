@@ -4,4 +4,7 @@
 	#ifdef RegisterClass
 		#undef RegisterClass
 	#endif
+	#ifdef DrawText
+		#undef DrawText
+	#endif
 #endif

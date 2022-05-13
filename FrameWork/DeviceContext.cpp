@@ -7,6 +7,8 @@ namespace FW
 	DeviceContext::DeviceContext()
 	{
 		memset(&InformazioniDisegno, 0, sizeof(PAINTSTRUCT));
+		memset(&DettagliTesto, 0, sizeof(DRAWTEXTPARAMS));
+		DettagliTesto.cbSize = sizeof(DRAWTEXTPARAMS);
 	}
 
 	DeviceContext::DeviceContext(DeviceContext&& context) noexcept
@@ -59,7 +61,7 @@ namespace FW
 		if (this != &context)
 		{
 			InformazioniDisegno = context.InformazioniDisegno;
-
+			DettagliTesto = context.DettagliTesto;
 		}
 		return *this;
 	}
@@ -69,8 +71,53 @@ namespace FW
 		if (this != &context)
 		{
 			InformazioniDisegno = context.InformazioniDisegno;
+			DettagliTesto = context.DettagliTesto;
 		}
 		return *this;
 	}
+#pragma endregion
+
+#pragma region Interfaccia
+#pragma region Text
+	int DeviceContext::GetLeftMargin() const noexcept
+	{
+		return DettagliTesto.iLeftMargin;
+	}
+
+	int DeviceContext::GetRightMargin() const noexcept
+	{
+		return DettagliTesto.iRightMargin;
+	}
+
+	int DeviceContext::GetTabLength() const noexcept
+	{
+		return DettagliTesto.iTabLength;
+	}
+
+	void DeviceContext::DrawText(String text, Rectangle<LONG> drawArea, UINT textStyle)
+	{
+		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-drawtextexa
+		int altezzaTesto = DrawTextEx(*this, text, text.GetLength(), drawArea, textStyle, &DettagliTesto);
+		if (altezzaTesto == 0)
+		{
+			throw std::exception();
+		}
+	}
+
+	void DeviceContext::SetLeftMargin(int leftMargin)
+	{
+		DettagliTesto.iLeftMargin = leftMargin;
+	}
+
+	void DeviceContext::SetRightMargin(int rightMargin)
+	{
+		DettagliTesto.iRightMargin = rightMargin;
+	}
+
+	void DeviceContext::SetTabLength(int tabLength)
+	{
+		DettagliTesto.iTabLength = tabLength;
+	}
+#pragma endregion
 #pragma endregion
 }

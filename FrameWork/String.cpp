@@ -32,6 +32,11 @@ namespace FW
 		return std::string(Contenuto.cbegin(), Contenuto.cend());
 	}
 
+	std::size_t String::GetLength() const noexcept
+	{
+		return Contenuto.length();
+	}
+
 	/// <summary>
 	/// Converte la stringa memorizzata nell'oggetto in una stringa unicode.
 	/// </summary>

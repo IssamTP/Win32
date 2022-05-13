@@ -63,6 +63,39 @@ namespace FW
 			}
 			return pixel;
 		}
+	public:
+		/// <summary>
+		/// Imposta il valore della coordinata X.
+		/// </summary>
+		/// <param name="x">Nuova coordinata X.</param>
+		void SetX(T x)
+		{
+			X = x;
+		}
+		/// <summary>
+		/// Imposta il valore della coordinata Y.
+		/// </summary>
+		/// <param name="y">Nuova coordinata Y.</param>
+		void SetY(T y)
+		{
+			Y = y;
+		}
+		/// <summary>
+		/// Ottiene la copia del valore X.
+		/// </summary>
+		/// <returns>Valore di X.</returns>
+		T GetX() const
+		{
+			return X;
+		}
+		/// <summary>
+		/// Ottiene la copia del valore Y.
+		/// </summary>
+		/// <returns>Valore di Y.</returns>
+		T GetY() const
+		{
+			return Y;
+		}
 	};
 };
 #endif

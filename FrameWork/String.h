@@ -39,6 +39,11 @@ namespace FW
 		/// <returns>Una stringa convertita in versione non-unicode.</returns>
 		std::string GetAsNonUnicode() const;
 		/// <summary>
+		/// Ottiene la lunghezza della stringa.
+		/// </summary>
+		/// <returns>std::basic_string<T>.length()</returns>
+		std::size_t GetLength() const noexcept;
+		/// <summary>
 		/// Converte la stringa memorizzata nell'oggetto in una stringa unicode.
 		/// </summary>
 		/// <returns>Una stringa convertita in versione unicode.</returns>

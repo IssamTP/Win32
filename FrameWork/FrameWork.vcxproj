@@ -117,6 +117,7 @@ copy $(ProjectDir)*.h $(OutDir)headers
     <ClInclude Include="Icon.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="StylesOperations.h" />
