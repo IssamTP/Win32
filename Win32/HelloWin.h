@@ -1,0 +1,21 @@
+#pragma once
+    #include <headers/FrameWork.h>
+
+class HelloWin : public FW::Window
+{
+public:
+    HelloWin(HINSTANCE istanza, FW::String nomeClasse)
+        : Window(istanza, nomeClasse)
+    {
+    }
+protected:
+    virtual void OnPaint()
+    {
+        FW::Window::OnPaint();
+        RECT rettangolo;
+        GetClientRect(HandleFinestra, &rettangolo);
+        UINT stileTesto = FW::StylesOperations::Combine(FW::DrawTextStyles::DTSingleLine, FW::DrawTextStyles::DTCenter, FW::DrawTextStyles::DTVCener);
+        ContestoDisegno.DrawText(TEXT("Hello, Windows 10!"), FW::Rectangle<LONG>(rettangolo), stileTesto);
+    }
+};
+
