@@ -79,12 +79,51 @@ namespace FW
     };
 
     /// <summary>
+    /// Elenco degli oggetti predefiniti.
+    /// </summary>
+    enum class StockObjects : UINT
+    {
+        SOBlackBrush = BLACK_BRUSH,
+        SODKGrayBrush = DKGRAY_BRUSH,
+        SODCBrush = DC_BRUSH,
+        SOGrayBrush = GRAY_BRUSH,
+        SONullBrush = HOLLOW_BRUSH,
+        SOLTGrayBrush = LTGRAY_BRUSH,
+        SOWhiteBrush = WHITE_BRUSH,
+        SOBlackPen = BLACK_PEN,
+        SODCPen = DC_PEN,
+        SONullPen = NULL_PEN,
+        SOWhitePen = WHITE_PEN,
+        SOAnsiFixedFont = ANSI_FIXED_FONT,
+        SOAnsiVarFont = ANSI_VAR_FONT,
+        SODeviceDefaultFont = DEVICE_DEFAULT_FONT,
+        SODefaultGuiFont = DEFAULT_GUI_FONT,
+        SOOemFixedFont = OEM_FIXED_FONT,
+        SOSystemFont = SYSTEM_FONT,
+        SOSystemFixedFont = SYSTEM_FIXED_FONT,
+        SODefaultPalette = DEFAULT_PALETTE,
+    };
+
+    /// <summary>
     /// Codifica dei codici di errore di alcune funzioni Windows.
     /// </summary>
     enum class ErrNoCodes : int
     {
         EInval = EINVAL,
         ERange = ERANGE,
+    };
+
+    /// <summary>
+    /// Enum con un elenco parziale dei messaggi che arrivano alla finestra.
+    /// </summary>
+    enum class WindowsMessages : UINT
+    {
+        WMClose = WM_CLOSE,
+        WMCreate = WM_CREATE,
+        WMDestroy = WM_DESTROY,
+        WMPaint = WM_PAINT,
+        WMNCCreate = WM_NCCREATE,
+        WMQuit = WM_QUIT,
     };
 
     /// <summary>

@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "Brush.h"
 #include "Window.h"
 
 namespace FW
@@ -23,6 +24,8 @@ namespace FW
 		ClasseWindows.hInstance = istanza;
 		ClasseWindows.lpfnWndProc = &ProceduraStandard;
 		ClasseWindows.lpszClassName = NomeClasse;
+		ContestoDisegno.SetCurrentBrush(Brush::GetDefaultWindowBrush());
+		ClasseWindows.hbrBackground = ContestoDisegno.GetCurrentBrush();
 		ClasseWindows.hIcon = Icon::GetDefaultIcon();
 		ClasseWindows.hIconSm = Icon::GetDefaultIcon();
 		ClasseWindows.hCursor = Cursor::GetDefaultCursor();
@@ -106,52 +109,27 @@ namespace FW
 
 	INT_PTR Window::ProceduraFinestra(UINT messaggio, WPARAM wParam, LPARAM lParam)
 	{
-		INT_PTR messaggioGestito = FALSE;
+		INT_PTR messaggioDaGestire = FALSE;
 		switch (messaggio)
 		{
 		default:
-			messaggioGestito = DefWindowProc(HandleFinestra, messaggio, wParam, lParam);
+			messaggioDaGestire = DefWindowProc(HandleFinestra, messaggio, wParam, lParam);
 			break;
-		case WM_CREATE:
-		{
-			/*
-			// Inizializzazione dei parametri di TextMetric.
-			HDC finestra = GetDC(HandleFinestra);
-			GetTextMetrics(finestra, m_TextMetric);
-			ReleaseDC(HandleFinestra, finestra);
-			messaggioGestito = OnCreate(wParam, lParam);
-			*/
-		}
-		break;
 		case WM_CLOSE:
-			messaggioGestito = TRUE;
 			DestroyWindow(HandleFinestra);
+			messaggioDaGestire = FALSE;
 			break;
 		case WM_DESTROY:
-			messaggioGestito = TRUE;
-			// TODO: Pulizia risorse...
 			PostQuitMessage(EXIT_SUCCESS);
-			break;
-		case WM_HSCROLL:
-			// OnHScroll(static_cast<EventiHScroll>(LOWORD(wParam)), HIWORD(wParam));
-			break;
-		case WM_NOTIFY:
-			// OnNotify(reinterpret_cast<LPNMHDR>(lParam));
+			messaggioDaGestire = FALSE;
 			break;
 		case WM_PAINT:
 			OnPaint();
 			// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-endpaint
 			EndPaint(HandleFinestra, ContestoDisegno);
 			break;
-		case WM_SIZE:
-			// OnSize(LOWORD(lParam), HIWORD(lParam));
-			messaggioGestito = TRUE;
-			break;
-		case WM_VSCROLL:
-			// OnVScroll(static_cast<EventiVScroll>(LOWORD(wParam)), HIWORD(wParam));
-			break;
 		}
-		return messaggioGestito;
+		return messaggioDaGestire;
 	}
 #pragma endregion
 

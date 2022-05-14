@@ -110,6 +110,7 @@ copy $(ProjectDir)*.h $(OutDir)headers
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ApplicazioneWindows.h" />
+    <ClInclude Include="Brush.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="FrameWork.h" />
@@ -128,6 +129,7 @@ copy $(ProjectDir)*.h $(OutDir)headers
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApplicazioneWindows.cpp" />
+    <ClCompile Include="Brush.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="DeviceContext.cpp" />
     <ClCompile Include="dllmain.cpp" />

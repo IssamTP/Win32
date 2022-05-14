@@ -25,7 +25,9 @@ namespace FW
 	#pragma region Statiche
 	Icon Icon::GetDefaultIcon()
 	{
-		return Icon(static_cast<HICON>(LoadImage(nullptr, MAKEINTRESOURCE(OIC_WINLOGO), IMAGE_ICON, SM_CXICON, SM_CYICON, LR_DEFAULTCOLOR)));
+		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-loadimagew
+		HICON handleIcona = static_cast<HICON>(LoadImage(nullptr, MAKEINTRESOURCE(OIC_WINLOGO), IMAGE_ICON, SM_CXICON, SM_CYICON, LR_SHARED));
+		return Icon(handleIcona);
 	}
 	#pragma endregion
 }

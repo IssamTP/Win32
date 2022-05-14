@@ -25,7 +25,7 @@ namespace FW
 #pragma region Statiche
 	Cursor Cursor::GetDefaultCursor()
 	{
-		return Cursor(static_cast<HCURSOR>(LoadImage(nullptr, MAKEINTRESOURCE(OCR_NORMAL), IMAGE_ICON, SM_CXCURSOR, SM_CYCURSOR, LR_DEFAULTCOLOR)));
+		return Cursor(static_cast<HCURSOR>(LoadImage(nullptr, MAKEINTRESOURCE(OCR_NORMAL), IMAGE_CURSOR, SM_CXCURSOR, SM_CYCURSOR, LR_SHARED)));
 	}
 #pragma endregion
 }

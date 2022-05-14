@@ -25,10 +25,6 @@ namespace FW
         ~ApplicazioneWindows();
 #pragma region Virtuali
         /// <summary>
-        /// Avvia l'applicazione corrente.
-        /// </summary>
-        virtual void AvviaApplicazione();
-        /// <summary>
         /// Inizializza l'applicazione con l'istanza del programma.
         /// Questo metodo crea una classe di finestra con una serie di valori predefiniti: sovrascriverlo per personalizzare la finestra.
         /// Per mostrarla utilizzare AvviaApplicazione.
@@ -37,7 +33,18 @@ namespace FW
         /// <param name="nomeClasseFinestra">Nome da assegnare alla classe finestra.</param>
         /// <param name="titoloFinestra">Titolo che comparirà nella barra del titolo.</param>
         virtual void InizializzaApplicazione(HINSTANCE instance, String nomeClasseFinestra, String titoloFinestra);
+        /// <summary>
+        /// Inizializza l'applicazione con l'istanza del programma.
+        /// Questo metodo crea una classe di finestra con una serie di valori predefiniti: sovrascriverlo per personalizzare la finestra.
+        /// Per mostrarla utilizzare AvviaApplicazione.
+        /// </summary>
+        /// <param name="window">Finestra di avvio.</param>
         virtual void InizializzaApplicazione(Window* window);
+        /// <summary>
+        /// Avvia l'applicazione corrente.
+        /// </summary>
+        /// <return>Valore dell'ultimo messaggio ricevuto.</param>
+        virtual WPARAM AvviaApplicazione();
 #pragma endregion
     };
 }

@@ -104,6 +104,11 @@ namespace FW
 		}
 	}
 
+	void DeviceContext::SetCurrentBrush(Brush nuovoBrush)
+	{
+		BrushCorrente = nuovoBrush;
+	}
+
 	void DeviceContext::SetLeftMargin(int leftMargin)
 	{
 		DettagliTesto.iLeftMargin = leftMargin;
@@ -117,6 +122,11 @@ namespace FW
 	void DeviceContext::SetTabLength(int tabLength)
 	{
 		DettagliTesto.iTabLength = tabLength;
+	}
+
+	Brush& DeviceContext::GetCurrentBrush()
+	{
+		return BrushCorrente;
 	}
 #pragma endregion
 #pragma endregion

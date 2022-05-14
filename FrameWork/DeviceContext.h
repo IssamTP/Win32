@@ -2,6 +2,7 @@
 #ifndef _DEVICE_CONTEXT_H_
 	#define _DEVICE_CONTEXT_H_
 	#include "HeaderCPP.h"
+	#include "Brush.h"
 	#include "Rectangle.h"
 	#include "WinExports.h"
 	#include "WinUndefinitions.h"
@@ -13,6 +14,10 @@ namespace FW
 	class _FRAMEWORK_CLASS_EXPORT_ DeviceContext
 	{
 	protected:
+		/// <summary>
+		/// Pennello corrente.
+		/// </summary>
+		Brush BrushCorrente;
 		/// <summary>
 		/// Contiene informazioni sul disegno del testo.
 		/// </summary>
@@ -102,6 +107,11 @@ namespace FW
 		/// <param name="textStyle">Stile di disegno del testo: usare StyleOperations::Combine con DrawTextStyles.</param>
 		void DrawText(String text, Rectangle<LONG> drawArea, UINT textStyle);
 		/// <summary>
+		/// Imposta il brush corrente.
+		/// </summary>
+		/// <param name="nuovoBrush">Nuovo brush.</param>
+		void SetCurrentBrush(Brush nuovoBrush);
+		/// <summary>
 		/// Imposta il margine sinistro del testo.
 		/// </summary>
 		/// <param name="leftMargin">L'unità di misura è la media della larghezza del carattere.</param>
@@ -116,6 +126,11 @@ namespace FW
 		/// </summary>
 		/// <param name="tabLength">L'unità di misura è la media della larghezza del carattere.</param>
 		void SetTabLength(int tabLength);
+		/// <summary>
+		/// Ottiene il brush corrente.
+		/// </summary>
+		/// <returns></returns>
+		Brush& GetCurrentBrush();
 #pragma endregion
 #pragma endregion
 	};

@@ -21,8 +21,9 @@ namespace FW
 #pragma endregion
 
 #pragma region Virtuali
-	void ApplicazioneWindows::AvviaApplicazione()
+	WPARAM ApplicazioneWindows::AvviaApplicazione()
 	{
+		WPARAM valoreDiRitorno = 0u;
 		if (FinestraApplicazione != nullptr)
 		{
 			FinestraApplicazione->RegisterClassAndCreateWindow();
@@ -33,7 +34,9 @@ namespace FW
 				TranslateMessage(&message);
 				DispatchMessage(&message);
 			}
+			valoreDiRitorno = message.wParam;
 		}
+		return valoreDiRitorno;
 	}
 
 	void ApplicazioneWindows::InizializzaApplicazione(Window* window)

@@ -29,8 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HelloWin* finestra = new HelloWin(hInstance, szWindowClass);
     finestra->SetTitle(szTitle);
     applicazioneWindows.InizializzaApplicazione(finestra);
-    applicazioneWindows.AvviaApplicazione();
-    return 0;
+    return applicazioneWindows.AvviaApplicazione();
 }
 
 // Gestore di messaggi per la finestra Informazioni su.
