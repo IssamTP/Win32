@@ -6,32 +6,33 @@ namespace FW
 {
 #pragma region Costruttori
 	Window::Window()
+		: WNDCLASSEX()
 	{
-		memset(&ClasseWindows, 0, sizeof(WNDCLASSEX));
-		ClasseWindows.cbSize = sizeof(WNDCLASSEX);
-		CursoreFinestra = nullptr;
+		ModalitaVisualizzazione = ShowWindowsCommands::SWDefault;
 		IdUnicoClasse = 0;
 		StileFinestra = StileFinestraEsteso = 0ul;
-		IconaFinestra = nullptr;
+		cbSize = sizeof(WNDCLASSEX);
+		CursoreFinestra = nullptr;
 		HandleFinestra = nullptr;
+		IconaFinestra = nullptr;
 	}
 
 	Window::Window(HINSTANCE istanza, String nomeClasse)
 		: Window()
 	{
 		NomeClasse = String(nomeClasse);
-		ClasseWindows.style = StylesOperations::Combine(ClassStyles::CSHRedraw, ClassStyles::CSVRedraw);
-		ClasseWindows.hInstance = istanza;
-		ClasseWindows.lpfnWndProc = &ProceduraStandard;
-		ClasseWindows.lpszClassName = NomeClasse;
+		lpszClassName = NomeClasse;
+		style = StylesOperations::Combine(ClassStyles::CSHRedraw, ClassStyles::CSVRedraw);
+		hInstance = istanza;
+		lpfnWndProc = &ProceduraStandard;
 		ContestoDisegno.SetCurrentBrush(Brush::GetDefaultWindowBrush());
-		ClasseWindows.hbrBackground = ContestoDisegno.GetCurrentBrush();
+		hbrBackground = ContestoDisegno.GetCurrentBrush();
 		IconaFinestra = Icon::GetDefaultIcon();
-		ClasseWindows.hIcon = IconaFinestra;
-		ClasseWindows.hIconSm = IconaFinestra;
+		hIcon = IconaFinestra;
+		hIconSm = IconaFinestra;
 		CursoreFinestra = Cursor::GetDefaultCursor();
-		ClasseWindows.hCursor = CursoreFinestra;
-		ClasseWindows.lpszMenuName = nullptr;
+		hCursor = CursoreFinestra;
+		lpszMenuName = nullptr;
 		StileFinestra = StylesOperations::Combine(WindowStyles::WSOverlappedWindow);
 		HandleFinestra = nullptr;
 	}
@@ -43,7 +44,7 @@ namespace FW
 		RegisterClass();
 		int usaPredefinito = static_cast<int>(StylesOperations::Combine(CreateWindowOptions::CWUseDefault));
 		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-createwindowexw
-		HandleFinestra = CreateWindowEx(StileFinestraEsteso, NomeClasse, NomeFinestra, StileFinestra, usaPredefinito, usaPredefinito, usaPredefinito, usaPredefinito, nullptr, nullptr, ClasseWindows.hInstance, this);
+		HandleFinestra = CreateWindowEx(StileFinestraEsteso, NomeClasse, NomeFinestra, StileFinestra, usaPredefinito, usaPredefinito, usaPredefinito, usaPredefinito, nullptr, nullptr, hInstance, this);
 		if (HandleFinestra != nullptr)
 		{
 			ShowWindow(ShowWindowsCommands::SWShow);
@@ -58,7 +59,7 @@ namespace FW
 	void Window::RegisterClass()
 	{
 		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-registerclassexw
-		IdUnicoClasse = RegisterClassEx(&ClasseWindows);
+		IdUnicoClasse = RegisterClassEx(this);
 		if (IdUnicoClasse == 0)
 		{
 			throw std::exception();
@@ -96,14 +97,9 @@ namespace FW
 #pragma region Messaggi
 	void Window::OnPaint()
 	{
-		PAINTSTRUCT paintStruct;
 		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-beginpaint
-		HDC controllo = BeginPaint(HandleFinestra, &paintStruct);
-		if (controllo == paintStruct.hdc)
-		{
-			ContestoDisegno = paintStruct;
-		}
-		else
+		HDC controllo = BeginPaint(HandleFinestra, &ContestoDisegno);
+		if (controllo != ContestoDisegno)
 		{
 			throw std::exception();
 		}
@@ -128,7 +124,7 @@ namespace FW
 		case WM_PAINT:
 			OnPaint();
 			// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-endpaint
-			EndPaint(HandleFinestra, ContestoDisegno);
+			EndPaint(HandleFinestra, &ContestoDisegno);
 			break;
 		}
 		return messaggioDaGestire;

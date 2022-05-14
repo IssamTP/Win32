@@ -5,18 +5,20 @@ namespace FW
 {
 #pragma region Costruttore
 	DeviceContext::DeviceContext()
+		: PAINTSTRUCT()
 	{
-		memset(&InformazioniDisegno, 0, sizeof(PAINTSTRUCT));
 		memset(&DettagliTesto, 0, sizeof(DRAWTEXTPARAMS));
 		DettagliTesto.cbSize = sizeof(DRAWTEXTPARAMS);
 	}
 
 	DeviceContext::DeviceContext(DeviceContext&& context) noexcept
+		: PAINTSTRUCT()
 	{
 		*this = context;
 	}
 
 	DeviceContext::DeviceContext(const DeviceContext& context)
+		: PAINTSTRUCT()
 	{
 		*this = context;
 	}
@@ -25,34 +27,14 @@ namespace FW
 #pragma region Operatori
 	DeviceContext::operator HDC()
 	{
-		return InformazioniDisegno.hdc;
-	}
-
-	DeviceContext::operator PAINTSTRUCT()
-	{
-		return InformazioniDisegno;
-	}
-
-	DeviceContext::operator LPPAINTSTRUCT()
-	{
-		return &InformazioniDisegno;
+		return hdc;
 	}
 
 	void DeviceContext::operator=(HDC deviceContext)
 	{
 		if (deviceContext != nullptr)
 		{
-			memset(&InformazioniDisegno, 0, sizeof(PAINTSTRUCT));
-			InformazioniDisegno.hdc = deviceContext;
-		}
-	}
-
-	void DeviceContext::operator=(const PAINTSTRUCT& paintStruct)
-	{
-		errno_t errore = memcpy_s(&InformazioniDisegno, sizeof(PAINTSTRUCT), &paintStruct, sizeof(PAINTSTRUCT));
-		if (errore != 0)
-		{
-			throw std::exception();
+			hdc = deviceContext;
 		}
 	}
 
@@ -60,7 +42,16 @@ namespace FW
 	{
 		if (this != &context)
 		{
-			InformazioniDisegno = context.InformazioniDisegno;
+			fErase = context.fErase;
+			fIncUpdate = context.fIncUpdate;
+			fRestore = context.fRestore;
+			hdc = context.hdc;
+			rcPaint = context.rcPaint;
+			errno_t errore = memmove_s(rgbReserved, 32u * sizeof(BYTE), context.rgbReserved, 32u * sizeof(BYTE));
+			if (errore != 0)
+			{
+				memset(rgbReserved, 0, 32u * sizeof(BYTE));
+			}
 			DettagliTesto = context.DettagliTesto;
 		}
 		return *this;
@@ -70,7 +61,16 @@ namespace FW
 	{
 		if (this != &context)
 		{
-			InformazioniDisegno = context.InformazioniDisegno;
+			fErase = context.fErase;
+			fIncUpdate = context.fIncUpdate;
+			fRestore = context.fRestore;
+			hdc = context.hdc;
+			rcPaint = context.rcPaint;
+			errno_t errore = memcpy_s(rgbReserved, 32u * sizeof(BYTE), context.rgbReserved, 32u * sizeof(BYTE));
+			if (errore != 0)
+			{
+				memset(rgbReserved, 0, 32u * sizeof(BYTE));
+			}
 			DettagliTesto = context.DettagliTesto;
 		}
 		return *this;

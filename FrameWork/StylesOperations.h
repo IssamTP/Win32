@@ -5,6 +5,17 @@
 
 namespace FW
 {
+    /*
+     * CS = Class Style
+     * CW = Create Window
+     * DT = Draw Text
+     * IDI = Icon Identifier
+     * IDC = Cursor Identifier
+     * MB = Message Box
+     * SND = Sound
+     * WM = Windows Message
+     * WS = Windows Style
+     */
     /// <summary>
     /// Incapsulamento ad enum degli stili di classe di Windows.
     /// </summary>
