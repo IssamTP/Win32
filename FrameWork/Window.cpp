@@ -26,9 +26,11 @@ namespace FW
 		ClasseWindows.lpszClassName = NomeClasse;
 		ContestoDisegno.SetCurrentBrush(Brush::GetDefaultWindowBrush());
 		ClasseWindows.hbrBackground = ContestoDisegno.GetCurrentBrush();
-		ClasseWindows.hIcon = Icon::GetDefaultIcon();
-		ClasseWindows.hIconSm = Icon::GetDefaultIcon();
-		ClasseWindows.hCursor = Cursor::GetDefaultCursor();
+		IconaFinestra = Icon::GetDefaultIcon();
+		ClasseWindows.hIcon = IconaFinestra;
+		ClasseWindows.hIconSm = IconaFinestra;
+		CursoreFinestra = Cursor::GetDefaultCursor();
+		ClasseWindows.hCursor = CursoreFinestra;
 		ClasseWindows.lpszMenuName = nullptr;
 		StileFinestra = StylesOperations::Combine(WindowStyles::WSOverlappedWindow);
 		HandleFinestra = nullptr;
