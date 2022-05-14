@@ -145,6 +145,9 @@ copy $(ProjectDir)*.h $(OutDir)headers
   <ItemGroup>
     <Text Include="Informazioni.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="CopiaBinariFrameworkD.bat" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
