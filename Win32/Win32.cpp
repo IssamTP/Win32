@@ -25,11 +25,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_WIN32, szWindowClass, MAX_LOADSTRING);
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WIN32));
-    FW::ApplicazioneWindows applicazioneWindows;
+    FW::ApplicazioneWindows* applicazioneWindows = FW::ApplicazioneWindows::GetWinAppInstance();
     HelloWin* finestra = new HelloWin(hInstance, szWindowClass);
     finestra->SetTitle(szTitle);
-    applicazioneWindows.InizializzaApplicazione(finestra);
-    return applicazioneWindows.AvviaApplicazione();
+    applicazioneWindows->InizializzaApplicazione(finestra);
+    WPARAM exitValue = applicazioneWindows->AvviaApplicazione();
+    delete applicazioneWindows;
+    return exitValue;
 }
 
 // Gestore di messaggi per la finestra Informazioni su.

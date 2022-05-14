@@ -20,8 +20,16 @@ namespace FW
         /// Puntatore alla finestra principale del programma.
         /// </summary>
         Window* FinestraApplicazione;
+#pragma region Singleton
+    private:
+        static ApplicazioneWindows* WinApp;
+        ApplicazioneWindows() = default;
+        ApplicazioneWindows(const ApplicazioneWindows& winApp) = delete;
+        ApplicazioneWindows& operator=(const ApplicazioneWindows& winApp) = delete;
     public:
-        ApplicazioneWindows();
+        static ApplicazioneWindows* GetWinAppInstance();
+#pragma endregion
+    public:
         ~ApplicazioneWindows();
 #pragma region Virtuali
         /// <summary>

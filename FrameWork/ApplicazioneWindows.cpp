@@ -3,14 +3,19 @@
 
 namespace FW
 {
-#pragma region Costruttori
-	/// <summary>Costruttore predefinito.</summary>
-	ApplicazioneWindows::ApplicazioneWindows()
+#pragma region Singleton
+	ApplicazioneWindows* ApplicazioneWindows::WinApp = nullptr;
+	ApplicazioneWindows* ApplicazioneWindows::GetWinAppInstance()
 	{
-		IstanzaApplicazione = nullptr;
-		FinestraApplicazione = nullptr;
+		if (ApplicazioneWindows::WinApp == nullptr)
+		{
+			ApplicazioneWindows::WinApp = new ApplicazioneWindows();
+		}
+		return ApplicazioneWindows::WinApp;
 	}
+#pragma endregion
 
+#pragma region Costruttori
 	ApplicazioneWindows::~ApplicazioneWindows()
 	{
 		if (FinestraApplicazione != nullptr)

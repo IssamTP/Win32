@@ -5,7 +5,26 @@
 
 namespace FW
 {
-    /*
+    /* HUNGARIAN NOTATION
+     * c = char o wchar_t
+     * by = BYTE
+     * n = short
+     * i = int
+     * x, y = coordinate
+     * cx, cy = count x/y
+     * b o f = BOOL (int) o flag
+     * w = word
+     * l = long
+     * dw = double word -> unsigned long
+     * fn = function
+     * s = string
+     * sz = string terminated by zero
+     * h = handle
+     * p = pointer
+     * lp / fp / np = long/far/near pointer
+     */
+
+    /* PREFISSI CODICI
      * CS = Class Style
      * CW = Create Window
      * DT = Draw Text
