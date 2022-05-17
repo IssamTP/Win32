@@ -16,6 +16,9 @@
     <Filter Include="Utilità">
       <UniqueIdentifier>{a86e413c-8c83-4fad-a21f-d17a0b7d203c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{91265bd9-50a3-408f-9b6f-7f1f3df88876}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -45,16 +48,10 @@
     <ClInclude Include="Icon.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="Size.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
     <ClInclude Include="Cursor.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="StylesOperations.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
-    <ClInclude Include="Point.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="WinUndefinitions.h">
@@ -63,13 +60,25 @@
     <ClInclude Include="DeviceContext.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="Rectangle.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
     <ClInclude Include="Brush.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="WinPoint.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="WinRectangle.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="Size.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="WinSize.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>
@@ -105,6 +114,12 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="WinPoint.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="WinRectangle.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="WinSize.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

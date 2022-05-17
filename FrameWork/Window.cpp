@@ -39,7 +39,7 @@ namespace FW
 #pragma endregion
 
 #pragma region Interfaccia
-	void Window::InvalidateRect(Rectangle<LONG> invalidateArea, bool eraseBackground)
+	void Window::InvalidateRect(const WinRectangle& invalidateArea, bool eraseBackground)
 	{
 		::InvalidateRect(HandleFinestra, invalidateArea, eraseBackground);
 	}
@@ -87,13 +87,12 @@ namespace FW
 		return HandleFinestra;
 	}
 
-	Rectangle<LONG> Window::GetClientRect()
+	WinRectangle Window::GetClientRect()
 	{
 		if (HandleFinestra != nullptr)
 		{
-			RECT rettangolo{ 0 };
-			::GetClientRect(HandleFinestra, &rettangolo);
-			RettangoloClient = Rectangle<LONG>(rettangolo);
+			::GetClientRect(HandleFinestra, RettangoloClient);
+			RettangoloClient.GetOriginAndSize(Posizione, Dimensione);
 		}
 		return RettangoloClient;
 	}

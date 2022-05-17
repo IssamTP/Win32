@@ -3,7 +3,7 @@
 	#define _RECTANGLE_CLASS_H_
 	#include "Point.h"
 	#include "Size.h"
-namespace FW
+namespace Math
 {
 	/// <summary>
 	/// Classe che modella un oggetto rettangolo con origine in alto a sinistra.

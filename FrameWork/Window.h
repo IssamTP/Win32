@@ -2,21 +2,17 @@
 #ifndef _WINDOW_H_
 	#define _WINDOW_H_
 	#include "HeaderCPP.h"
-	#include "Point.h"
+	#include "WinPoint.h"
+	#include "WinSize.h"
 	#include "Cursor.h"
 	#include "Icon.h"
-	#include "Size.h"
-	#include "Rectangle.h"
+	#include "WinRectangle.h"
 	#include "StylesOperations.h"
 	#include "DeviceContext.h"
 	#include "WinExports.h"
 	#include "WinUndefinitions.h"
 namespace FW
 {
-	_FRAMEWORK_TEMPLATE_EXPORT_ template class Point2D<LONG>;
-	_FRAMEWORK_TEMPLATE_EXPORT_ template class Size2D<LONG>;
-	_FRAMEWORK_TEMPLATE_EXPORT_ template class Rectangle<LONG>;
-
 	/// <summary>
 	/// Finestra di base.
 	/// Incapsula le funzionalità di base della finestra C.
@@ -51,11 +47,11 @@ namespace FW
 		/// <summary>"Puntatore" alla finestra di Windows.</summary>
 		HWND HandleFinestra;
 		/// <summary>Coordinata di posizione della finestra sullo schermo.</summary>
-		Point2D<LONG> Posizione;
+		WinPoint Posizione;
 		/// <summary>Dimensioni dell'area client.</summary>
-		Rectangle<LONG> RettangoloClient;
+		WinRectangle RettangoloClient;
 		/// <summary>Dimensioni in pixel della finestra sullo schermo.</summary>
-		Size2D<LONG> Dimensione;
+		WinSize Dimensione;
 		/// <summary>Specifica come mostrare la finestra al comando Show.</summary>
 		ShowWindowsCommands ModalitaVisualizzazione;
 		/// <summary>Nome della classe di finestre.</summary>
@@ -84,7 +80,7 @@ namespace FW
 		/// </summary>
 		/// <param name="invalidateArea">Rettangolo da invalidare.</param>
 		/// <param name="eraseBackground">Se sì, invita Windows a cancellare lo sfondo (fErase di PAINTSTRUCT sarà == 0).</param>
-		void InvalidateRect(Rectangle<LONG> invalidateArea, bool eraseBackground);
+		void InvalidateRect(const WinRectangle& invalidateArea, bool eraseBackground);
 		/// <summary>Registra la classe, se non lo è già, e crea la finestra con posizione e dimensioni predefinite senza finestra proprietaria.</summary>
 		void RegisterClassAndCreateWindow();
 		/// <summary>Registra la classe finestra associata.</summary>
@@ -100,7 +96,7 @@ namespace FW
 		HWND GetWindowHandle() const;
 		/// <summary>Ottiene le dimensioni del rettangolo Client.</summary>
 		/// <returns>Un oggetto Rectangle<LONG></returns>
-		Rectangle<LONG> GetClientRect();
+		WinRectangle GetClientRect();
 	protected:
 		/// <summary>
 		/// Funzione di cancellazione personalizzata dello sfondo dell'area client.

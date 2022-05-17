@@ -2,7 +2,7 @@
 #ifndef _CLASS_POINT_2D_H_
 	#define _CLASS_POINT_2D_H_
 	#include "HeaderCPP.h"
-namespace FW
+namespace Math
 {
 	/// <summary>
 	/// Classe che rappresenta un punto nello spazio 2D.

@@ -3,7 +3,7 @@
 	#define _DEVICE_CONTEXT_H_
 	#include "HeaderCPP.h"
 	#include "Brush.h"
-	#include "Rectangle.h"
+	#include "WinRectangle.h"
 	#include "WinExports.h"
 	#include "WinUndefinitions.h"
 namespace FW
@@ -94,7 +94,7 @@ namespace FW
 		/// <param name="text">Stringa da scrivere.</param>
 		/// <param name="drawArea">Rettangolo di scrittura.</param>
 		/// <param name="textStyle">Stile di disegno del testo: usare StyleOperations::Combine con DrawTextStyles.</param>
-		void DrawText(String text, Rectangle<LONG> drawArea, UINT textStyle);
+		void DrawText(String text, const WinRectangle& drawArea, UINT textStyle);
 		/// <summary>
 		/// Imposta il brush corrente.
 		/// </summary>

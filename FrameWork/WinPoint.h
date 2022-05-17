@@ -2,12 +2,13 @@
 #ifndef _WIN_POINT_CLASS_H_
 	#define _WIN_POINT_CLASS_H_
 	#include "HeaderCPP.h"
+	#include "WinExports.h"
 namespace FW
 {
 	/// <summary>
 	/// Classe wrap della struttura di base POINT.
 	/// </summary>
-	class WinPoint : POINT
+	class _FRAMEWORK_CLASS_EXPORT_ WinPoint : POINT
 	{
 	protected:
 		using POINT::x;

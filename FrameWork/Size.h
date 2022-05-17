@@ -2,7 +2,7 @@
 #ifndef _SIZE_CLASS_H_
 	#define _SIZE_CLASS_H_
 	#include "HeaderCPP.h"
-namespace FW
+namespace Math
 {
 	/// <summary>
 	/// Classe di incapsulamento della struttura SIZE.

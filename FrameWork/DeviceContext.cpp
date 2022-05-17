@@ -94,10 +94,10 @@ namespace FW
 		return DettagliTesto.iTabLength;
 	}
 
-	void DeviceContext::DrawText(String text, Rectangle<LONG> drawArea, UINT textStyle)
+	void DeviceContext::DrawText(String text, const WinRectangle& drawArea, UINT textStyle)
 	{
 		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-drawtextexa
-		int altezzaTesto = DrawTextEx(*this, text, text.GetLength(), drawArea, textStyle, &DettagliTesto);
+		int altezzaTesto = DrawTextEx(*this, text, static_cast<int>(text.GetLength()), *const_cast<WinRectangle *>(&drawArea), textStyle, &DettagliTesto);
 		if (altezzaTesto == 0)
 		{
 			throw std::exception();
