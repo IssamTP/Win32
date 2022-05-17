@@ -11,7 +11,7 @@ namespace FW
 	/// <summary>
 	/// Classe wrap della struttura RECT.
 	/// </summary>
-	class _FRAMEWORK_CLASS_EXPORT_ WinRectangle : RECT
+	class _FRAMEWORK_CLASS_EXPORT_ WinRectangle : public RECT
 	{
 	protected:
 		using RECT::bottom;

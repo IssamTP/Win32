@@ -44,6 +44,13 @@ namespace FW
 		/// <summary>Costruttore di copia.</summary>
 		/// <param name="context">Contesto da copiare..</param>
 		DeviceContext(const DeviceContext& context);
+		/// <summary>
+		/// Generalmente chiamato da GetDC di Window.
+		/// Non usare.
+		/// </summary>
+		/// <param name="handleToDeviceContext">Handle al device context.</param>
+		/// <param name="clientArea">Rettangolo corrispondente a tutta la finestra.</param>
+		DeviceContext(HDC handleToDeviceContext, const WinRectangle& clientArea);
 #pragma endregion
 #pragma region Operatori
 	public:

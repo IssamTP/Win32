@@ -42,6 +42,10 @@ namespace FW
 		Cursor CursoreFinestra;
 		/// <summary>Oggetto per disegnare nella finestra.</summary>
 		DeviceContext ContestoDisegno;
+		/// <summary>
+		/// Riferimento all'extra context da deallocare nel caso in cui l'utente se ne dimentichi.
+		/// </summary>
+		DeviceContext* ExtraContestoDisegno;
 		/// <summary>Icona della finestra.</summary>
 		Icon IconaFinestra;
 		/// <summary>"Puntatore" alla finestra di Windows.</summary>
@@ -50,6 +54,8 @@ namespace FW
 		WinPoint Posizione;
 		/// <summary>Dimensioni dell'area client.</summary>
 		WinRectangle RettangoloClient;
+		/// <summary>Dimensioni dell'area client.</summary>
+		WinRectangle RettangoloWindow;
 		/// <summary>Dimensioni in pixel della finestra sullo schermo.</summary>
 		WinSize Dimensione;
 		/// <summary>Specifica come mostrare la finestra al comando Show.</summary>
@@ -76,6 +82,11 @@ namespace FW
 #pragma endregion
 	public:
 		/// <summary>
+		/// Invalida tutta l'area client della finestra.
+		/// </summary>
+		/// <param name="eraseBackground">Se sì, invita Windows a cancellare lo sfondo (fErase di PAINTSTRUCT sarà == 0).</param>
+		void InvalidateClientArea(bool eraseBackground);
+		/// <summary>
 		/// Specifica a Windows che si vuole invalidare una porzione dell'area di client E se si vuole cancellare lo sfondo.
 		/// </summary>
 		/// <param name="invalidateArea">Rettangolo da invalidare.</param>
@@ -85,24 +96,49 @@ namespace FW
 		void RegisterClassAndCreateWindow();
 		/// <summary>Registra la classe finestra associata.</summary>
 		void RegisterClass();
+		/// <summary>
+		/// Dealloca il DeviceContext ottenuto con GetDC.
+		/// </summary>
+		/// <remarks>Questa funzione deve essere chiamata nello stesso messaggio in cui si è chiamato GetDC.</remarks>
+		void ReleaseDC();
 		/// <summary>Imposta il titolo della finestra.</summary>
 		/// <param name="nomeFinestra">Nuovo titolo della finestra.</param>
 		void SetTitle(String nomeFinestra);
 		/// <summary>Mostra la finestra con la modalità specificata.</summary>
 		/// <param name="command">Specifica come mostrare la finestra.</param>
 		void ShowWindow(ShowWindowsCommands command);
+		/// <summary>
+		/// Valida manualmente una porzione dello schermo.
+		/// </summary>
+		/// <param name="areaToValidate">Porzione dello schermo da validare.</param>
+		/// <remarks>Questa funzione va eventualmente utilizzata di concerto con GetClient/WindowDC.</remarks>
+		void ValidateRect(const WinRectangle& areaToValidate);
+		/// <summary>
+		/// Crea e restituisce un Device Context.
+		/// Richiede una chiamata a ReleaseDC().
+		/// </summary>
+		/// <returns>Un oggetto DeviceContext da usare per disegnare fuori dal messaggio WM_PAINT.</returns>
+		/// <remarks>GetDC non valida porzioni di finestra eventualmente invaldiate, chiamare ValidateRect(). Questa funzione dovrebbe essere usata per disegnare qualcosa in risposta agli eventi generati dall'utente.</remarks>
+		DeviceContext* GetCientDC();
+		DeviceContext* GetWindowDC();
 		/// <summary>Ottiene l'handle dell'istanza della finestra.</summary>
 		/// <returns>HWND istanza finestra.</returns>
 		HWND GetWindowHandle() const;
 		/// <summary>Ottiene le dimensioni del rettangolo Client.</summary>
-		/// <returns>Un oggetto Rectangle<LONG></returns>
+		/// <returns>Un oggetto WinRectangle.</returns>
 		WinRectangle GetClientRect();
+		/// <summary>
+		/// Ottiene le dimensioni del rettangolo finestra.
+		/// </summary>
+		/// <returns>Un oggetto WinRectangle.</returns>
+		WinRectangle GetWindowRect();
 	protected:
 		/// <summary>
 		/// Funzione di cancellazione personalizzata dello sfondo dell'area client.
 		/// </summary>
 		virtual void OnEraseBkGnd();
 		/// <summary>Funzione di disegno di base. Ogni finestra che erediterà da quella principale deve chiamare questa funzione.</summary>
+		/// <remarks>Si suggerisce di fare caso al rettangolo di ridisegno in fase di implementazione della OnPaint.</remarks>
 		virtual void OnPaint();
 		/// <summary>Implementazione della procedura della finestra: si può cambiare, se lo si desidera...</summary>
 		/// <param name="messaggio"></param>

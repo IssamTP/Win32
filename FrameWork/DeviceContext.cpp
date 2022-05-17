@@ -22,6 +22,13 @@ namespace FW
 	{
 		*this = context;
 	}
+
+	DeviceContext::DeviceContext(HDC handleToDeviceContext, const WinRectangle& clientArea)
+		: DeviceContext()
+	{
+		hdc = handleToDeviceContext;
+		rcPaint = clientArea;
+	}
 #pragma endregion
 
 #pragma region Operatori

@@ -15,6 +15,7 @@ namespace FW
 		CursoreFinestra = nullptr;
 		HandleFinestra = nullptr;
 		IconaFinestra = nullptr;
+		ExtraContestoDisegno = nullptr;
 	}
 
 	Window::Window(HINSTANCE istanza, String nomeClasse)
@@ -39,6 +40,11 @@ namespace FW
 #pragma endregion
 
 #pragma region Interfaccia
+	void Window::InvalidateClientArea(bool eraseBackground)
+	{
+		::InvalidateRect(HandleFinestra, nullptr, eraseBackground);
+	}
+
 	void Window::InvalidateRect(const WinRectangle& invalidateArea, bool eraseBackground)
 	{
 		::InvalidateRect(HandleFinestra, invalidateArea, eraseBackground);
@@ -71,6 +77,15 @@ namespace FW
 		}
 	}
 
+	void Window::ReleaseDC()
+	{
+		if (::ReleaseDC(HandleFinestra, *ExtraContestoDisegno) == 1)
+		{
+			delete ExtraContestoDisegno;
+			ExtraContestoDisegno = nullptr;
+		}
+	}
+
 	void Window::SetTitle(String nomeFinestra)
 	{
 		NomeFinestra = nomeFinestra;
@@ -80,6 +95,31 @@ namespace FW
 	{
 		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-showwindow
 		BOOL statoPrecedente = ::ShowWindow(HandleFinestra, static_cast<int>(command));
+	}
+
+	void Window::ValidateRect(const WinRectangle& areaToValidate)
+	{
+		BOOL esito = ::ValidateRect(HandleFinestra, areaToValidate);
+	}
+
+	DeviceContext* Window::GetCientDC()
+	{
+		if (ExtraContestoDisegno != nullptr)
+		{
+			ReleaseDC();
+		}
+		ExtraContestoDisegno = new DeviceContext(::GetDC(HandleFinestra), GetClientRect());
+		return ExtraContestoDisegno;
+	}
+
+	DeviceContext* Window::GetWindowDC()
+	{
+		if (ExtraContestoDisegno != nullptr)
+		{
+			ReleaseDC();
+		}
+		ExtraContestoDisegno = new DeviceContext(::GetWindowDC(HandleFinestra), GetWindowRect());
+		return ExtraContestoDisegno;
 	}
 
 	HWND Window::GetWindowHandle() const
@@ -92,9 +132,18 @@ namespace FW
 		if (HandleFinestra != nullptr)
 		{
 			::GetClientRect(HandleFinestra, RettangoloClient);
-			RettangoloClient.GetOriginAndSize(Posizione, Dimensione);
 		}
 		return RettangoloClient;
+	}
+
+	WinRectangle Window::GetWindowRect()
+	{
+		if (HandleFinestra != nullptr)
+		{
+			::GetWindowRect(HandleFinestra, RettangoloWindow);
+			RettangoloWindow.GetOriginAndSize(Posizione, Dimensione);
+		}
+		return RettangoloWindow;
 	}
 #pragma endregion
 
@@ -138,6 +187,10 @@ namespace FW
 			// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-endpaint
 			EndPaint(HandleFinestra, &ContestoDisegno);
 			break;
+		}
+		if (ExtraContestoDisegno != nullptr)
+		{
+			ReleaseDC();
 		}
 		return messaggioDaGestire;
 	}
