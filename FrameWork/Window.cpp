@@ -39,6 +39,11 @@ namespace FW
 #pragma endregion
 
 #pragma region Interfaccia
+	void Window::InvalidateRect(Rectangle<LONG> invalidateArea, bool eraseBackground)
+	{
+		::InvalidateRect(HandleFinestra, invalidateArea, eraseBackground);
+	}
+
 	void Window::RegisterClassAndCreateWindow()
 	{
 		RegisterClass();
@@ -95,6 +100,10 @@ namespace FW
 #pragma endregion
 
 #pragma region Messaggi
+	void Window::OnEraseBkGnd()
+	{
+	}
+
 	void Window::OnPaint()
 	{
 		// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-beginpaint
@@ -108,20 +117,24 @@ namespace FW
 	INT_PTR Window::ProceduraFinestra(UINT messaggio, WPARAM wParam, LPARAM lParam)
 	{
 		INT_PTR messaggioDaGestire = FALSE;
-		switch (messaggio)
+
+		switch (static_cast<WindowsMessages>(messaggio))
 		{
 		default:
 			messaggioDaGestire = DefWindowProc(HandleFinestra, messaggio, wParam, lParam);
 			break;
-		case WM_CLOSE:
+		case WindowsMessages::WMClose:
 			DestroyWindow(HandleFinestra);
 			messaggioDaGestire = FALSE;
 			break;
-		case WM_DESTROY:
+		case WindowsMessages::WMEraseBkGnd:
+			OnEraseBkGnd();
+			break;
+		case WindowsMessages::WMDestroy:
 			PostQuitMessage(EXIT_SUCCESS);
 			messaggioDaGestire = FALSE;
 			break;
-		case WM_PAINT:
+		case WindowsMessages::WMPaint:
 			OnPaint();
 			// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-endpaint
 			EndPaint(HandleFinestra, &ContestoDisegno);

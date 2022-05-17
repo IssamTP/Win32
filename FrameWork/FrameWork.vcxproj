@@ -125,6 +125,7 @@ copy $(ProjectDir)*.h $(OutDir)headers
     <ClInclude Include="SystemMessageBox.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WinExports.h" />
+    <ClInclude Include="WinPoint.h" />
     <ClInclude Include="WinUndefinitions.h" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +142,7 @@ copy $(ProjectDir)*.h $(OutDir)headers
     <ClCompile Include="String.cpp" />
     <ClCompile Include="SystemMessageBox.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="WinPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Informazioni.txt" />

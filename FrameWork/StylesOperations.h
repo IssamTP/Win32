@@ -151,6 +151,7 @@ namespace FW
         WMClose = WM_CLOSE,
         WMCreate = WM_CREATE,
         WMDestroy = WM_DESTROY,
+        WMEraseBkGnd = WM_ERASEBKGND,
         WMPaint = WM_PAINT,
         WMNCCreate = WM_NCCREATE,
         WMQuit = WM_QUIT,

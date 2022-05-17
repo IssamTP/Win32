@@ -12,13 +12,18 @@ namespace FW
 	class _FRAMEWORK_CLASS_EXPORT_ DeviceContext : public PAINTSTRUCT
 	{
 #pragma region 
-	protected:
-		using PAINTSTRUCT::fErase;
+	private:
+		// RISERVATI WINDOWS.
 		using PAINTSTRUCT::fIncUpdate;
 		using PAINTSTRUCT::fRestore;
+		using PAINTSTRUCT::rgbReserved;
+	protected:
+		/// <summary>
+		/// Se uguale da 0, indica che Windows ha già cancellato lo sfondo per il disegno di WM_PAINT (da interpretare come "TO BE ERASED"). Per personalizzare la cancellazione dello sfondo la finestra deve implementare WM_ERASEBKGROUND.
+		/// </summary>
+		using PAINTSTRUCT::fErase;
 		using PAINTSTRUCT::hdc;
 		using PAINTSTRUCT::rcPaint;
-		using PAINTSTRUCT::rgbReserved;
 #pragma endregion
 	protected:
 		/// <summary>

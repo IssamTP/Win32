@@ -79,6 +79,12 @@ namespace FW
 		Window(HINSTANCE istanza, String nomeClasse);
 #pragma endregion
 	public:
+		/// <summary>
+		/// Specifica a Windows che si vuole invalidare una porzione dell'area di client E se si vuole cancellare lo sfondo.
+		/// </summary>
+		/// <param name="invalidateArea">Rettangolo da invalidare.</param>
+		/// <param name="eraseBackground">Se sì, invita Windows a cancellare lo sfondo (fErase di PAINTSTRUCT sarà == 0).</param>
+		void InvalidateRect(Rectangle<LONG> invalidateArea, bool eraseBackground);
 		/// <summary>Registra la classe, se non lo è già, e crea la finestra con posizione e dimensioni predefinite senza finestra proprietaria.</summary>
 		void RegisterClassAndCreateWindow();
 		/// <summary>Registra la classe finestra associata.</summary>
@@ -96,6 +102,10 @@ namespace FW
 		/// <returns>Un oggetto Rectangle<LONG></returns>
 		Rectangle<LONG> GetClientRect();
 	protected:
+		/// <summary>
+		/// Funzione di cancellazione personalizzata dello sfondo dell'area client.
+		/// </summary>
+		virtual void OnEraseBkGnd();
 		/// <summary>Funzione di disegno di base. Ogni finestra che erediterà da quella principale deve chiamare questa funzione.</summary>
 		virtual void OnPaint();
 		/// <summary>Implementazione della procedura della finestra: si può cambiare, se lo si desidera...</summary>

@@ -3,6 +3,8 @@
 	#define _FRAMEWORK_H_
 	#include "HeaderCPP.h"
 	#include "WinExports.h"
+	#include "WinUndefinitions.h"
+	#include "StylesOperations.h"
 	#include "String.h"
 	#include "SystemMessageBox.h"
 	#include "Size.h"
