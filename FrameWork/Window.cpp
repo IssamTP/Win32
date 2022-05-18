@@ -26,6 +26,7 @@ namespace FW
 		style = StylesOperations::Combine(ClassStyles::CSHRedraw, ClassStyles::CSVRedraw);
 		hInstance = istanza;
 		lpfnWndProc = &ProceduraStandard;
+		// Questo colore è solitamente impostato a bianco affinché corrisponda con quello di DrawText.
 		ContestoDisegno.SetCurrentBrush(Brush::GetDefaultWindowBrush());
 		hbrBackground = ContestoDisegno.GetCurrentBrush();
 		IconaFinestra = Icon::GetDefaultIcon();

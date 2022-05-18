@@ -9,6 +9,8 @@
 namespace FW
 {
 	/// <summary>Classe per la gestione del disegno della finestra...</summary>
+	/// <remarks>Nella documentazione è riportata la dicitura "LOGICAL UNITS", essa ha vari significati dipendetemente dal valore di mapping:
+	/// MM_TEXT: 1lu = 1pu = 1px</remarks>
 	class _FRAMEWORK_CLASS_EXPORT_ DeviceContext : public PAINTSTRUCT
 	{
 #pragma region 
@@ -101,6 +103,7 @@ namespace FW
 		/// <param name="text">Stringa da scrivere.</param>
 		/// <param name="drawArea">Rettangolo di scrittura.</param>
 		/// <param name="textStyle">Stile di disegno del testo: usare StyleOperations::Combine con DrawTextStyles.</param>
+		/// <remarks>Attenzione: il colore di sfondo di DrawText NON è il medesimo di quello usato per cancellare il background. Non usare caratteri speciali, DrawText non li riconosce e li disegnerà come rettangoli.</remarks>
 		void DrawText(String text, const WinRectangle& drawArea, UINT textStyle);
 		/// <summary>
 		/// Imposta il brush corrente.

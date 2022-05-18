@@ -114,6 +114,7 @@ namespace FW
 	void DeviceContext::SetCurrentBrush(Brush nuovoBrush)
 	{
 		BrushCorrente = nuovoBrush;
+		// TODO: impostare il brush corrente nel contesto di disegno?
 	}
 
 	void DeviceContext::SetLeftMargin(int leftMargin)
