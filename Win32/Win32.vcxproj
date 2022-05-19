@@ -152,11 +152,13 @@
     <ClInclude Include="AG_Framework.h" />
     <ClInclude Include="HelloWin.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SysMetsWin.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Win32.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HelloWin.cpp" />
+    <ClCompile Include="SysMetsWin.cpp" />
     <ClCompile Include="Win32.cpp" />
   </ItemGroup>
   <ItemGroup>

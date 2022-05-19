@@ -193,44 +193,22 @@ namespace FW
         SMSameDisplayFormat = SM_SAMEDISPLAYFORMAT,
         SMImmEnabled = SM_IMMENABLED,
         SMCXFocusBorder = SM_CXFOCUSBORDER,
-        SMCYFocusBorder = SM_CYFOCUSBORDER
-#define SM_TABLETPC             86
-#define SM_MEDIACENTER          87
-#define SM_STARTER              88
-#define SM_SERVERR2             89
-#endif /* _WIN32_WINNT >= 0x0501 */
-
-#if(_WIN32_WINNT >= 0x0600)
-#define SM_MOUSEHORIZONTALWHEELPRESENT    91
-#define SM_CXPADDEDBORDER       92
-#endif /* _WIN32_WINNT >= 0x0600 */
-
-#if(WINVER >= 0x0601)
-
-#define SM_DIGITIZER            94
-#define SM_MAXIMUMTOUCHES       95
-#endif /* WINVER >= 0x0601 */
-
-
-#if(WINVER >= 0x0500)
-#define SM_REMOTESESSION        0x1000
-
-
-#if(_WIN32_WINNT >= 0x0501)
-#define SM_SHUTTINGDOWN           0x2000
-#endif /* _WIN32_WINNT >= 0x0501 */
-
-#if(WINVER >= 0x0501)
-#define SM_REMOTECONTROL          0x2001
-#endif /* WINVER >= 0x0501 */
-
-#if(WINVER >= 0x0501)
-#define SM_CARETBLINKINGENABLED   0x2002
-#endif /* WINVER >= 0x0501 */
-
-#if(WINVER >= 0x0602)
-#define SM_CONVERTIBLESLATEMODE   0x2003
-#define SM_SYSTEMDOCKED           0x2004
+        SMCYFocusBorder = SM_CYFOCUSBORDER,
+        /// <summary>Windows è a bordo di un tablet.</summary>
+        SMTabletPC = SM_TABLETPC,
+        /// <summary>Windows media center.</summary>
+        SMMediaCenter = SM_MEDIACENTER,
+        SMStarter = SM_STARTER,
+        SMServerR2 = SM_SERVERR2,
+        SMMouseHorizontalWheelPresent = SM_MOUSEHORIZONTALWHEELPRESENT,
+        SMCXPaddedBorder = SM_CXPADDEDBORDER,
+        SMDigitizer = SM_DIGITIZER,
+        SMMaximumTouches = SM_MAXIMUMTOUCHES,
+        SMRemoteSession = SM_REMOTESESSION,
+        SMRemoteControl = SM_REMOTECONTROL,
+        SMCaretBlinkingEnabled = SM_CARETBLINKINGENABLED,
+        SMConvertIbleslateMode = SM_CONVERTIBLESLATEMODE,
+        SMSystemDocked = SM_SYSTEMDOCKED,
     };
 
     /// <summary>

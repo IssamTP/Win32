@@ -30,12 +30,18 @@
     <ClInclude Include="HelloWin.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="SysMetsWin.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Win32.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="HelloWin.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="SysMetsWin.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

@@ -7,6 +7,7 @@
 	#include "StylesOperations.h"
 	#include "String.h"
 	#include "SystemMessageBox.h"
+	#include "TextMetrics.h"
 	#include "WinPoint.h"
 	#include "WinSize.h"
 	#include "WinRectangle.h"
