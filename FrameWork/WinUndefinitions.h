@@ -7,4 +7,7 @@
 	#ifdef DrawText
 		#undef DrawText
 	#endif
+	#ifdef GetTextMetrics
+		#undef GetTextMetrics
+	#endif
 #endif

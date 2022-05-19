@@ -147,6 +147,8 @@ namespace FW
 		/// <returns></returns>
 		virtual INT_PTR ProceduraFinestra(UINT messaggio, WPARAM parametro1, LPARAM parametro2);
 	private:
+		void InizializzaTextMetrics();
+	private:
 		/// <summary>
 		/// Procedura della finestra per la classe corrente.
 		/// </summary>

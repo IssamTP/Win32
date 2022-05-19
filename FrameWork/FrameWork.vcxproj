@@ -123,6 +123,7 @@ copy $(ProjectDir)*.h $(OutDir)headers
     <ClInclude Include="String.h" />
     <ClInclude Include="StylesOperations.h" />
     <ClInclude Include="SystemMessageBox.h" />
+    <ClInclude Include="TextMetrics.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WinExports.h" />
     <ClInclude Include="WinPoint.h" />
@@ -143,6 +144,7 @@ copy $(ProjectDir)*.h $(OutDir)headers
     </ClCompile>
     <ClCompile Include="String.cpp" />
     <ClCompile Include="SystemMessageBox.cpp" />
+    <ClCompile Include="TextMetrics.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WinPoint.cpp" />
     <ClCompile Include="WinRectangle.cpp" />

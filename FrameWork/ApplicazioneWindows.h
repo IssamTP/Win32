@@ -4,6 +4,7 @@
     #include "HeaderCPP.h"
     #include "WinExports.h"
     #include "Window.h"
+    #include "TextMetrics.h"
 namespace FW
 {
     /// <summary>

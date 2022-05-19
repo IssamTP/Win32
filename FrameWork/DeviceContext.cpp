@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "DeviceContext.h"
+#include "TextMetrics.h"
 
 namespace FW
 {
@@ -109,6 +110,11 @@ namespace FW
 		{
 			throw std::exception();
 		}
+	}
+
+	void DeviceContext::GetTextMetrics()
+	{
+		BOOL esito = GetTextMetricsW(hdc, TextMetrics::GetTextMetricsInstance());
 	}
 
 	void DeviceContext::SetCurrentBrush(Brush nuovoBrush)

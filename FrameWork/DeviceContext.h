@@ -106,6 +106,10 @@ namespace FW
 		/// <remarks>Attenzione: il colore di sfondo di DrawText NON è il medesimo di quello usato per cancellare il background. Non usare caratteri speciali, DrawText non li riconosce e li disegnerà come rettangoli.</remarks>
 		void DrawText(String text, const WinRectangle& drawArea, UINT textStyle);
 		/// <summary>
+		/// Inizializza la struttura TextMetrics.
+		/// </summary>
+		void GetTextMetrics();
+		/// <summary>
 		/// Imposta il brush corrente.
 		/// </summary>
 		/// <param name="nuovoBrush">Nuovo brush.</param>

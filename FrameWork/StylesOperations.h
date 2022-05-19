@@ -35,6 +35,204 @@ namespace FW
      * WM = Windows Message
      * WS = Windows Style
      */
+
+    /// <summary>
+    /// Raggruppamento dei codici per GetSystemMetrics.
+    /// </summary>
+    enum class SystemMetrics : UINT
+    {
+        /// <summary>Larghezza in pixel dello schermo.</summary>
+        SMCXScreen = SM_CXSCREEN,
+        /// <summary>Altezza in pixel dello schermo.</summary>
+        SMCYScreen = SM_CYSCREEN,
+        /// <summary>Larghezza in pixel della barra verticale di scorrimento.</summary>
+        SMCXVScroll = SM_CXVSCROLL,
+        /// <summary>Altezza in pixel della barra orizzontale di scorrimento.</summary>
+        SMCYHScroll = SM_CYHSCROLL,
+        /// <summary>Altezza in pixel della barra di caption.</summary>
+        SMCYCaptionBar = SM_CYCAPTION,
+        /// <summary>Spessore del bordo della finestra.</summary>
+        SMCXBorder = SM_CXBORDER,
+        /// <summary>Altezza del bordo della finestra.</summary>
+        SMCYBorder = SM_CYBORDER,
+        /// <summary>Larghezza in pixel del frame della finestra di dialogo.</summary>
+        SMCXFixedFrame = SM_CXFIXEDFRAME,
+        /// <summary>Altezza in pixel del frame della finestra di dialogo.</summary>
+        SMCYFixedFrame = SM_CYFIXEDFRAME,
+        /// <summary>Altezza del "thumb" della barra di scorrimento verticale..</summary>
+        SMCYVThumb = SM_CYVTHUMB,
+        /// <summary>Larghezza del "thumb" della barra di scorrimento verticale..</summary>
+        SMCXHThumb = SM_CXHTHUMB,
+        /// <summary>Larghezza dell'icona.</summary>
+        SMCXIcon = SM_CXICON,
+        /// <summary>Altezza dell'icona.</summary>
+        SMCYIcon = SM_CYICON,
+        /// <summary>Larghezza del cursore.</summary>
+        SMCXCursor = SM_CXCURSOR,
+        /// <summary>Altezza del cursore.</summary>
+        SMCYCursor = SM_CYCURSOR,
+        /// <summary>Altezza della barra dei menu.</summary>
+        SMCYMenu = SM_CYMENU,
+        /// <summary>Larghezza a tutto schermo della client area.</summary>
+        SMCXFullScreen = SM_CXFULLSCREEN,
+        /// <summary>Altezza a tutto schermo della client area.</summary>
+        SMCYFullScreen = SM_CYFULLSCREEN,
+        /// <summary>Altezza a tutto schermo della finestra Kanji.</summary>
+        SMCYKanjiWindow = SM_CYKANJIWINDOW,
+        /// <summary>Spia presenza mouse.</summary>
+        SMMousePresent = SM_MOUSEPRESENT,
+        /// <summary>Altezza della freccia della barra di scorrimento verticale.</summary>
+        SMCYVScroll = SM_CYVSCROLL,
+        /// <summary>Larghezza della freccia della barra di scorrimento orizzontale.</summary>
+        SMCXHScroll = SM_CXHSCROLL,
+        /// <summary>Spia versione debug.</summary>
+        SMDebug = SM_DEBUG,
+        /// <summary>Spia inversione bottoni del mouse.</summary>
+        SMSwapButton = SM_SWAPBUTTON,
+        /// <summary>Larghezza minima finestra.</summary>
+        SMCXMin = SM_CXMIN,
+        /// <summary>Altezza minima finestra.</summary>
+        SMCYMin = SM_CYMIN,
+        /// <summary>Larghezza minima dei bottoni di sistema Minimizza / Massimizza / Chiudi.</summary>
+        SMCXSize = SM_CXSIZE,
+        /// <summary>Altezza minima dei bottoni di sistema Minimizza / Massimizza / Chiudi.</summary>
+        SMCYSize = SM_CYSIZE,
+        /// <summary>Spessore del frame di ridimensionamento in larghezza.</summary>
+        SMCXSizeFrame = SM_CXSIZEFRAME,
+        /// <summary>Spessore del frame di ridimensionamento in altezza.</summary>
+        SMCYSizeFrame = SM_CYSIZEFRAME,
+        /// <summary>Larghezza minima della finestra di trascinamento.</summary>
+        SMCXMinTrak = SM_CXMINTRACK,
+        /// <summary>Altezza minima della finestra di trascinamento.</summary>
+        SMCYMinTrak = SM_CYMINTRACK,
+        /// <summary>Tolleranza in X del doppio click.</summary>
+        SMCXDoubleClk = SM_CXDOUBLECLK,
+        /// <summary>Tolleranza in Y del doppio click.</summary>
+        SMCYDoubleClk = SM_CYDOUBLECLK,
+        /// <summary>Spaziatura in X delle icone.</summary>
+        SMCCXIconSpacing = SM_CXICONSPACING,
+        /// <summary>Spaziatura in Y delle icone.</summary>
+        SMCYIconSpacing = SM_CYICONSPACING,
+        /// <summary>Allineamento destra o sinistra del menu a discesa.</summary>
+        SMMenuDropAlignment = SM_MENUDROPALIGNMENT,
+        /// <summary>Spia estensione penna installata.</summary>
+        SMPenWindows = SM_PENWINDOWS,
+        /// <summary>Spia carattere a due byte abilitati.</summary>
+        SMDBCSEnabled = SM_DBCSENABLED,
+        /// <summary>Numero dei bottoni del mouse.</summary>
+        SMCMouseButtons = SM_CMOUSEBUTTONS,
+        /// <summary>Spia sicurezza.</summary>
+        SMSecure = SM_SECURE,
+        /// <summary>Larghezza del bordo 3D.</summary>
+        SMCXEdge = SM_CXEDGE,
+        /// <summary>Altezza del bordo 3D.</summary>
+        SMCYEdge = SM_CYEDGE,
+        /// <summary>Spaziatura in X minima per le finestre minimizzate.</summary>
+        SMCXMinSpacing = SM_CXMINSPACING,
+        /// <summary>Spaziatura in Y minima per le finestre minimizzate.</summary>
+        SMCYMinSpacing = SM_CYMINSPACING,
+        /// <summary>Larghezza icona piccola.</summary>
+        SMCXSmIcon = SM_CXSMICON,
+        /// <summary>Altezza icona piccola.</summary>
+        SMCYSmIcon = SM_CYSMICON,
+        /// <summary>Altezza caption piccolo.</summary>
+        SMCYSmCaption = SM_CYSMCAPTION,
+        /// <summary>Larghezza bottone caption piccolo.</summary>
+        SMCXSmSize = SM_CXSMSIZE,
+        /// <summary>Altezza bottone caption piccolo.</summary>
+        SMCYSmSize = SM_CYSMSIZE,
+        /// <summary>Larghezza bottone barra dei menu.</summary>
+        SMCXMenuSize = SM_CXMENUSIZE,
+        /// <summary>Altezza bottone barra dei menu.</summary>
+        SMCYMenuSize = SM_CYMENUSIZE,
+        /// <summary>Come vengono ordinate le finestre minimizzate.</summary>
+        SMArrange = SM_ARRANGE,
+        /// <summary>Larghezza finestra minimizzata.</summary>
+        SMCXMinimized = SM_CXMINIMIZED,
+        /// <summary>Altezza finestra minimizzata.</summary>
+        SMCYMinimized = SM_CYMINIMIZED,
+        /// <summary>Massima larghezza trascinabile.</summary>
+        SMCXMaxTrack = SM_CXMAXTRACK,
+        /// <summary>Massima altezza trascinabile.</summary>
+        SMCYMaxTrack = SM_CYMAXTRACK,
+        /// <summary>Larghezza della finestra massimizzata.</summary>
+        SMCXMaximized = SM_CXMAXIMIZED,
+        /// <summary>Altezza della finestra massimizzata.</summary>
+        SMCYMaximized = SM_CYMAXIMIZED,
+        /// <summary>Spia presenza della rete.</summary>
+        SMNetwork = SM_NETWORK,
+        /// <summary>Esito dell'ultimo avvio.</summary>
+        SMCleanBoot = SM_CLEANBOOT,
+        /// <summary>Tolleranza per evitare il trascinamento in X.</summary>
+        SMCXDrag = SM_CXDRAG,
+            /// <summary>Tolleranza per evitare il trascinamento in Y.</summary>
+        SMCYDrag = SM_CYDRAG,
+        /// <summary>Mostra i suoni visivamente (?)</summary>
+        SMShowSounds = SM_SHOWSOUNDS,
+        /// <summary>Larghezza della spunta di conferma nei menu.</summary>
+        SMCXMenuCheck = SM_CXMENUCHECK,
+        /// <summary>Larghezza della spunta di conferma nei menu.</summary>
+        SMCYMenuCheck = SM_CYMENUCHECK,
+        /// <summary>Spia macchina lenta.</summary>
+        SMSlowMachine = SM_SLOWMACHINE,
+        /// <summary>Spia per l'abilitazione dell'ebraico e arabico.</summary>
+        SMMidEastEnabled = SM_MIDEASTENABLED,
+        /// <summary>Spia presenza rotellina mouse.</summary>
+        SMMouseWheelPresent = SM_MOUSEWHEELPRESENT,
+        /// <summary>Coordinata X dell'origine dello schermo virtuale.</summary>
+        SMXVirtualScreen = SM_XVIRTUALSCREEN,
+        /// <summary>Coordinata Y dell'origine dello schermo virtuale.</summary>
+        SMYVirtualScreen = SM_YVIRTUALSCREEN,
+        /// <summary>Larghezza X dello schermo virtuale.</summary>
+        SMCXVirtualScreen = SM_CXVIRTUALSCREEN,
+        /// <summary>Larghezza Y dello schermo virtuale.</summary>
+        SMCYVirtualScreen = SM_CYVIRTUALSCREEN,
+        /// <summary>Numero dei monitor.</summary>
+        SMCMonitors = SM_CMONITORS,
+        /// <summary>Spia per medesimo formato dei colori.</summary>
+        SMSameDisplayFormat = SM_SAMEDISPLAYFORMAT,
+        SMImmEnabled = SM_IMMENABLED,
+        SMCXFocusBorder = SM_CXFOCUSBORDER,
+        SMCYFocusBorder = SM_CYFOCUSBORDER
+#define SM_TABLETPC             86
+#define SM_MEDIACENTER          87
+#define SM_STARTER              88
+#define SM_SERVERR2             89
+#endif /* _WIN32_WINNT >= 0x0501 */
+
+#if(_WIN32_WINNT >= 0x0600)
+#define SM_MOUSEHORIZONTALWHEELPRESENT    91
+#define SM_CXPADDEDBORDER       92
+#endif /* _WIN32_WINNT >= 0x0600 */
+
+#if(WINVER >= 0x0601)
+
+#define SM_DIGITIZER            94
+#define SM_MAXIMUMTOUCHES       95
+#endif /* WINVER >= 0x0601 */
+
+
+#if(WINVER >= 0x0500)
+#define SM_REMOTESESSION        0x1000
+
+
+#if(_WIN32_WINNT >= 0x0501)
+#define SM_SHUTTINGDOWN           0x2000
+#endif /* _WIN32_WINNT >= 0x0501 */
+
+#if(WINVER >= 0x0501)
+#define SM_REMOTECONTROL          0x2001
+#endif /* WINVER >= 0x0501 */
+
+#if(WINVER >= 0x0501)
+#define SM_CARETBLINKINGENABLED   0x2002
+#endif /* WINVER >= 0x0501 */
+
+#if(WINVER >= 0x0602)
+#define SM_CONVERTIBLESLATEMODE   0x2003
+#define SM_SYSTEMDOCKED           0x2004
+    };
+
     /// <summary>
     /// Incapsulamento ad enum degli stili di classe di Windows.
     /// </summary>
@@ -163,6 +361,10 @@ namespace FW
     class StylesOperations
     {
     public:
+        int GetSystemMetric(SystemMetrics metric)
+        {
+            return ::GetSystemMetrics(static_cast<int>(metric));
+        }
         /// <summary>
         /// Questa operazione combina un qualsiasi numero di stili di tipo diverso in un'unica maschera.
         /// </summary>

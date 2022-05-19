@@ -148,6 +148,15 @@ namespace FW
 	}
 #pragma endregion
 
+#pragma region Implementazione
+	void Window::InizializzaTextMetrics()
+	{
+		DeviceContext* wdc = GetWindowDC();
+		wdc->GetTextMetrics();
+		ReleaseDC();
+	}
+#pragma endregion
+
 #pragma region Messaggi
 	void Window::OnEraseBkGnd()
 	{
@@ -175,6 +184,9 @@ namespace FW
 		case WindowsMessages::WMClose:
 			DestroyWindow(HandleFinestra);
 			messaggioDaGestire = FALSE;
+			break;
+		case WindowsMessages::WMCreate:
+			InizializzaTextMetrics();
 			break;
 		case WindowsMessages::WMEraseBkGnd:
 			OnEraseBkGnd();
