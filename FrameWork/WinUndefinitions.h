@@ -10,4 +10,7 @@
 	#ifdef GetTextMetrics
 		#undef GetTextMetrics
 	#endif
+	#ifdef max
+		#undef max
+	#endif
 #endif

@@ -22,8 +22,20 @@ namespace FW
 	}
 	#pragma endregion
 
-	WinPoint TextMetrics::GetInformationAboutSpacing() const
+	LONG TextMetrics::GetAverageCharacterWidth() const
 	{
-		return WinPoint(tmAveCharWidth, tmHeight + tmExternalLeading);
+		return GetTextMetricsInstance()->tmAveCharWidth;
+	}
+
+	LONG TextMetrics::GetAverageMaximizedCharacterWidth() const
+	{
+		TextMetrics* instance = GetTextMetricsInstance();
+		return (instance->tmPitchAndFamily & 1 ? 3 : 2) * instance->tmAveCharWidth / 2;
+	}
+
+	void TextMetrics::GetInformationAboutSpacing(WinSize& size) const
+	{
+		size.SetWidth(tmAveCharWidth);
+		size.SetHeight(tmHeight + tmExternalLeading);
 	}
 };

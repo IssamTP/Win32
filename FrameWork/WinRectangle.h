@@ -47,6 +47,18 @@ namespace FW
 		/// Cast diretto a const RECT* (Tipato in CPRECT).
 		/// </summary>
 		operator CPRECT() const;
+		/// <summary>
+		/// Sposta l'origine del rettangolo di origine.
+		/// </summary>
+		/// <param name="origin"></param>
+		/// <returns></returns>
+		WinRectangle& operator +=(const WinPoint& spostamento);
+		/// <summary>
+		/// Allarga opportunamente il rettangolo.
+		/// </summary>
+		/// <param name="scale">Di quanto allargare il rettangolo.</param>
+		/// <returns>Il nuovo rettangolo.</returns>
+		WinRectangle& operator +=(const WinSize& scale);
 	public:
 		/// <summary>
 		/// Valorizza due variabili con origine e dimensione.
@@ -54,6 +66,26 @@ namespace FW
 		/// <param name="origin">Variabile che conterrà l'origine del rettangolo (ULC).</param>
 		/// <param name="size">Variabile che conterrà le dimensioni del rettangolo (LRC - ULC).</param>
 		void GetOriginAndSize(WinPoint& origin, WinSize& size);
+		/// <summary>
+		/// Imposta la nuova origine del rettangolo;
+		/// </summary>
+		/// <param name="origin">Nuova origine.</param>
+		void SetOrigin(const WinPoint& origin);
+		/// <summary>
+		/// Imposta l'altezza del rettangolo.
+		/// </summary>
+		/// <param name="height">La nuova altezza del rettangolo.</param>
+		void SetHeight(LONG height);
+		/// <summary>
+		/// Imposta le dimensioni del rettangolo.
+		/// </summary>
+		/// <param name="size">Nuove dimensioni del rettangolo.</param>
+		void SetSize(const WinSize& size);
+		/// <summary>
+		/// Imposta la larghezza del rettangolo.
+		/// </summary>
+		/// <param name="width">Larghezza del rettangolo.</param>
+		void SetWidth(LONG width);
 	};
 };
 #endif

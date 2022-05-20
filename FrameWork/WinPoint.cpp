@@ -18,6 +18,15 @@ namespace FW
 	}
 #pragma endregion
 
+#pragma region
+	WinPoint& WinPoint::operator+=(const WinPoint& traslazione)
+	{
+		x += traslazione.x;
+		y += traslazione.y;
+		return *this;
+	}
+#pragma endregion
+
 #pragma region Interfaccia
 	void WinPoint::SetX(LONG x)
 	{

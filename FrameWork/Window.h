@@ -134,6 +134,11 @@ namespace FW
 		WinRectangle GetWindowRect();
 	protected:
 		/// <summary>
+		/// Crea le funzionalità di base della finestra.
+		/// Se si sovrascrive va chiamato sempre.
+		/// </summary>
+		virtual void OnCreate();
+		/// <summary>
 		/// Funzione di cancellazione personalizzata dello sfondo dell'area client.
 		/// </summary>
 		virtual void OnEraseBkGnd();

@@ -2,7 +2,7 @@
 #ifndef _TEXT_METRICS_CLASS_H_
     #define _TEXT_METRICS_CLASS_H_
     #include "HeaderCPP.h"
-    #include "WinPoint.h"
+    #include "WinSize.h"
 namespace FW
 {
     /// <summary>
@@ -61,12 +61,22 @@ namespace FW
         TextMetrics& operator=(const TextMetrics& textMetrics) = delete;
     public:
         /// <summary>
+        /// Ottiene la larghezza media del carattere minuscolo.
+        /// </summary>
+        /// <returns></returns>
+        LONG GetAverageCharacterWidth() const;
+        /// <summary>
+        /// Ottiene la larghezza media del carattere minuscolo.
+        /// </summary>
+        /// <returns></returns>
+        LONG GetAverageMaximizedCharacterWidth() const;
+        /// <summary>
         /// Ottiene l'istanza di textMetrics.
         /// </summary>
         static TextMetrics* GetTextMetricsInstance();
 #pragma endregion
     public:
-        WinPoint GetInformationAboutSpacing() const;
+        void GetInformationAboutSpacing(WinSize& size) const;
     };
 };
 #endif

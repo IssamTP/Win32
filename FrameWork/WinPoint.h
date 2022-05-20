@@ -24,6 +24,14 @@ namespace FW
 		/// <param name="x">Coordinata x.</param>
 		/// <param name="y">Coordinata y.</param>
 		WinPoint(LONG x, LONG y);
+	public:
+		/// <summary>
+		/// Operatore di "traslazione".
+		/// </summary>
+		/// <param name="traslazione">Di quanto spostare il punto.</param>
+		/// <returns>Nuova posizione.</returns>
+		WinPoint& operator+=(const WinPoint& traslazione);
+	public:
 		/// <summary>
 		/// Funzione setter per la coordinata x.
 		/// </summary>

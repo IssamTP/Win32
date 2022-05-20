@@ -158,6 +158,11 @@ namespace FW
 #pragma endregion
 
 #pragma region Messaggi
+	void Window::OnCreate()
+	{
+		InizializzaTextMetrics();
+	}
+
 	void Window::OnEraseBkGnd()
 	{
 	}
@@ -186,7 +191,7 @@ namespace FW
 			messaggioDaGestire = FALSE;
 			break;
 		case WindowsMessages::WMCreate:
-			InizializzaTextMetrics();
+			OnCreate();
 			break;
 		case WindowsMessages::WMEraseBkGnd:
 			OnEraseBkGnd();
