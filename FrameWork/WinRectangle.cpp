@@ -78,8 +78,8 @@ namespace FW
 		
 		left = origin.GetX();
 		top = origin.GetY();
-		right -= deltaX;
-		bottom -= deltaY;
+		right += deltaX;
+		bottom += deltaY;
 	}
 
 	void WinRectangle::SetSize(const WinSize& size)

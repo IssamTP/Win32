@@ -24,22 +24,22 @@ namespace FW
 #pragma region Interfaccia
 	void WinSize::SetHeight(LONG height)
 	{
-		cx = height;
+		cy = height;
 	}
 
 	void WinSize::SetWidth(LONG width)
 	{
-		cy = width;
+		cx = width;
 	}
 
 	LONG WinSize::GetHeight() const
 	{
-		return cx;
+		return cy;
 	}
 
 	LONG WinSize::GetWidth() const
 	{
-		return cy;
+		return cx;
 	}
 #pragma endregion
 };

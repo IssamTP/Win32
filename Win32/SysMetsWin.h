@@ -5,6 +5,7 @@
 struct SysMetsValue
 {
 	int Index;
+    int Value;
 	FW::String Label;
 	FW::String Description;
 public:
@@ -13,14 +14,17 @@ public:
         Index = index;
         Label = label;
         Description = description;
+        Value = GetSystemMetrics(index);
     }
 };
 
 class SysMetsWin : public FW::Window
 {
+    const UINT CAPS = 0u;
+    const UINT NO_CAPS = 1u;
 protected:
-    double LarghezzaMedia;
-    double LarghezzaMediaCaps;
+    LONG LarghezzaMedia;
+    LONG LarghezzaMediaCaps;
     FW::TextMetrics* TextMetric;
     FW::WinSize Colonne[3];
 	std::vector<SysMetsValue> SysMetsValues;
@@ -42,16 +46,25 @@ protected:
         FW::WinRectangle disegno;
         FW::WinPoint posizione;
         
+        disegno.SetHeight(Colonne[0].GetHeight());
         for (auto met = SysMetsValues.begin(); met != SysMetsValues.end(); met++)
         {
+            disegno.SetWidth(Colonne[0].GetWidth());
             ContestoDisegno.DrawText(met->Label, disegno, DT_VCENTER | DT_LEFT | DT_NOCLIP);
-            posizione += FW::WinPoint(0ul, Colonne[0].GetHeight());
+            posizione += FW::WinPoint(Colonne[0].GetWidth() + LarghezzaMedia, 0);
+            disegno.SetOrigin(posizione);
+            disegno.SetWidth(Colonne[1].GetWidth());
+            ContestoDisegno.DrawText(met->Description, disegno, DT_VCENTER | DT_LEFT | DT_NOCLIP);
+            posizione += FW::WinPoint(Colonne[1].GetWidth() + LarghezzaMedia, 0);
+            disegno.SetOrigin(posizione);
+            ContestoDisegno.DrawText(FW::String(std::to_wstring(met->Value).c_str()), disegno, DT_VCENTER | DT_RIGHT | DT_NOCLIP);
+            posizione += FW::WinPoint(-(Colonne[0].GetWidth() + Colonne[1].GetWidth() + 2*LarghezzaMedia), Colonne[0].GetHeight());
             disegno.SetOrigin(posizione);
         }
     }
     void CreaDati()
     {
-        double larghezzeColonne[3];
+        LONG larghezzeColonne[3];
         TextMetric = FW::TextMetrics::GetTextMetricsInstance();
         FW::WinSize sizing;
         
@@ -59,8 +72,10 @@ protected:
         auto aggiungi = [&](auto nuovaMetrica)
         {
             SysMetsValues.push_back(nuovaMetrica);
-            larghezzeColonne[0] = std::max(larghezzeColonne[0], SysMetsValues.rbegin()->Label.GetLength() * LarghezzaMediaCaps);
-            larghezzeColonne[1] = std::max(larghezzeColonne[1], SysMetsValues.rbegin()->Label.GetLength() * LarghezzaMedia);
+            LONG lunghezzaStringa = SysMetsValues.rbegin()->Label.GetLength();
+            larghezzeColonne[CAPS] = std::max(larghezzeColonne[0], lunghezzaStringa * LarghezzaMediaCaps);
+            lunghezzaStringa = SysMetsValues.rbegin()->Description.GetLength();
+            larghezzeColonne[NO_CAPS] = std::max(larghezzeColonne[1], lunghezzaStringa * LarghezzaMedia);
         };
 
         LarghezzaMedia = TextMetric->GetAverageCharacterWidth();
@@ -69,8 +84,8 @@ protected:
         SysMetsValues.reserve(110);
 
         SysMetsValues.push_back(SysMetsValue(static_cast<int>(FW::SystemMetrics::SMCXScreen), TEXT("SM_CXSCREEN"), TEXT("Larghezza in pixel dello schermo.")));
-        larghezzeColonne[0] = SysMetsValues.rbegin()->Label.GetLength() * LarghezzaMediaCaps;
-        larghezzeColonne[1] = SysMetsValues.rbegin()->Description.GetLength() * LarghezzaMedia;
+        larghezzeColonne[CAPS] = SysMetsValues.rbegin()->Label.GetLength() * LarghezzaMediaCaps;
+        larghezzeColonne[NO_CAPS] = SysMetsValues.rbegin()->Description.GetLength() * LarghezzaMedia;
 
         aggiungi(SysMetsValue(static_cast<int>(FW::SystemMetrics::SMCYScreen), TEXT("SM_CYSCREEN"), TEXT("Altezza in pixel dello schermo.")));
         aggiungi(SysMetsValue(static_cast<int>(FW::SystemMetrics::SMCXVScroll), TEXT("SM_CXVSCROLL"), TEXT("Larghezza in pixel della barra verticale di scorrimento.")));
@@ -163,10 +178,10 @@ protected:
         aggiungi(SysMetsValue(static_cast<int>(FW::SystemMetrics::SMConvertIbleslateMode), TEXT("SM_CONVERTIBLESLATEMODE"), TEXT("")));
         aggiungi(SysMetsValue(static_cast<int>(FW::SystemMetrics::SMSystemDocked), TEXT("SM_SYSTEMDOCKED"), TEXT("")));
 
-        sizing.SetWidth(larghezzeColonne[0]);
+        sizing.SetWidth(larghezzeColonne[CAPS]);
         Colonne[0].SetWidth(sizing.GetWidth());
         Colonne[0].SetHeight(sizing.GetHeight());
-        sizing.SetWidth(larghezzeColonne[1]);
+        sizing.SetWidth(larghezzeColonne[NO_CAPS]);
         Colonne[1].SetWidth(sizing.GetWidth());
         Colonne[1].SetHeight(sizing.GetHeight());
         sizing.SetWidth(larghezzeColonne[2]);
