@@ -110,11 +110,6 @@ namespace FW
 		/// </summary>
 		void GetTextMetrics();
 		/// <summary>
-		/// Imposta il brush corrente.
-		/// </summary>
-		/// <param name="nuovoBrush">Nuovo brush.</param>
-		void SetCurrentBrush(Brush nuovoBrush);
-		/// <summary>
 		/// Imposta il margine sinistro del testo.
 		/// </summary>
 		/// <param name="leftMargin">L'unità di misura è la media della larghezza del carattere.</param>
@@ -130,11 +125,21 @@ namespace FW
 		/// <param name="tabLength">L'unità di misura è la media della larghezza del carattere.</param>
 		void SetTabLength(int tabLength);
 		/// <summary>
+		/// Imposta la formattazione del test all'interno del rettangolo di disegno.
+		/// </summary>
+		/// <param name="alignment">Una combinazione di flag TextAlign</param>
+		void SetTextAlign(UINT alignment);
+#pragma endregion
+		/// <summary>
+		/// Imposta il brush corrente.
+		/// </summary>
+		/// <param name="nuovoBrush">Nuovo brush.</param>
+		void SetCurrentBrush(Brush nuovoBrush);
+		/// <summary>
 		/// Ottiene il brush corrente.
 		/// </summary>
 		/// <returns></returns>
 		Brush& GetCurrentBrush();
-#pragma endregion
 #pragma endregion
 	};
 }

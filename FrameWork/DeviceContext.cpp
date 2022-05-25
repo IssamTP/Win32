@@ -138,6 +138,14 @@ namespace FW
 		DettagliTesto.iTabLength = tabLength;
 	}
 
+	void DeviceContext::SetTextAlign(UINT alignment)
+	{
+		if (hdc != nullptr)
+		{
+			::SetTextAlign(hdc, alignment);
+		}
+	}
+
 	Brush& DeviceContext::GetCurrentBrush()
 	{
 		return BrushCorrente;

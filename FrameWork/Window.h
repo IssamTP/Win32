@@ -145,6 +145,12 @@ namespace FW
 		/// <summary>Funzione di disegno di base. Ogni finestra che erediterà da quella principale deve chiamare questa funzione.</summary>
 		/// <remarks>Si suggerisce di fare caso al rettangolo di ridisegno in fase di implementazione della OnPaint.</remarks>
 		virtual void OnPaint();
+		/// <summary>
+		/// Registra le nuove dimensioni della finestra a seguito di WM_SIZE.
+		/// </summary>
+		/// <param name="width">Larghezza della finestra.</param>
+		/// <param name="height">Altezza della finestra.</param>
+		virtual void OnSize(WORD width, WORD height);
 		/// <summary>Implementazione della procedura della finestra: si può cambiare, se lo si desidera...</summary>
 		/// <param name="messaggio"></param>
 		/// <param name="parametro1"></param>

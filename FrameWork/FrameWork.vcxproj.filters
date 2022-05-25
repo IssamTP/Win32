@@ -138,5 +138,8 @@
     <None Include="CopiaBinariFrameworkD.bat">
       <Filter>Utilità</Filter>
     </None>
+    <None Include="CopiaDLL_Lavoro.bat">
+      <Filter>Utilità</Filter>
+    </None>
   </ItemGroup>
 </Project>

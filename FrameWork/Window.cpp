@@ -177,6 +177,11 @@ namespace FW
 		}
 	}
 
+	void Window::OnSize(WORD width, WORD height)
+	{
+		RettangoloClient.SetSize(WinSize(width, height));
+	}
+
 	INT_PTR Window::ProceduraFinestra(UINT messaggio, WPARAM wParam, LPARAM lParam)
 	{
 		INT_PTR messaggioDaGestire = FALSE;
@@ -204,6 +209,9 @@ namespace FW
 			OnPaint();
 			// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-endpaint
 			EndPaint(HandleFinestra, &ContestoDisegno);
+			break;
+		case WindowsMessages::WMSize:
+			OnSize(LOWORD(lParam), HIWORD(lParam));
 			break;
 		}
 		if (ExtraContestoDisegno != nullptr)

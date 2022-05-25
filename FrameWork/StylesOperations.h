@@ -259,6 +259,18 @@ namespace FW
         DTWordEllipsis = DT_WORD_ELLIPSIS,
     };
 
+    enum class TextAlignStyles : UINT
+    {
+        TALeft = TA_LEFT,
+        TARight = TA_RIGHT,
+        TACenter = TA_CENTER,
+        TATop = TA_TOP,
+        TABottom = TA_BOTTOM,
+        TABaseline = TA_BASELINE,
+        TARTLReading = TA_RTLREADING,
+        TAMask = TA_MASK,
+    };
+
     enum class ShowWindowsCommands : int
     {
         SWHide = SW_HIDE,
@@ -329,6 +341,7 @@ namespace FW
         WMDestroy = WM_DESTROY,
         WMEraseBkGnd = WM_ERASEBKGND,
         WMPaint = WM_PAINT,
+        WMSize = WM_SIZE,
         WMNCCreate = WM_NCCREATE,
         WMQuit = WM_QUIT,
     };
