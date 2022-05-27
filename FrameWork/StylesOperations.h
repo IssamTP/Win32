@@ -293,6 +293,8 @@ namespace FW
     enum class WindowStyles : UINT
     {
         WSOverlappedWindow = WS_OVERLAPPEDWINDOW,
+        WSHScroll = WS_HSCROLL,
+        WSVScroll = WS_VSCROLL,
         WSVisible = WS_VISIBLE,
     };
 
@@ -344,6 +346,40 @@ namespace FW
         WMSize = WM_SIZE,
         WMNCCreate = WM_NCCREATE,
         WMQuit = WM_QUIT,
+        WMVScroll = WM_VSCROLL,
+        WMHScroll = WM_HSCROLL,
+    };
+
+    /// <summary>
+    /// Specifica che barra di scorrimento si vuole indicare come oggetto delle funzioni.
+    /// </summary>
+    enum class ScrollBarIdentifiers
+    {
+        SBVertical = SB_VERT,
+        SBHorizontal = SB_HORZ,
+    };
+
+    /// <summary>
+    /// Codici di notifica eventi WM_VSCROLL WM_HSCROLL.
+    /// </summary>
+    enum class ScrollBarNotifications
+    {
+        /// <summary>Equivalente a SB_LINEUP. Occorre quando si fa click sulla freccia.</summary>
+        SBSingleBack = SB_LINELEFT,
+        /// <summary>Equivalente a SB_LINEDOWN. Occorre quando si fa click sulla freccia.</summary>
+        SBSingleForward = SB_LINERIGHT,
+        /// <summary>Equivalente a SB_PAGEUP</summary>
+        SBMultipleBack = SB_PAGELEFT,
+        /// <summary>Equivalente a SB_PAGEDOWN</summary>
+        SBMultipleForward = SB_PAGERIGHT,
+        SBThumbPosition = SB_THUMBPOSITION,
+        SBThumbTrack = SB_THUMBTRACK,
+        /// <summary>Equivalente a SB_TOP.</summary>
+        SBStart = SB_LEFT,
+        /// <summary>Equivalente a SB_BOTTOM.</summary>
+        SBEnd = SB_RIGHT,
+        /// <summary>Fine delle operazioni di scrolling. Occorre quando si rilascia il mouse.</summary>
+        SBEndScroll = SB_ENDSCROLL,
     };
 
     /// <summary>

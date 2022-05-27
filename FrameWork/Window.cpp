@@ -51,6 +51,12 @@ namespace FW
 		::InvalidateRect(HandleFinestra, invalidateArea, eraseBackground);
 	}
 
+	void Window::ModifyStyle(UINT stylesToAdd, UINT stylesToRemove)
+	{
+		StileFinestra |= stylesToAdd;
+		StileFinestra &= ~stylesToRemove;
+	}
+
 	void Window::RegisterClassAndCreateWindow()
 	{
 		RegisterClass();
@@ -161,6 +167,16 @@ namespace FW
 	void Window::OnCreate()
 	{
 		InizializzaTextMetrics();
+		if ((StileFinestra & WS_VSCROLL) == WS_VSCROLL)
+		{
+			SetScrollRange(HandleFinestra, SB_VERT, 0, 100, FALSE);
+			SetScrollPos(HandleFinestra, SB_VERT, 0, TRUE);
+		}
+		if ((StileFinestra & WS_HSCROLL) == WS_HSCROLL)
+		{
+			SetScrollRange(HandleFinestra, SB_HORZ, 0, 100, FALSE);
+			SetScrollPos(HandleFinestra, SB_HORZ, 0, TRUE);
+		}
 	}
 
 	void Window::OnEraseBkGnd()
@@ -174,6 +190,14 @@ namespace FW
 		if (controllo != ContestoDisegno)
 		{
 			throw std::exception();
+		}
+	}
+
+	void Window::OnScroll(ScrollBarIdentifiers identifier, ScrollBarNotifications notification, int position)
+	{
+		if (notification == ScrollBarNotifications::SBThumbPosition || notification == ScrollBarNotifications::SBThumbTrack)
+		{
+			SetScrollPos(HandleFinestra, static_cast<int>(identifier), position, TRUE);
 		}
 	}
 
@@ -209,6 +233,10 @@ namespace FW
 			OnPaint();
 			// https://docs.microsoft.com/it-it/windows/win32/api/winuser/nf-winuser-endpaint
 			EndPaint(HandleFinestra, &ContestoDisegno);
+			break;
+		case WindowsMessages::WMHScroll:
+		case WindowsMessages::WMVScroll:
+			OnScroll(messaggio == WM_HSCROLL ? ScrollBarIdentifiers::SBHorizontal : ScrollBarIdentifiers::SBVertical, static_cast<ScrollBarNotifications>(LOWORD(wParam)), static_cast<int>(HIWORD(wParam)));
 			break;
 		case WindowsMessages::WMSize:
 			OnSize(LOWORD(lParam), HIWORD(lParam));

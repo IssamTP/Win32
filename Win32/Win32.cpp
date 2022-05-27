@@ -29,6 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     FW::ApplicazioneWindows* applicazioneWindows = FW::ApplicazioneWindows::GetWinAppInstance();
     //HelloWin* finestra = new HelloWin(hInstance, szWindowClass);
     SysMetsWin* finestra = new SysMetsWin(hInstance, szWindowClass);
+    finestra->ModifyStyle(FW::StylesOperations::Combine(FW::WindowStyles::WSHScroll, FW::WindowStyles::WSVScroll), 0ul);
     finestra->SetTitle(szTitle);
     applicazioneWindows->InizializzaApplicazione(finestra);
     WPARAM exitValue = applicazioneWindows->AvviaApplicazione();

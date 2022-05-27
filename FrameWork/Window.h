@@ -42,22 +42,13 @@ namespace FW
 		Cursor CursoreFinestra;
 		/// <summary>Oggetto per disegnare nella finestra.</summary>
 		DeviceContext ContestoDisegno;
-		/// <summary>
-		/// Riferimento all'extra context da deallocare nel caso in cui l'utente se ne dimentichi.
-		/// </summary>
+		/// <summary>Riferimento all'extra context da deallocare nel caso in cui l'utente se ne dimentichi.</summary>
+		/// <summary>Riferimento all'extra context da deallocare nel caso in cui l'utente se ne dimentichi.</summary>
 		DeviceContext* ExtraContestoDisegno;
 		/// <summary>Icona della finestra.</summary>
 		Icon IconaFinestra;
 		/// <summary>"Puntatore" alla finestra di Windows.</summary>
 		HWND HandleFinestra;
-		/// <summary>Coordinata di posizione della finestra sullo schermo.</summary>
-		WinPoint Posizione;
-		/// <summary>Dimensioni dell'area client.</summary>
-		WinRectangle RettangoloClient;
-		/// <summary>Dimensioni dell'area client.</summary>
-		WinRectangle RettangoloWindow;
-		/// <summary>Dimensioni in pixel della finestra sullo schermo.</summary>
-		WinSize Dimensione;
 		/// <summary>Specifica come mostrare la finestra al comando Show.</summary>
 		ShowWindowsCommands ModalitaVisualizzazione;
 		/// <summary>Nome della classe di finestre.</summary>
@@ -70,6 +61,14 @@ namespace FW
 		/// <summary>Combinazione di WindowStylesEx.</summary>
 		/// <remarks>Può essere sottoposto a revisione.</remarks>
 		UINT StileFinestraEsteso;
+		/// <summary>Coordinata di posizione della finestra sullo schermo.</summary>
+		WinPoint Posizione;
+		/// <summary>Dimensioni dell'area client.</summary>
+		WinRectangle RettangoloClient;
+		/// <summary>Dimensioni dell'area client.</summary>
+		WinRectangle RettangoloWindow;
+		/// <summary>Dimensioni in pixel della finestra sullo schermo.</summary>
+		WinSize Dimensione;
 #pragma endregion
 #pragma region Costruttori
 	private:
@@ -92,6 +91,13 @@ namespace FW
 		/// <param name="invalidateArea">Rettangolo da invalidare.</param>
 		/// <param name="eraseBackground">Se sì, invita Windows a cancellare lo sfondo (fErase di PAINTSTRUCT sarà == 0).</param>
 		void InvalidateRect(const WinRectangle& invalidateArea, bool eraseBackground);
+		/// <summary>
+		/// Modifica lo stile corrente della finestra.
+		/// </summary>
+		/// <param name="stylesToAdd">Aggiunge questa combinazione di stili a quella già presente.</param>
+		/// <param name="stylesToRemove">Rimuove questa combinazione di stili a quella già presente.</param>
+		/// <remarks>Funzione ancora in lavorazione.</remarks>
+		void ModifyStyle(UINT stylesToAdd, UINT stylesToRemove);
 		/// <summary>Registra la classe, se non lo è già, e crea la finestra con posizione e dimensioni predefinite senza finestra proprietaria.</summary>
 		void RegisterClassAndCreateWindow();
 		/// <summary>Registra la classe finestra associata.</summary>
@@ -120,6 +126,11 @@ namespace FW
 		/// <returns>Un oggetto DeviceContext da usare per disegnare fuori dal messaggio WM_PAINT.</returns>
 		/// <remarks>GetDC non valida porzioni di finestra eventualmente invaldiate, chiamare ValidateRect(). Questa funzione dovrebbe essere usata per disegnare qualcosa in risposta agli eventi generati dall'utente.</remarks>
 		DeviceContext* GetCientDC();
+		/// <summary>
+		/// Crea e restituisce un Device Context per tutta la finestra.
+		/// Richiede una chiamata a ReleaseDC().
+		/// </summary>
+		/// <returns>Come per GetClientDC, ma valido su tutta la finestra.</returns>
 		DeviceContext* GetWindowDC();
 		/// <summary>Ottiene l'handle dell'istanza della finestra.</summary>
 		/// <returns>HWND istanza finestra.</returns>
@@ -145,6 +156,14 @@ namespace FW
 		/// <summary>Funzione di disegno di base. Ogni finestra che erediterà da quella principale deve chiamare questa funzione.</summary>
 		/// <remarks>Si suggerisce di fare caso al rettangolo di ridisegno in fase di implementazione della OnPaint.</remarks>
 		virtual void OnPaint();
+		/// <summary>
+		/// Gestisce lo scorrimento dell'area visibile sia in orizzontale che in verticale.
+		/// </summary>
+		/// <param name="identifier">Identificatore della barra di scorrimento.</param>
+		/// <param name="notification">Operazione occorsa.</param>
+		/// <param name="position">Ha senso solo se operazione occorsa è uguale a SB_THUMBTRACK/SB_THUMBPOSITION.</param>
+		/// <remarks>ACHTUNG: Windows non cambierà la posizione dello scroll alla ricezione di questo messaggio, bisogna farlo con SetScrollInfo. Se non lo si farà, Windows porterà indietro la posizione dello scroll. Solitamente si elabora solamente uno tra i due messaggi di trascinamento: se si elabora THUMBTRACK la vista viene spostata mentre il cursore è trascinato, altrimenti alla fine.</remarks>
+		virtual void OnScroll(ScrollBarIdentifiers identifier, ScrollBarNotifications notification, int position);
 		/// <summary>
 		/// Registra le nuove dimensioni della finestra a seguito di WM_SIZE.
 		/// </summary>

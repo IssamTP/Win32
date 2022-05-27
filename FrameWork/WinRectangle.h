@@ -86,6 +86,16 @@ namespace FW
 		/// </summary>
 		/// <param name="width">Larghezza del rettangolo.</param>
 		void SetWidth(LONG width);
+		/// <summary>
+		/// Calcola l'altezza del rettangolo.
+		/// </summary>
+		/// <returns>Un LONG rappresentante l'altezza del rettangolo.</returns>
+		LONG GetHeight() const;
+		/// <summary>
+		/// Calcola la larghezza del rettangolo.
+		/// </summary>
+		/// <returns>Un LONG rappresentante la larghezza del rettangolo.</returns>
+		LONG GetWidth() const;
 	};
 };
 #endif

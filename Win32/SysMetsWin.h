@@ -23,6 +23,7 @@ class SysMetsWin : public FW::Window
     const UINT CAPS = 0u;
     const UINT NO_CAPS = 1u;
 protected:
+    LONG AltezzaRiga;
     LONG LarghezzaMedia;
     LONG LarghezzaMediaCaps;
     FW::TextMetrics* TextMetric;
@@ -42,6 +43,8 @@ protected:
     }
     virtual void OnPaint()
     {
+        LONG caratteriVisibili{ RettangoloClient.GetWidth() / LarghezzaMediaCaps };
+        LONG righeVisibili{ RettangoloClient.GetHeight() / AltezzaRiga };
         FW::Window::OnPaint();
         FW::WinRectangle disegno;
         FW::WinPoint posizione;
@@ -69,6 +72,7 @@ protected:
         FW::WinSize sizing;
         
         TextMetric->GetInformationAboutSpacing(sizing);
+        AltezzaRiga = sizing.GetHeight();
         auto aggiungi = [&](auto nuovaMetrica)
         {
             SysMetsValues.push_back(nuovaMetrica);
@@ -180,13 +184,13 @@ protected:
 
         sizing.SetWidth(larghezzeColonne[CAPS]);
         Colonne[0].SetWidth(sizing.GetWidth());
-        Colonne[0].SetHeight(sizing.GetHeight());
+        Colonne[0].SetHeight(AltezzaRiga);
         sizing.SetWidth(larghezzeColonne[NO_CAPS]);
         Colonne[1].SetWidth(sizing.GetWidth());
-        Colonne[1].SetHeight(sizing.GetHeight());
+        Colonne[1].SetHeight(AltezzaRiga);
         sizing.SetWidth(larghezzeColonne[2]);
         Colonne[2].SetWidth(sizing.GetWidth());
-        Colonne[2].SetHeight(sizing.GetHeight());
+        Colonne[2].SetHeight(AltezzaRiga);
     }
 };
 

@@ -92,5 +92,15 @@ namespace FW
 	{
 		right = left + width;
 	}
+
+	LONG WinRectangle::GetHeight() const
+	{
+		return bottom - top;
+	}
+
+	LONG WinRectangle::GetWidth() const
+	{
+		return right - left;
+	}
 #pragma endregion
 };

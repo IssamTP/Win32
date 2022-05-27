@@ -84,6 +84,9 @@
     <ClInclude Include="TextMetrics.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="WinRange.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -126,6 +129,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="TextMetrics.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="WinRange.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
