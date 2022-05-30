@@ -129,6 +129,7 @@ copy $(ProjectDir)*.h $(OutDir)headers
     <ClInclude Include="WinPoint.h" />
     <ClInclude Include="WinRange.h" />
     <ClInclude Include="WinRectangle.h" />
+    <ClInclude Include="WinScrollInfo.h" />
     <ClInclude Include="WinSize.h" />
     <ClInclude Include="WinUndefinitions.h" />
   </ItemGroup>
@@ -150,6 +151,7 @@ copy $(ProjectDir)*.h $(OutDir)headers
     <ClCompile Include="WinPoint.cpp" />
     <ClCompile Include="WinRange.cpp" />
     <ClCompile Include="WinRectangle.cpp" />
+    <ClCompile Include="WinScrollInfo.cpp" />
     <ClCompile Include="WinSize.cpp" />
   </ItemGroup>
   <ItemGroup>

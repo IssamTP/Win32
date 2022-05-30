@@ -87,6 +87,9 @@
     <ClInclude Include="WinRange.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="WinScrollInfo.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -132,6 +135,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="WinRange.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="WinScrollInfo.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
