@@ -30,7 +30,12 @@ namespace FW
 	LONG TextMetrics::GetAverageMaximizedCharacterWidth() const
 	{
 		TextMetrics* instance = GetTextMetricsInstance();
-		return (instance->tmPitchAndFamily & 1 ? 3 : 2) * instance->tmAveCharWidth / 2;
+		return (instance->IsVariableWidthChar() ? 3 : 2) * instance->tmAveCharWidth / 2;
+	}
+
+	bool TextMetrics::IsVariableWidthChar() const
+	{
+		return (tmPitchAndFamily & 1) == 1;
 	}
 
 	void TextMetrics::GetInformationAboutSpacing(WinSize& size) const

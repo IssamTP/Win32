@@ -76,6 +76,11 @@ namespace FW
         static TextMetrics* GetTextMetricsInstance();
 #pragma endregion
     public:
+        /// <summary>
+        /// Indica se il font è a larghezza variabile.
+        /// </summary>
+        /// <returns>True se il bit meno significativo di tmPitchAndFamily è 1.</returns>
+        bool IsVariableWidthChar() const;
         void GetInformationAboutSpacing(WinSize& size) const;
     };
 };

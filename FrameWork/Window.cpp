@@ -195,6 +195,7 @@ namespace FW
 
 	void Window::OnScroll(ScrollBarIdentifiers identifier, ScrollBarNotifications notification, int position)
 	{
+		// Versione obsoleta.
 		if (notification == ScrollBarNotifications::SBThumbPosition || notification == ScrollBarNotifications::SBThumbTrack)
 		{
 			SetScrollPos(HandleFinestra, static_cast<int>(identifier), position, TRUE);

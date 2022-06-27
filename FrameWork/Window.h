@@ -155,6 +155,7 @@ namespace FW
 		virtual void OnEraseBkGnd();
 		/// <summary>Funzione di disegno di base. Ogni finestra che erediterà da quella principale deve chiamare questa funzione.</summary>
 		/// <remarks>Si suggerisce di fare caso al rettangolo di ridisegno in fase di implementazione della OnPaint.</remarks>
+		/// <throws>exception - Quando c'è un disallineamento tra il valore restituito da BeginPaint e quello modificato nei parametri.</throws>
 		virtual void OnPaint();
 		/// <summary>
 		/// Gestisce lo scorrimento dell'area visibile sia in orizzontale che in verticale.
