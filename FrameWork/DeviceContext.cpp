@@ -117,6 +117,19 @@ namespace FW
 		BOOL esito = GetTextMetricsW(hdc, TextMetrics::GetTextMetricsInstance());
 	}
 
+	void DeviceContext::PopTextAlign()
+	{
+		if (hdc != nullptr)
+		{
+			::SetTextAlign(hdc, TextAlignPrecedente);
+		}
+	}
+
+	void DeviceContext::PushTextAlign(UINT textAlign)
+	{
+		TextAlignPrecedente = textAlign;
+	}
+
 	void DeviceContext::SetCurrentBrush(Brush nuovoBrush)
 	{
 		BrushCorrente = nuovoBrush;
@@ -142,7 +155,7 @@ namespace FW
 	{
 		if (hdc != nullptr)
 		{
-			::SetTextAlign(hdc, alignment);
+			PushTextAlign(::SetTextAlign(hdc, alignment));
 		}
 	}
 

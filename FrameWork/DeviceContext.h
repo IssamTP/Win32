@@ -36,6 +36,8 @@ namespace FW
 		/// Contiene informazioni sul disegno del testo.
 		/// </summary>
 		DRAWTEXTPARAMS DettagliTesto;
+		/// <summary>Precedente valore del TextAlign. Impostato quando si chiama SetText.</summary>
+		UINT TextAlignPrecedente;
 #pragma region Costruttori
 	public:
 		/// <summary>Costruttore predefinito. Privato.</summary>
@@ -78,6 +80,12 @@ namespace FW
 		/// <returns>*this.</returns>
 		DeviceContext& operator=(const DeviceContext& context);
 #pragma endregion
+#pragma region Implementazione
+	protected:
+		/// <summary>Memoriazza il valore della spia TextAlign.</summary>
+		/// <param name="textAlign">Valore da memorizzare.</param>
+		void PushTextAlign(UINT textAlign);
+#pragma endregion
 #pragma region Interfaccia
 	public:
 #pragma region Text
@@ -109,6 +117,8 @@ namespace FW
 		/// Inizializza la struttura TextMetrics.
 		/// </summary>
 		void GetTextMetrics();
+		/// <summary>Ripristina il valore di TextAlign.</summary>
+		void PopTextAlign();
 		/// <summary>
 		/// Imposta il margine sinistro del testo.
 		/// </summary>

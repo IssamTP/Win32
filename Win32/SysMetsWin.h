@@ -60,6 +60,7 @@ protected:
             ContestoDisegno.DrawText(met->Description, disegno, DT_VCENTER | DT_LEFT | DT_NOCLIP);
             posizione += FW::WinPoint(Colonne[1].GetWidth() + LarghezzaMedia, 0);
             disegno.SetOrigin(posizione);
+            ContestoDisegno.SetTextAlign()
             ContestoDisegno.DrawText(FW::String(std::to_wstring(met->Value).c_str()), disegno, DT_VCENTER | DT_RIGHT | DT_NOCLIP);
             posizione += FW::WinPoint(-(Colonne[0].GetWidth() + Colonne[1].GetWidth() + 2*LarghezzaMedia), Colonne[0].GetHeight());
             disegno.SetOrigin(posizione);
