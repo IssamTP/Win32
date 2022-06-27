@@ -93,9 +93,29 @@ namespace FW
 		}
 	}
 
+	void Window::SetHorizontalScrollPos(int position, bool redraw)
+	{
+		SetScrollPos(ScrollBarIdentifiers::SBHorizontal, position, redraw);
+	}
+
+	void Window::SetHorizontalScrollRange(int minimum, int maximum, bool redraw)
+	{
+		SetScrollRange(ScrollBarIdentifiers::SBHorizontal, minimum, maximum, redraw);
+	}
+
 	void Window::SetTitle(String nomeFinestra)
 	{
 		NomeFinestra = nomeFinestra;
+	}
+
+	void Window::SetVerticalScrollPos(int position, bool redraw)
+	{
+		SetScrollPos(ScrollBarIdentifiers::SBVertical, position, redraw);
+	}
+
+	void Window::SetVerticalScrollRange(int minimum, int maximum, bool redraw)
+	{
+		SetScrollRange(ScrollBarIdentifiers::SBVertical, minimum, maximum, redraw);
 	}
 
 	void Window::ShowWindow(ShowWindowsCommands command)
@@ -115,7 +135,7 @@ namespace FW
 		{
 			ReleaseDC();
 		}
-		ExtraContestoDisegno = new DeviceContext(::GetDC(HandleFinestra), GetClientRect());
+		ExtraContestoDisegno = new DeviceContext(::GetDC(HandleFinestra), GetClientRect(false));
 		return ExtraContestoDisegno;
 	}
 
@@ -134,11 +154,18 @@ namespace FW
 		return HandleFinestra;
 	}
 
-	WinRectangle Window::GetClientRect()
+	WinRectangle Window::GetClientRect(bool considerScrollBars)
 	{
 		if (HandleFinestra != nullptr)
 		{
 			::GetClientRect(HandleFinestra, RettangoloClient);
+			if (considerScrollBars)
+			{
+				int larghezzaSV = GetSystemMetrics(static_cast<int>(SystemMetrics::SMCXVScroll));
+				int altezzaSO = GetSystemMetrics(static_cast<int>(SystemMetrics::SMCYHScroll));
+				RettangoloClient += WinSize(-larghezzaSV, -altezzaSO);
+
+			}
 		}
 		return RettangoloClient;
 	}
@@ -161,6 +188,16 @@ namespace FW
 		wdc->GetTextMetrics();
 		ReleaseDC();
 	}
+
+	void Window::SetScrollPos(ScrollBarIdentifiers scrollBar, int position, bool redraw)
+	{
+		int esito = ::SetScrollPos(HandleFinestra, static_cast<int>(scrollBar), position, redraw);
+	}
+
+	void Window::SetScrollRange(ScrollBarIdentifiers scrollBar, int minimum, int maximum, bool redraw)
+	{
+		BOOL esito = ::SetScrollRange(HandleFinestra, static_cast<int>(scrollBar), minimum, maximum, redraw ? TRUE : FALSE);
+	}
 #pragma endregion
 
 #pragma region Messaggi
@@ -169,13 +206,13 @@ namespace FW
 		InizializzaTextMetrics();
 		if ((StileFinestra & WS_VSCROLL) == WS_VSCROLL)
 		{
-			SetScrollRange(HandleFinestra, SB_VERT, 0, 100, FALSE);
-			SetScrollPos(HandleFinestra, SB_VERT, 0, TRUE);
+			SetScrollRange(ScrollBarIdentifiers::SBVertical, 0, 100, false);
+			SetScrollPos(ScrollBarIdentifiers::SBVertical, 0, true);
 		}
 		if ((StileFinestra & WS_HSCROLL) == WS_HSCROLL)
 		{
-			SetScrollRange(HandleFinestra, SB_HORZ, 0, 100, FALSE);
-			SetScrollPos(HandleFinestra, SB_HORZ, 0, TRUE);
+			SetScrollRange(ScrollBarIdentifiers::SBHorizontal, 0, 100, false);
+			SetScrollPos(ScrollBarIdentifiers::SBHorizontal, 0, true);
 		}
 	}
 
@@ -198,7 +235,7 @@ namespace FW
 		// Versione obsoleta.
 		if (notification == ScrollBarNotifications::SBThumbPosition || notification == ScrollBarNotifications::SBThumbTrack)
 		{
-			SetScrollPos(HandleFinestra, static_cast<int>(identifier), position, TRUE);
+			::SetScrollPos(HandleFinestra, static_cast<int>(identifier), position, TRUE);
 		}
 	}
 

@@ -107,9 +107,27 @@ namespace FW
 		/// </summary>
 		/// <remarks>Questa funzione deve essere chiamata nello stesso messaggio in cui si è chiamato GetDC.</remarks>
 		void ReleaseDC();
+		/// <summary>Imposta la posizione del cursore della barra di scorrimento orizzontale.</summary>
+		/// <param name="minimum">Posizione della barra di scorrimento.</param>
+		/// <param name="redraw">Ridisegna la barra di scorrimento.</param>
+		void SetHorizontalScrollPos(int position, bool redraw);
+		/// <summary>Imposta i limiti della barra di scorrimento orizzontale.</summary>
+		/// <param name="minimum">Posizione minima.</param>
+		/// <param name="maximum">Posizione massima.</param>
+		/// <param name="redraw">Indica se ridisegnare.</param>
+		void SetHorizontalScrollRange(int minimum, int maximum, bool redraw);
 		/// <summary>Imposta il titolo della finestra.</summary>
 		/// <param name="nomeFinestra">Nuovo titolo della finestra.</param>
 		void SetTitle(String nomeFinestra);
+		/// <summary>Imposta la posizione del cursore della barra di scorrimento verticale.</summary>
+		/// <param name="position">Nuova posizione della barra di scorrimento.</param>
+		/// <param name="redraw">Ridisegna la barra.</param>
+		void SetVerticalScrollPos(int position, bool redraw);
+		/// <summary>Imposta i limiti della barra di scorrimento verticale.</summary>
+		/// <param name="minimum">Posizione minima.</param>
+		/// <param name="maximum">Posizione massima.</param>
+		/// <param name="redraw">Indica se ridisegnare.</param>
+		void SetVerticalScrollRange(int minimum, int maximum, bool redraw);
 		/// <summary>Mostra la finestra con la modalità specificata.</summary>
 		/// <param name="command">Specifica come mostrare la finestra.</param>
 		void ShowWindow(ShowWindowsCommands command);
@@ -136,14 +154,16 @@ namespace FW
 		/// <returns>HWND istanza finestra.</returns>
 		HWND GetWindowHandle() const;
 		/// <summary>Ottiene le dimensioni del rettangolo Client.</summary>
+		/// <param name="considerScrollBars">Indica se nel calcolo dello spazio occupato dalla finestra del client bisogna calcolare l'ingombro delle barre di scorrimento.</param>
 		/// <returns>Un oggetto WinRectangle.</returns>
-		WinRectangle GetClientRect();
+		WinRectangle GetClientRect(bool considerScrollBars);
 		/// <summary>
 		/// Ottiene le dimensioni del rettangolo finestra.
 		/// </summary>
 		/// <returns>Un oggetto WinRectangle.</returns>
 		WinRectangle GetWindowRect();
 	protected:
+#pragma region Messaggi
 		/// <summary>
 		/// Crea le funzionalità di base della finestra.
 		/// Se si sovrascrive va chiamato sempre.
@@ -177,8 +197,24 @@ namespace FW
 		/// <param name="parametro2"></param>
 		/// <returns></returns>
 		virtual INT_PTR ProceduraFinestra(UINT messaggio, WPARAM parametro1, LPARAM parametro2);
+#pragma endregion
 	private:
 		void InizializzaTextMetrics();
+		/// <summary>
+		/// DEPRECATA
+		/// </summary>
+		/// <param name="scrollBar"></param>
+		/// <param name="position"></param>
+		/// <param name="redraw"></param>
+		void SetScrollPos(ScrollBarIdentifiers scrollBar, int position, bool redraw);
+		/// <summary>
+		/// DEPRECATA
+		/// </summary>
+		/// <param name="scrollBar"></param>
+		/// <param name="minimum"></param>
+		/// <param name="maximum"></param>
+		/// <param name="redraw"></param>
+		void SetScrollRange(ScrollBarIdentifiers scrollBar, int minimum, int maximum, bool redraw);
 	private:
 		/// <summary>
 		/// Procedura della finestra per la classe corrente.

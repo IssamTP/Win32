@@ -31,7 +31,7 @@ protected:
 	std::vector<SysMetsValue> SysMetsValues;
 public:
 	SysMetsWin(HINSTANCE istanza, FW::String nomeClasse)
-		: FW::Window(istanza, nomeClasse)
+        : FW::Window(istanza, nomeClasse), AltezzaRiga{ 0 }, LarghezzaMedia{ 0 }, LarghezzaMediaCaps{ 0 }, TextMetric { nullptr }
 	{
         
 	}
@@ -60,8 +60,9 @@ protected:
             ContestoDisegno.DrawText(met->Description, disegno, DT_VCENTER | DT_LEFT | DT_NOCLIP);
             posizione += FW::WinPoint(Colonne[1].GetWidth() + LarghezzaMedia, 0);
             disegno.SetOrigin(posizione);
-            ContestoDisegno.SetTextAlign()
-            ContestoDisegno.DrawText(FW::String(std::to_wstring(met->Value).c_str()), disegno, DT_VCENTER | DT_RIGHT | DT_NOCLIP);
+            ContestoDisegno.SetTextAlign(TA_TOP | TA_RIGHT);
+            ContestoDisegno.DrawText(FW::String(std::to_wstring(met->Value).c_str()), disegno, DT_VCENTER | DT_LEFT | DT_NOCLIP);
+            ContestoDisegno.PopTextAlign();
             posizione += FW::WinPoint(-(Colonne[0].GetWidth() + Colonne[1].GetWidth() + 2*LarghezzaMedia), Colonne[0].GetHeight());
             disegno.SetOrigin(posizione);
         }

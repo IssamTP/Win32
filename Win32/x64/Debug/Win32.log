@@ -1,14 +1,34 @@
-﻿  Win32.cpp
-E:\Sviluppo\Win32\FrameWork\x64\Debug\FrameWork-msvc14-std20\headers\String.h(16,16): warning C4251: 'FW::String::Contenuto': class 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'FW::String'
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.31.31103\include\xstring(4928): message : vedere la dichiarazione di 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>'
-E:\Sviluppo\Win32\FrameWork\x64\Debug\FrameWork-msvc14-std20\headers\Style.h(46,28): error C2440: 'reinterpret_cast': impossibile convertire da '_Ty' a 'UINT'
+﻿  HelloWin.cpp
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\FrameWork\x64\Debug\FrameWork-msvc14-std20\headers\String.h(18,16): warning C4251: 'FW::String::Contenuto': class 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'FW::String'
+C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.32.31326\include\xstring(4920): message : vedere la dichiarazione di 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>'
+  SysMetsWin.cpp
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\FrameWork\x64\Debug\FrameWork-msvc14-std20\headers\String.h(18,16): warning C4251: 'FW::String::Contenuto': class 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'FW::String'
+C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.32.31326\include\xstring(4920): message : vedere la dichiarazione di 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>'
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\Win32\SysMetsWin.h(93,1): warning C4267: '=': conversione da 'size_t' a 'LONG'. Possibile perdita di dati.
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\Win32\SysMetsWin.h(94,1): warning C4267: '=': conversione da 'size_t' a 'LONG'. Possibile perdita di dati.
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\Win32\SysMetsWin.h(85,1): warning C4267: 'inizializzazione': conversione da 'size_t' a 'LONG'. Possibile perdita di dati.
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\Win32\SysMetsWin.h(96): message : vedere il riferimento all'istanza 'auto SysMetsWin::CreaDati::<lambda_1>::operator ()<SysMetsValue>(_T1) const' della funzione modello di cui è in corso la compilazione
           with
           [
-              _Ty=std::any
+              _T1=SysMetsValue
           ]
-E:\Sviluppo\Win32\FrameWork\x64\Debug\FrameWork-msvc14-std20\headers\Style.h(46,28): message : La conversione richiede un costruttore o un operatore di conversione definito dall'utente, che non può essere utilizzato da const_cast o reinterpret_cast
-E:\Sviluppo\Win32\Win32\Win32.cpp(69): message : vedere il riferimento all'istanza 'UINT FW::StylesOperation::Combine<FW::ClassStyles,FW::ClassStyles,FW::ClassStyles,FW::ClassStyles,FW::ClassStyles,void>(Head,FW::ClassStyles,FW::ClassStyles,FW::ClassStyles,FW::ClassStyles)' della funzione modello di cui è in corso la compilazione
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\Win32\SysMetsWin.h(85,1): warning C4267: '=': conversione da 'size_t' a 'LONG'. Possibile perdita di dati.
+  Win32.cpp
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\FrameWork\x64\Debug\FrameWork-msvc14-std20\headers\String.h(18,16): warning C4251: 'FW::String::Contenuto': class 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>' deve avere un'interfaccia dll per essere utilizzata dai client di class 'FW::String'
+C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.32.31326\include\xstring(4920): message : vedere la dichiarazione di 'std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>'
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\Win32\SysMetsWin.h(93,1): warning C4267: '=': conversione da 'size_t' a 'LONG'. Possibile perdita di dati.
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\Win32\SysMetsWin.h(94,1): warning C4267: '=': conversione da 'size_t' a 'LONG'. Possibile perdita di dati.
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\Win32\SysMetsWin.h(85,1): warning C4267: 'inizializzazione': conversione da 'size_t' a 'LONG'. Possibile perdita di dati.
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\Win32\SysMetsWin.h(96): message : vedere il riferimento all'istanza 'auto SysMetsWin::CreaDati::<lambda_1>::operator ()<SysMetsValue>(_T1) const' della funzione modello di cui è in corso la compilazione
           with
           [
-              Head=FW::ClassStyles
+              _T1=SysMetsValue
           ]
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\Win32\SysMetsWin.h(85,1): warning C4267: '=': conversione da 'size_t' a 'LONG'. Possibile perdita di dati.
+C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\Win32\Win32.cpp(37,12): warning C4244: 'return': conversione da 'WPARAM' a 'int'. Possibile perdita di dati.
+  Generazione del codice in corso...
+  Win32.vcxproj -> C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\x64\Debug\Win32.exe
+  C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\FrameWork\x64\Debug\FrameWork-msvc14-std20\bin\FrameWorkD.dll
+  C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\FrameWork\x64\Debug\FrameWork-msvc14-std20\bin\FrameWorkD.pdb
+  C:\Users\mmarcianesi\source\repos\CorsoWin32\FrameWork\source\FrameWork\x64\Debug\FrameWork-msvc14-std20\bin\vc143.pdb
+          3 file copiati.
