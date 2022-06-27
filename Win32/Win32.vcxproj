@@ -117,19 +117,19 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>E:\Sviluppo\Win32\FrameWork\x64\Debug\FrameWork-msvc14-std20;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Sviluppo\Win32\FrameWork\x64\Debug\FrameWork-msvc14-std20;$(SolutionDir)FrameWork\$(Platform)\$(Configuration)\FrameWork-msvc14-std20;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>E:\Sviluppo\Win32\FrameWork\x64\Debug\FrameWork-msvc14-std20\lib\FrameWorkD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)FrameWork\$(Platform)\$(Configuration)\FrameWork-msvc14-std20\lib\FrameWorkD.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
       <Command>
       </Command>
     </CustomBuildStep>
     <PostBuildEvent>
-      <Command>copy "E:\Sviluppo\Win32\FrameWork\x64\Debug\FrameWork-msvc14-std20\bin\*.*" $(OutDir)</Command>
+      <Command>copy "$(SolutionDir)FrameWork\$(Platform)\$(Configuration)\FrameWork-msvc14-std20\bin\*.*" $(OutDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

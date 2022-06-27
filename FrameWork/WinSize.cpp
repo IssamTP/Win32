@@ -11,6 +11,8 @@ namespace FW
 
 	WinSize::WinSize(LONG width, LONG height)
 	{
+		cx = width;
+		cy = height;
 	}
 #pragma endregion
 
