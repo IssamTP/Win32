@@ -33,6 +33,9 @@
     <ClInclude Include="SysMetsWin.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="SysMets2.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Win32.cpp">
@@ -42,6 +45,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="SysMetsWin.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="SysMets2.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

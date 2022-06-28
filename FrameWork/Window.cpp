@@ -93,6 +93,12 @@ namespace FW
 		}
 	}
 
+	void Window::SetContentSize(LONG width, LONG height)
+	{
+		DimensioneContenuto.SetHeight(height);
+		DimensioneContenuto.SetWidth(width);
+	}
+
 	void Window::SetHorizontalScrollPos(int position, bool redraw)
 	{
 		SetScrollPos(ScrollBarIdentifiers::SBHorizontal, position, redraw);
@@ -206,12 +212,16 @@ namespace FW
 		InizializzaTextMetrics();
 		if ((StileFinestra & WS_VSCROLL) == WS_VSCROLL)
 		{
-			SetScrollRange(ScrollBarIdentifiers::SBVertical, 0, 100, false);
+			MinimoBarraDiScorrimentoVerticale = 0;
+			MassimoBarraDiScorrimentoVerticale = 100;
+			SetScrollRange(ScrollBarIdentifiers::SBVertical, MinimoBarraDiScorrimentoVerticale, MassimoBarraDiScorrimentoVerticale, false);
 			SetScrollPos(ScrollBarIdentifiers::SBVertical, 0, true);
 		}
 		if ((StileFinestra & WS_HSCROLL) == WS_HSCROLL)
 		{
-			SetScrollRange(ScrollBarIdentifiers::SBHorizontal, 0, 100, false);
+			MinimoBarraDiScorrimentoOrizzontale = 0;
+			MassimoBarraDiScorrimentoOrizzontale = 100;
+			SetScrollRange(ScrollBarIdentifiers::SBHorizontal, MinimoBarraDiScorrimentoOrizzontale, MassimoBarraDiScorrimentoOrizzontale, false);
 			SetScrollPos(ScrollBarIdentifiers::SBHorizontal, 0, true);
 		}
 	}
@@ -235,7 +245,29 @@ namespace FW
 		// Versione obsoleta.
 		if (notification == ScrollBarNotifications::SBThumbPosition || notification == ScrollBarNotifications::SBThumbTrack)
 		{
-			::SetScrollPos(HandleFinestra, static_cast<int>(identifier), position, TRUE);
+			if (identifier == ScrollBarIdentifiers::SBVertical)
+			{
+				if (position < MinimoBarraDiScorrimentoVerticale)
+				{
+					position = MinimoBarraDiScorrimentoVerticale;
+				}
+				if (position > MassimoBarraDiScorrimentoVerticale)
+				{
+					position = MassimoBarraDiScorrimentoVerticale;
+				}
+			}
+			if (identifier == ScrollBarIdentifiers::SBHorizontal)
+			{
+				if (position < MinimoBarraDiScorrimentoOrizzontale)
+				{
+					position = MinimoBarraDiScorrimentoOrizzontale;
+				}
+				if (position > MassimoBarraDiScorrimentoOrizzontale)
+				{
+					position = MassimoBarraDiScorrimentoOrizzontale;
+				}
+			}
+			SetScrollPos(identifier, position, true);
 		}
 	}
 

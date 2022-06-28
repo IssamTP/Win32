@@ -36,6 +36,14 @@ namespace FW
 #pragma endregion
 #pragma region Membri
 	protected:
+		/// <summary>Valore massimo dell'intervallo della barra di scorrimento verticale.</summary>
+		int MassimoBarraDiScorrimentoOrizzontale;
+		/// <summary>Valore minimo dell'intervallo della barra di scorrimento verticale.</summary>
+		int MinimoBarraDiScorrimentoOrizzontale;
+		/// <summary>Valore massimo dell'intervallo della barra di scorrimento verticale.</summary>
+		int MassimoBarraDiScorrimentoVerticale;
+		/// <summary>Valore minimo dell'intervallo della barra di scorrimento verticale.</summary>
+		int MinimoBarraDiScorrimentoVerticale;
 		/// <summary>Identificatore unico della classe. Vale solo se != 0.</summary>
 		ATOM IdUnicoClasse;
 		/// <summary>Cursore della finestra.</summary>
@@ -63,12 +71,16 @@ namespace FW
 		UINT StileFinestraEsteso;
 		/// <summary>Coordinata di posizione della finestra sullo schermo.</summary>
 		WinPoint Posizione;
+		/// <summary>Posizione rispetto allo (0, 0) dell'area Client.</summary>
+		WinPoint OffsetContenuto;
 		/// <summary>Dimensioni dell'area client.</summary>
 		WinRectangle RettangoloClient;
 		/// <summary>Dimensioni dell'area client.</summary>
 		WinRectangle RettangoloWindow;
 		/// <summary>Dimensioni in pixel della finestra sullo schermo.</summary>
 		WinSize Dimensione;
+		/// <summary>Dimensione del contenuto della finestra.</summary>
+		WinSize DimensioneContenuto;
 #pragma endregion
 #pragma region Costruttori
 	private:
@@ -80,6 +92,7 @@ namespace FW
 		Window(HINSTANCE istanza, String nomeClasse);
 #pragma endregion
 	public:
+#pragma region Utilità
 		/// <summary>
 		/// Invalida tutta l'area client della finestra.
 		/// </summary>
@@ -107,6 +120,10 @@ namespace FW
 		/// </summary>
 		/// <remarks>Questa funzione deve essere chiamata nello stesso messaggio in cui si è chiamato GetDC.</remarks>
 		void ReleaseDC();
+		/// <summary>Imposta le dimensioni in pixel del contenuto "logico" della finestra.</summary>
+		/// <param name="width">Larghezza del contenuto.</param>
+		/// <param name="height">Altezza del contenuto.</param>
+		void SetContentSize(LONG width, LONG height);
 		/// <summary>Imposta la posizione del cursore della barra di scorrimento orizzontale.</summary>
 		/// <param name="minimum">Posizione della barra di scorrimento.</param>
 		/// <param name="redraw">Ridisegna la barra di scorrimento.</param>
@@ -157,37 +174,27 @@ namespace FW
 		/// <param name="considerScrollBars">Indica se nel calcolo dello spazio occupato dalla finestra del client bisogna calcolare l'ingombro delle barre di scorrimento.</param>
 		/// <returns>Un oggetto WinRectangle.</returns>
 		WinRectangle GetClientRect(bool considerScrollBars);
-		/// <summary>
-		/// Ottiene le dimensioni del rettangolo finestra.
-		/// </summary>
+		/// <summary>Ottiene le dimensioni del rettangolo finestra.</summary>
 		/// <returns>Un oggetto WinRectangle.</returns>
 		WinRectangle GetWindowRect();
+#pragma endregion
 	protected:
 #pragma region Messaggi
-		/// <summary>
-		/// Crea le funzionalità di base della finestra.
-		/// Se si sovrascrive va chiamato sempre.
-		/// </summary>
+		/// <summary>Crea le funzionalità di base della finestra. Se si sovrascrive va chiamato sempre.</summary>
 		virtual void OnCreate();
-		/// <summary>
-		/// Funzione di cancellazione personalizzata dello sfondo dell'area client.
-		/// </summary>
+		/// <summary>Funzione di cancellazione personalizzata dello sfondo dell'area client.</summary>
 		virtual void OnEraseBkGnd();
 		/// <summary>Funzione di disegno di base. Ogni finestra che erediterà da quella principale deve chiamare questa funzione.</summary>
 		/// <remarks>Si suggerisce di fare caso al rettangolo di ridisegno in fase di implementazione della OnPaint.</remarks>
 		/// <throws>exception - Quando c'è un disallineamento tra il valore restituito da BeginPaint e quello modificato nei parametri.</throws>
 		virtual void OnPaint();
-		/// <summary>
-		/// Gestisce lo scorrimento dell'area visibile sia in orizzontale che in verticale.
-		/// </summary>
+		/// <summary>Gestisce lo scorrimento dell'area visibile sia in orizzontale che in verticale.</summary>
 		/// <param name="identifier">Identificatore della barra di scorrimento.</param>
 		/// <param name="notification">Operazione occorsa.</param>
 		/// <param name="position">Ha senso solo se operazione occorsa è uguale a SB_THUMBTRACK/SB_THUMBPOSITION.</param>
 		/// <remarks>ACHTUNG: Windows non cambierà la posizione dello scroll alla ricezione di questo messaggio, bisogna farlo con SetScrollInfo. Se non lo si farà, Windows porterà indietro la posizione dello scroll. Solitamente si elabora solamente uno tra i due messaggi di trascinamento: se si elabora THUMBTRACK la vista viene spostata mentre il cursore è trascinato, altrimenti alla fine.</remarks>
 		virtual void OnScroll(ScrollBarIdentifiers identifier, ScrollBarNotifications notification, int position);
-		/// <summary>
-		/// Registra le nuove dimensioni della finestra a seguito di WM_SIZE.
-		/// </summary>
+		/// <summary>Registra le nuove dimensioni della finestra a seguito di WM_SIZE.</summary>
 		/// <param name="width">Larghezza della finestra.</param>
 		/// <param name="height">Altezza della finestra.</param>
 		virtual void OnSize(WORD width, WORD height);

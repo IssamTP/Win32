@@ -293,7 +293,9 @@ namespace FW
     enum class WindowStyles : UINT
     {
         WSOverlappedWindow = WS_OVERLAPPEDWINDOW,
+        /// <summary>Mostra la barra di scorrimento orizzontale.</summary>
         WSHScroll = WS_HSCROLL,
+        /// <summary>Mostra la barra di scorrimento verticale.</summary>
         WSVScroll = WS_VSCROLL,
         WSVisible = WS_VISIBLE,
     };
@@ -355,13 +357,13 @@ namespace FW
     /// </summary>
     enum class ScrollBarIdentifiers
     {
+        /// <summary>Il messaggio è relativo alla barra verticale.</summary>
         SBVertical = SB_VERT,
+        /// <summary>Il messaggio è relativo alla barra orizzontale.</summary>
         SBHorizontal = SB_HORZ,
     };
 
-    /// <summary>
-    /// Codici di notifica eventi WM_VSCROLL WM_HSCROLL.
-    /// </summary>
+    /// <summary>Codici di notifica eventi WM_VSCROLL WM_HSCROLL.</summary>
     enum class ScrollBarNotifications
     {
         /// <summary>Equivalente a SB_LINEUP. Occorre quando si fa click sulla freccia.</summary>
@@ -372,7 +374,9 @@ namespace FW
         SBMultipleBack = SB_PAGELEFT,
         /// <summary>Equivalente a SB_PAGEDOWN</summary>
         SBMultipleForward = SB_PAGERIGHT,
+        /// <summary>Indica la posizione del thumb alla fine delle operazioni di movimento.</summary>
         SBThumbPosition = SB_THUMBPOSITION,
+        /// <summary>Indica la posizione del thumb ad ogni operazione di spostamento.</summary>
         SBThumbTrack = SB_THUMBTRACK,
         /// <summary>Equivalente a SB_TOP.</summary>
         SBStart = SB_LEFT,
