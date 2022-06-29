@@ -81,6 +81,10 @@ namespace FW
         /// </summary>
         /// <returns>True se il bit meno significativo di tmPitchAndFamily è 1.</returns>
         bool IsVariableWidthChar() const;
+        /// <summary>
+        /// Calcola l'ingombro in altezza e larghezza, quindi WinSize, del font attualmente caricato in TextMetrics.
+        /// </summary>
+        /// <param name="size">Riferimento ad una variabile WinSize da valorizzare.</param>
         void GetInformationAboutSpacing(WinSize& size) const;
     };
 };

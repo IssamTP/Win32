@@ -1,22 +1,7 @@
 #pragma once
 #include <headers/FrameWork.h>
 #include <vector>
-
-struct SysMetsValue
-{
-	int Index;
-    int Value;
-	FW::String Label;
-	FW::String Description;
-public:
-    SysMetsValue(int index, const FW::String& label, const FW::String& description)
-    {
-        Index = index;
-        Label = label;
-        Description = description;
-        Value = GetSystemMetrics(index);
-    }
-};
+#include "SysMetsValue.h"
 
 class SysMetsWin : public FW::Window
 {
@@ -26,9 +11,9 @@ protected:
     LONG AltezzaRiga;
     LONG LarghezzaMedia;
     LONG LarghezzaMediaCaps;
+	CSysMetsValues SysMetsValues;
     FW::TextMetrics* TextMetric;
     FW::WinSize Colonne[3];
-	std::vector<SysMetsValue> SysMetsValues;
 public:
 	SysMetsWin(HINSTANCE istanza, FW::String nomeClasse)
         : FW::Window(istanza, nomeClasse), AltezzaRiga{ 0 }, LarghezzaMedia{ 0 }, LarghezzaMediaCaps{ 0 }, TextMetric { nullptr }

@@ -153,6 +153,7 @@
     <ClInclude Include="HelloWin.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SysMets2.h" />
+    <ClInclude Include="SysMetsValue.h" />
     <ClInclude Include="SysMetsWin.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Win32.h" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="HelloWin.cpp" />
     <ClCompile Include="SysMets2.cpp" />
+    <ClCompile Include="SysMetsValue.cpp" />
     <ClCompile Include="SysMetsWin.cpp" />
     <ClCompile Include="Win32.cpp" />
   </ItemGroup>
