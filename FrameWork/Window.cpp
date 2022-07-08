@@ -97,6 +97,10 @@ namespace FW
 	{
 		DimensioneContenuto.SetHeight(height);
 		DimensioneContenuto.SetWidth(width);
+		SetScrollRange(ScrollBarIdentifiers::SBVertical, 0, height, false);
+		SetScrollPos(ScrollBarIdentifiers::SBVertical, 0, true);
+		SetScrollRange(ScrollBarIdentifiers::SBHorizontal, 0, height, false);
+		SetScrollPos(ScrollBarIdentifiers::SBHorizontal, 0, true);
 	}
 
 	void Window::SetHorizontalScrollPos(int position, bool redraw)
@@ -242,33 +246,38 @@ namespace FW
 
 	void Window::OnScroll(ScrollBarIdentifiers identifier, ScrollBarNotifications notification, int position)
 	{
-		// Versione obsoleta.
-		if (notification == ScrollBarNotifications::SBThumbPosition || notification == ScrollBarNotifications::SBThumbTrack)
+
+		switch (notification)
 		{
-			if (identifier == ScrollBarIdentifiers::SBVertical)
-			{
-				if (position < MinimoBarraDiScorrimentoVerticale)
-				{
-					position = MinimoBarraDiScorrimentoVerticale;
-				}
-				if (position > MassimoBarraDiScorrimentoVerticale)
-				{
-					position = MassimoBarraDiScorrimentoVerticale;
-				}
-			}
-			if (identifier == ScrollBarIdentifiers::SBHorizontal)
-			{
-				if (position < MinimoBarraDiScorrimentoOrizzontale)
-				{
-					position = MinimoBarraDiScorrimentoOrizzontale;
-				}
-				if (position > MassimoBarraDiScorrimentoOrizzontale)
-				{
-					position = MassimoBarraDiScorrimentoOrizzontale;
-				}
-			}
-			SetScrollPos(identifier, position, true);
+		case ScrollBarNotifications::SBSingleForward:
+
+			break;
 		}
+
+		// Versione obsoleta.
+		if (identifier == ScrollBarIdentifiers::SBVertical)
+		{
+			if (position < MinimoBarraDiScorrimentoVerticale)
+			{
+				position = MinimoBarraDiScorrimentoVerticale;
+			}
+			if (position > MassimoBarraDiScorrimentoVerticale)
+			{
+				position = MassimoBarraDiScorrimentoVerticale;
+			}
+		}
+		if (identifier == ScrollBarIdentifiers::SBHorizontal)
+		{
+			if (position < MinimoBarraDiScorrimentoOrizzontale)
+			{
+				position = MinimoBarraDiScorrimentoOrizzontale;
+			}
+			if (position > MassimoBarraDiScorrimentoOrizzontale)
+			{
+				position = MassimoBarraDiScorrimentoOrizzontale;
+			}
+		}
+		SetScrollPos(identifier, position, true);
 	}
 
 	void Window::OnSize(WORD width, WORD height)

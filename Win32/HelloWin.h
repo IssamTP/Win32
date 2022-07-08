@@ -13,7 +13,7 @@ protected:
     {
         FW::Window::OnPaint();
         UINT stileTesto = FW::StylesOperations::Combine(FW::DrawTextStyles::DTSingleLine, FW::DrawTextStyles::DTCenter, FW::DrawTextStyles::DTVCener);
-        ContestoDisegno.DrawText(TEXT("Hello, Windows 10!"), GetClientRect(), stileTesto);
+        ContestoDisegno.DrawText(TEXT("Hello, Windows 10!"), GetClientRect(false), stileTesto);
     }
 };
 

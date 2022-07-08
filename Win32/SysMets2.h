@@ -23,12 +23,14 @@ protected:
 	/// <summary>Puntatore al font di sistema con le sue proprietà.</summary>
 	FW::TextMetrics* TextMetric;
 	/// <summary>Elenco dei valori con define e descrizione.</summary>
-	CSysMetsValue Values;
+	CSysMetsValues Values;
 public:
 	/// <summary>Costruttore finestra.</summary>
 	/// <param name="istanza">Istanza dell'applicazione.</param>
 	CSysMets2(HINSTANCE istanza);
 protected:
+	virtual void OnCreate();
+	virtual void OnPaint();
 	/// <summary>Genera tutti i dati da mostrare a video.</summary>
 	void CreaDati();
 };

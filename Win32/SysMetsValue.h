@@ -2,6 +2,8 @@
 
 #include <headers/FrameWork.h>
 
+#include <vector>
+
 struct SysMetsValue
 {
     int Index;

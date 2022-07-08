@@ -3,6 +3,7 @@
 #include "Win32.h"
 #include "HelloWin.h"
 #include "SysMetsWin.h"
+#include "SysMets2.h"
 
 #define MAX_LOADSTRING 100
 
@@ -28,7 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WIN32));
     FW::ApplicazioneWindows* applicazioneWindows = FW::ApplicazioneWindows::GetWinAppInstance();
     //HelloWin* finestra = new HelloWin(hInstance, szWindowClass);
-    SysMetsWin* finestra = new SysMetsWin(hInstance, szWindowClass);
+    CSysMets2* finestra = new CSysMets2(hInstance/*, szWindowClass*/);
     finestra->ModifyStyle(FW::StylesOperations::Combine(FW::WindowStyles::WSHScroll, FW::WindowStyles::WSVScroll), 0ul);
     finestra->SetTitle(szTitle);
     applicazioneWindows->InizializzaApplicazione(finestra);

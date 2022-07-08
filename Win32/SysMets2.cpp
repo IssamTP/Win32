@@ -6,10 +6,43 @@ CSysMets2::CSysMets2(HINSTANCE istanza)
     AltezzaRiga = LarghezzaColonnaCodice = LarghezzaColonnaDescrizione = LarghezzaColonnaValore = 0l;
 }
 
+void CSysMets2::OnCreate()
+{
+    FW::Window::OnCreate();
+    CreaDati();
+}
+
+void CSysMets2::OnPaint()
+{
+    int riga = 0;
+    FW::Window::OnPaint();
+    FW::WinRectangle areaDisegno;
+    FW::WinSize dimensioneRettangoloDisegno;
+    FW::WinPoint posizioneRettangoloDisegno;
+    areaDisegno.SetOrigin(OffsetContenuto);
+    areaDisegno.SetHeight(AltezzaRiga);
+    UINT stile = FW::StylesOperations::Combine(FW::DrawTextStyles::DTVCener, FW::DrawTextStyles::DTLeft, FW::DrawTextStyles::DTNoClip);
+    for (SysMetsValue current : Values)
+    {
+        areaDisegno.SetWidth(LarghezzaColonnaCodice);
+        ContestoDisegno.DrawText(current.Label, areaDisegno, stile);
+        areaDisegno += FW::WinPoint(LarghezzaColonnaCodice, 0l);
+        areaDisegno.SetWidth(LarghezzaColonnaDescrizione);
+        ContestoDisegno.DrawText(current.Description, areaDisegno, stile);
+        areaDisegno += FW::WinPoint(LarghezzaColonnaDescrizione, 0l);
+        areaDisegno.SetWidth(LarghezzaColonnaValore);
+        ContestoDisegno.DrawText(FW::String(std::to_wstring(current.Value).c_str()), areaDisegno, DT_RIGHT | DT_VCENTER | DT_NOCLIP);
+        areaDisegno.GetOriginAndSize(posizioneRettangoloDisegno, dimensioneRettangoloDisegno);
+        areaDisegno += FW::WinPoint(-posizioneRettangoloDisegno.GetX(), AltezzaRiga);
+    }
+}
+
 void CSysMets2::CreaDati()
 {
     // 1 - Ottengo le informazioni sul font.
     TextMetric = FW::TextMetrics::GetTextMetricsInstance();
+    LONG larghezzaMediaCaps = TextMetric->GetAverageMaximizedCharacterWidth();
+    LONG larghezzaMedia = TextMetric->GetAverageCharacterWidth();
     FW::WinSize sizing;
     // 2 - Mi faccio dire quanto occupa il font.
     TextMetric->GetInformationAboutSpacing(sizing);
@@ -18,22 +51,18 @@ void CSysMets2::CreaDati()
     // 4 - mi definisco una lambda che memorizza i nuovi dati e aggiorna lo spazio necessario alle singole colonne per ogni nuova metrica.
     auto aggiungi = [&](auto nuovaMetrica)
     {
-        SysMetsValues.push_back(nuovaMetrica);
-        LONG lunghezzaStringa = SysMetsValues.rbegin()->Label.GetLength();
-        larghezzeColonne[CAPS] = std::max(larghezzeColonne[0], lunghezzaStringa * LarghezzaMediaCaps);
-        lunghezzaStringa = SysMetsValues.rbegin()->Description.GetLength();
-        larghezzeColonne[NO_CAPS] = std::max(larghezzeColonne[1], lunghezzaStringa * LarghezzaMedia);
+        Values.push_back(nuovaMetrica);
+        LONG lunghezzaStringa = Values.rbegin()->Label.GetLength();
+        LarghezzaColonnaCodice = std::max(LarghezzaColonnaCodice, lunghezzaStringa * larghezzaMediaCaps);
+        lunghezzaStringa = Values.rbegin()->Description.GetLength();
+        LarghezzaColonnaDescrizione = std::max(LarghezzaColonnaDescrizione, lunghezzaStringa * larghezzaMedia);
     };
 
-    LarghezzaMedia = TextMetric->GetAverageCharacterWidth();
-    LarghezzaMediaCaps = TextMetric->GetAverageMaximizedCharacterWidth();
+    Values.reserve(110);
 
-    SysMetsValues.reserve(110);
-
-    SysMetsValues.push_back(SysMetsValue(static_cast<int>(FW::SystemMetrics::SMCXScreen), TEXT("SM_CXSCREEN"), TEXT("Larghezza in pixel dello schermo.")));
-    larghezzeColonne[CAPS] = SysMetsValues.rbegin()->Label.GetLength() * LarghezzaMediaCaps;
-    larghezzeColonne[NO_CAPS] = SysMetsValues.rbegin()->Description.GetLength() * LarghezzaMedia;
-
+    Values.push_back(SysMetsValue(static_cast<int>(FW::SystemMetrics::SMCXScreen), TEXT("SM_CXSCREEN"), TEXT("Larghezza in pixel dello schermo.")));
+    LarghezzaColonnaCodice = Values.rbegin()->Label.GetLength() * larghezzaMediaCaps;
+    LarghezzaColonnaDescrizione = Values.rbegin()->Description.GetLength() * larghezzaMedia;
     aggiungi(SysMetsValue(static_cast<int>(FW::SystemMetrics::SMCYScreen), TEXT("SM_CYSCREEN"), TEXT("Altezza in pixel dello schermo.")));
     aggiungi(SysMetsValue(static_cast<int>(FW::SystemMetrics::SMCXVScroll), TEXT("SM_CXVSCROLL"), TEXT("Larghezza in pixel della barra verticale di scorrimento.")));
     aggiungi(SysMetsValue(static_cast<int>(FW::SystemMetrics::SMCYHScroll), TEXT("SM_CYHSCROLL"), TEXT("Altezza in pixel della barra orizzontale di scorrimento.")));
@@ -125,13 +154,7 @@ void CSysMets2::CreaDati()
     aggiungi(SysMetsValue(static_cast<int>(FW::SystemMetrics::SMConvertIbleslateMode), TEXT("SM_CONVERTIBLESLATEMODE"), TEXT("")));
     aggiungi(SysMetsValue(static_cast<int>(FW::SystemMetrics::SMSystemDocked), TEXT("SM_SYSTEMDOCKED"), TEXT("")));
 
-    sizing.SetWidth(larghezzeColonne[CAPS]);
-    Colonne[0].SetWidth(sizing.GetWidth());
-    Colonne[0].SetHeight(AltezzaRiga);
-    sizing.SetWidth(larghezzeColonne[NO_CAPS]);
-    Colonne[1].SetWidth(sizing.GetWidth());
-    Colonne[1].SetHeight(AltezzaRiga);
-    sizing.SetWidth(larghezzeColonne[2]);
-    Colonne[2].SetWidth(sizing.GetWidth());
-    Colonne[2].SetHeight(AltezzaRiga);
+    FW::WinRectangle areaDisponibile = GetClientRect(true);
+    LarghezzaColonnaValore = areaDisponibile.GetWidth() - (LarghezzaColonnaCodice + LarghezzaColonnaDescrizione);
+    SetContentSize(areaDisponibile.GetWidth(), static_cast<LONG>(AltezzaRiga* Values.size()));
 }
