@@ -37,30 +37,30 @@ namespace FW
 #pragma region Membri
 	protected:
 		/// <summary>Identificatore unico della classe. Vale solo se != 0.</summary>
-		ATOM IdUnicoClasse;
+		ATOM IdUnicoClasse{ 0 };
 		/// <summary>Cursore della finestra.</summary>
 		Cursor CursoreFinestra;
 		/// <summary>Oggetto per disegnare nella finestra.</summary>
 		DeviceContext ContestoDisegno;
 		/// <summary>Riferimento all'extra context da deallocare nel caso in cui l'utente se ne dimentichi.</summary>
 		/// <summary>Riferimento all'extra context da deallocare nel caso in cui l'utente se ne dimentichi.</summary>
-		DeviceContext* ExtraContestoDisegno;
+		DeviceContext* ExtraContestoDisegno{ nullptr };
 		/// <summary>Icona della finestra.</summary>
 		Icon IconaFinestra;
 		/// <summary>"Puntatore" alla finestra di Windows.</summary>
-		HWND HandleFinestra;
+		HWND HandleFinestra{ nullptr };
 		/// <summary>Specifica come mostrare la finestra al comando Show.</summary>
-		ShowWindowsCommands ModalitaVisualizzazione;
+		ShowWindowsCommands ModalitaVisualizzazione{ ShowWindowsCommands::SWDefault };
 		/// <summary>Nome della classe di finestre.</summary>
 		String NomeClasse;
 		/// <summary>Imposta il nome della finestra (verrà visualizzato sulla barra del titolo).</summary>
 		String NomeFinestra;
 		/// <summary>Combinazione di WindowStyles.</summary>
 		/// <remarks>Può essere sottoposto a revisione.</remarks>
-		UINT StileFinestra;
+		UINT StileFinestra{ StylesOperations::Combine(WindowStyles::WSOverlappedWindow) };
 		/// <summary>Combinazione di WindowStylesEx.</summary>
 		/// <remarks>Può essere sottoposto a revisione.</remarks>
-		UINT StileFinestraEsteso;
+		UINT StileFinestraEsteso{ 0UL };
 		/// <summary>Coordinata di posizione della finestra sullo schermo.</summary>
 		WinPoint Posizione;
 		/// <summary>Dimensioni dell'area client.</summary>
@@ -71,13 +71,10 @@ namespace FW
 		WinSize Dimensione;
 #pragma endregion
 #pragma region Costruttori
-	private:
-		/// <summary>Costruttore predefinito. Inizializza a zero WNDCLASS.</summary>
-		Window();
 	public:
 		/// <summary>Costruttore con l'istanza dell'applicazione.</summary>
 		/// <param name="istanza">Istanza dell'applicazione.</param>
-		Window(HINSTANCE istanza, String nomeClasse);
+		Window(HINSTANCE istanza, const String& nomeClasse);
 #pragma endregion
 	public:
 		/// <summary>

@@ -5,27 +5,13 @@
 namespace FW
 {
 #pragma region Costruttori
-	Window::Window()
-		: WNDCLASSEX()
+	Window::Window(HINSTANCE istanza, const String& nomeClasse)
+		: WNDCLASSEX(), NomeClasse{ nomeClasse }
 	{
-		ModalitaVisualizzazione = ShowWindowsCommands::SWDefault;
-		IdUnicoClasse = 0;
-		StileFinestra = StileFinestraEsteso = 0ul;
-		cbSize = sizeof(WNDCLASSEX);
-		CursoreFinestra = nullptr;
-		HandleFinestra = nullptr;
-		IconaFinestra = nullptr;
-		ExtraContestoDisegno = nullptr;
-	}
-
-	Window::Window(HINSTANCE istanza, String nomeClasse)
-		: Window()
-	{
-		NomeClasse = String(nomeClasse);
+		lpfnWndProc = &ProceduraStandard;
 		lpszClassName = NomeClasse;
 		style = StylesOperations::Combine(ClassStyles::CSHRedraw, ClassStyles::CSVRedraw);
 		hInstance = istanza;
-		lpfnWndProc = &ProceduraStandard;
 		// Questo colore è solitamente impostato a bianco affinché corrisponda con quello di DrawText.
 		ContestoDisegno.SetCurrentBrush(Brush::GetDefaultWindowBrush());
 		hbrBackground = ContestoDisegno.GetCurrentBrush();
@@ -35,8 +21,6 @@ namespace FW
 		CursoreFinestra = Cursor::GetDefaultCursor();
 		hCursor = CursoreFinestra;
 		lpszMenuName = nullptr;
-		StileFinestra = StylesOperations::Combine(WindowStyles::WSOverlappedWindow);
-		HandleFinestra = nullptr;
 	}
 #pragma endregion
 

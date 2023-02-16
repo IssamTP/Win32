@@ -119,6 +119,7 @@ copy $(ProjectDir)*.h "..\..\Binaries\H\FrameWork"
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="DeviceContext.h" />
     <ClInclude Include="FrameWork.h" />
+    <ClInclude Include="FrameWorkDeclarations.h" />
     <ClInclude Include="HeaderCPP.h" />
     <ClInclude Include="Icon.h" />
     <ClInclude Include="pch.h" />

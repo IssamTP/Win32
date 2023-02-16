@@ -3,6 +3,7 @@
 	#define _HEADER_CPP_H_
 	// Intestazioni STL
 	#include <cmath>
+	#include <memory>
 	#include <string>
 	#include <type_traits>
 	#include <typeinfo>

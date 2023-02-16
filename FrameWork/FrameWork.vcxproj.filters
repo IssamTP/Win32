@@ -87,6 +87,9 @@
     <ClInclude Include="WinRange.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="FrameWorkDeclarations.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
