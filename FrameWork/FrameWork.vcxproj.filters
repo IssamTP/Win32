@@ -19,6 +19,9 @@
     <Filter Include="Math">
       <UniqueIdentifier>{91265bd9-50a3-408f-9b6f-7f1f3df88876}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Networking">
+      <UniqueIdentifier>{f8ffff2b-544d-446c-83ec-bcf211cf01d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -90,6 +93,18 @@
     <ClInclude Include="FrameWorkDeclarations.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="NetworkingException.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketAddressInternet.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Socket.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="WsaData.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -136,6 +151,18 @@
     </ClCompile>
     <ClCompile Include="WinRange.cpp">
       <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkingException.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketAddressInternet.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="Socket.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="WsaData.cpp">
+      <Filter>Networking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

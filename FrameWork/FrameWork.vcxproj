@@ -66,6 +66,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mkdir "..\FrameWork-msvc14-std20"
@@ -97,6 +98,7 @@ copy $(ProjectDir)*.h "..\FrameWork-msvc14-std20\h"
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+      <AdditionalDependencies>Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>mkdir "..\..\Binaries"
@@ -122,10 +124,13 @@ copy $(ProjectDir)*.h "..\..\Binaries\H\FrameWork"
     <ClInclude Include="FrameWorkDeclarations.h" />
     <ClInclude Include="HeaderCPP.h" />
     <ClInclude Include="Icon.h" />
+    <ClInclude Include="NetworkingException.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Size.h" />
+    <ClInclude Include="Socket.h" />
+    <ClInclude Include="SocketAddressInternet.h" />
     <ClInclude Include="String.h" />
     <ClInclude Include="StylesOperations.h" />
     <ClInclude Include="SystemMessageBox.h" />
@@ -137,6 +142,7 @@ copy $(ProjectDir)*.h "..\..\Binaries\H\FrameWork"
     <ClInclude Include="WinRectangle.h" />
     <ClInclude Include="WinSize.h" />
     <ClInclude Include="WinUndefinitions.h" />
+    <ClInclude Include="WsaData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApplicazioneWindows.cpp" />
@@ -145,10 +151,13 @@ copy $(ProjectDir)*.h "..\..\Binaries\H\FrameWork"
     <ClCompile Include="DeviceContext.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="Icon.cpp" />
+    <ClCompile Include="NetworkingException.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Socket.cpp" />
+    <ClCompile Include="SocketAddressInternet.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="SystemMessageBox.cpp" />
     <ClCompile Include="TextMetrics.cpp" />
@@ -157,6 +166,7 @@ copy $(ProjectDir)*.h "..\..\Binaries\H\FrameWork"
     <ClCompile Include="WinRange.cpp" />
     <ClCompile Include="WinRectangle.cpp" />
     <ClCompile Include="WinSize.cpp" />
+    <ClCompile Include="WsaData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Informazioni.txt" />

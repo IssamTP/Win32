@@ -7,7 +7,6 @@
 	#include <string>
 	#include <type_traits>
 	#include <typeinfo>
-	#include <vector>
 	// Intestazioni di Windows.
 	#include <tchar.h>
 	#define OEMRESOURCE
